@@ -1,0 +1,348 @@
+#+SEQ_TODO: TODO | DONE
+
+* glossary
+- package
+- project
+- analysis
+- virtual environement
+* Introduction
+  What we are concerned about today: the problem(s) we want to solve.
+  What we are going to do, the tools that we are going to use.
+  The example that we are going to consider.
+
+* Part 1 - Making a package
+** Initial motivation: separating methods from parameters and data
+A numerical experiment has three components:
+- The data (dataset, parameters of simulation)
+- The operations performed on this data
+- The output (numbers, plots)
+
+At the moment parameters (input data), operations and output are intertwined in a single 
+python script.
+
+This is often what we do in early exploratory phases, when the objective is to get insight
+into data quickly. /Quickly/ means without having to think about software, /i.e/ taking the 
+shortest path to the scientific output (the plot).
+
+However, this approach is (by design) messy.
+Depsite short term convenience, putting data, operations and output in the same file is very
+likely to slow down your research process on a longer term.
+
+The main reason is code-reuse. Consider the situation where you have a similar timeseries, 
+and want to visualise its histogram. A straightfoward solution would be to copy and paste
+lines 19 to 30 to the anaylis program for the new timeseries.
+This approach is risky:
+- If you want to modify this portion of code (fixing a bug, making improvements) you have to
+  make sure you do across all the places where you duplicated the code.
+- The duplicated code may not integrate itself well in another programm (conflicts in variable
+names for example.
+- Coding style discrepancies leading to poor readability.
+
+Instead, we are going to separate the /operations/ from the data and output.
+More precisely, we are going to implement the /operations/ on data inside a specific
+/package/ that we trust and can reuse across many similar analyses.
+
+The result could look like this:
+#+begin_src python
+  import numpy as np
+  import matplotlib.pyplot as plt
+  import my_pkg
+
+  timeseries = np.genfromtxt("./data/my_timeseries.csv", delimiter=",")
+
+  mean, var = my_pkg.get_mean_and_var(timeseries)
+
+  fig, ax = my_pkg.get_pdf(timeseries)
+
+  threshold = 3*np.sqrt(var)
+  fig, ax = my_pkg.show_extremes(timeseries, threshold)
+#+end_src
+
+The above script is much shorter and easier to read, because the actual implementation of
+the various operations (computing the mean and variance, computing the histogram...) is now
+/encpsulated/ inside the package ~my_pkg~. All that remains are the actual steps of the 
+analysis.
+
+If we were to make changes to the way some operations are implemented, we could simply make 
+changes to the package, leaving the scripts unmodified. The changes are then made avaialble
+to all the programs that use the package: no more copying and pasting code around.
+
+Conversely, by making change to the operations, you are a no risk of modyfing the analysis
+itself (sequence of operations, data and parameters, output).
+
+Taking a step back, the idea of separating different components is pervasive in software developemt 
+and software design. Different names depending on the field (encapsulation, separation of concerns,
+bounded contexts...).
+
+** making a python package
+*** The python hierachy: objects, modules, packages
+- functions, classes
+#+begin_src python
+  # operations.py
+  def add(a,b):
+      return a+b
+#+end_src
+- modules
+  Collection of python objects (classes, functions, variables)
+#+begin_src python
+  from operations import add
+  # "From file (or module) operations.py import object add"
+
+  result = add(1,2)
+#+end_src
+- packages
+  Collection of modules (~.py~ files)
+  #+begin_src python
+    from calculator.operations import add
+    from calculator.representations import hexa
+
+    a = hexa(1)
+    b = hexa(2)
+
+    result = add(a,b)
+  #+end_src
+  
+*** TODO Step 1 - Rewrite scripts into collection of functions
+So now it is technically possible to import each functions from the modules.
+But the script must be in this directory next to the modules.
+Plus we want to bundle both modules (and the ones to come) into a coherent 
+ensemble: a /package/.
+*** Let's make a package out of our 2 sripts
+#+begin_example
+  workshop/
+	  pkg/
+		  ___init__.py
+		  base.py
+		  show_extremes.py
+	  data/
+#+end_example
+
+*** TODO init dot pie
+A package /must/ contain a file ~__init__.py~ (even empty) (say init dot pie).
+It is this file that tells the python interpreter that ~pkg/~ directory is a package, and it is 
+the presence of this file that allows the use of the dot notation: ~from pkg.base import ...~.
+Try to remove the ~__init.py~ and see for yourself what happens then!
+
+* Part 2 - using the package across analyses
+Now that we have a nice package, let's save us some time and reuse it.
+
+#+begin_example
+  analysis2/
+	  analysis2.py
+#+end_example
+
+#+begin_src python
+  # analysis2.py
+  import numpy as np
+  import tstools
+
+  timeseries = np.genfromtxt("./data/data.csv")
+  fig, ax = tstools.plot_trajectory_subset(timeseries, 0, 50, dt=0.1)
+#+end_src
+
+*Problem* python cannot find the package!
+
+** Where does python look for packages?
+#+begin_example
+>>> import sys
+>>> sys.path
+#+end_example
+
+Lesson: python first looks inside the current dir, then inside the ~lib/pythonX.Y/site-packages~ dir.
+
+Potential solutions:
+- Copy pkg dir inside current analysis dir
+- Add ~analysis1/pkg~ to ~sys.path~
+- Copy ~pkg~ dir to ~site-packages~ dir
+  Difficult to update?
+
+None of these are generally recommended.
+Recommended approach: use /setuptools/.
+
+** TODO setuptools and setup dot pie
+
+setuptools is a python library that provides functionality to /install/ packages.
+
+/Installing/ a python package essentially means copying to package to the ~site-packages~ dir,
+but it /can/ be more than that: *what ?*
+
+Setuptool is used through a file ~setup.py~ located next to the package directory.
+*Piege* setup.py not located next to ~__init__.py~!!!
+
+#+begin_example
+  workshop/
+	  setup.py
+	  pkg/
+		  ___init__.py
+		  base.py
+		  show_extremes.py
+	  data/
+#+end_example
+
+Basic setup.py:
+#+begin_src python
+  from setuptools import setup
+
+  setup(name='tstools',
+	version='0.1',
+	description='A package to analyse timeseries',
+	url='',
+	author='Spam Eggs',
+	author_email='spameggs@example.com',
+	package=['pkg'],
+	license='GPLv3')
+#+end_src
+
+The package can now be installed through the command
+#+begin_src shell
+  python setup.py install
+#+end_src
+
+Let's have a look at the output of that command.
+
+Let's try again to use the pkg in analysis2/
+
+** Maitaining your package indepently from the anaylises that use it
+let's move the pkg out of analysis1/
+#+begin_example
+  tstools
+	  tstools/
+		  base.py
+		  show_extremes.py
+  analysis1/
+	  analysis1.py
+	  data/
+  analysis2/
+	  analysis2.py
+	  data/	
+#+end_example
+
+How do you update the package?
+
+*** Option 1 - Reinstalling every time
+
+*** Option 2 - Use the develop command
+#+begin_src shell
+python setup.py develop
+#+end_src
+
+just pts a link towards the ~tstools/~ dir in ~site-packages~.
+
+** Summary and break
+   State the benefits of the package structure.
+* Intermezzo: Python virtual environments
+Why virtualenv
+What's a virtualenv
+
+In the examples above we had both analyses in the same virtualenv.
+Usually invidividual analyses have their own virtualenv as they require different packages
+or different versions.
+Package directory has its own virtualenv where pkg is installed in develop mode.
+
+* Part 3 - Sharing the package
+You now have a python package that you can use independently in your analyses.
+This package lives somehwere in your system (the ~tstools/~) directory and your can install
+it in a project's virtualenv using setuptools (~python setup.py install~).
+
+We now look at ways your can /share/ your package with people interested in using your pkg.
+This includes yourself.
+
+Sharing means making it straightforward to both
+- Obtain the source code
+- Install and use the package
+
+In practice this means that anyone will be able to "pip install" your package:
+#+begin_src shell
+pip install tstools
+#+end_src
+
+** Making tstools pip installable
+*** Creating distributions
+**** Building the distribution(s)
+ The first is to generate a /distribution/ for the package, /i.e/ the ensemble of files and data
+ necessary to both install and use the package. 
+ This usually takes the from of, or is akin to, an archive (~.tar~, ~.zip~).
+
+ Make sure that you are in the ~tstools~ project root (where the ~setup.py~ is).
+ #+begin_src python
+ python setup.py sdist bdist_wheel
+ #+end_src
+ This builds *two* distribution:
+ - A source distribution. It is a ~.tar~ archive containing the source (the ~.py~ files) and possibly the data required
+   to use and/or test the package (/e.g/ parameters, input files, input data for tests...)
+ - A wheel (or built distribution). In many cases this is very similar to the source distribution, but can present important advantages.
+  
+ We will discuss the difference between these twp distributions later.
+ For now, suffice to remember that both are commonly generated together, and it is recommended
+ to make both avaialable to users. Again, we'll understand why later.
+
+ So where are these distributions? Notice that a directory ~lib/~ appeared next to the ~setup.py~
+ #+begin_src shell
+ ls lib/
+ #+end_src
+
+ #+NAME: install tstools with pip
+ #+begin_exercise
+ - Create a fresh virtualenv
+ - Install tstools whith ~pip install tstools.wheelp~ (or ~pip install tstools.tar.gz~)
+ #+end_exercise
+
+**** Sharing the distribution: PyPI
+ By generating the distribution(s) we bundled all the files and data required to install and use our package
+ into a single file that can be very conviently installed through ~pip~.
+
+ But we still need to make this file avaialbe to others.
+
+ Python distributions can be freely hosted on Python Package Index (PyPI).
+ Looking at numpy for instance, we can see all the available distribtions.
+
+ When installing a python package as 
+ #+begin_src shell
+ pip install numpy
+ #+end_src
+ by default ~pip~ makes a request to PyPI for the package ~numpy~ and downloads and install the 
+ relevant wheel.
+ if no wheel availabe, it will download and install the ~sdist~.
+
+ Let's see how to upload our tstools distributions to PyPI.
+
+*** Uploading distributions to PyPI
+ In this section we upload the source and wheel distribtuion created earlier to the test PyPI
+ repository.
+ For the purposes of this workshop, we actually make use of the test resposioty. 
+ It is a reposotory intended for tests only and there is no garantuee that your package will remain
+ avaialbe on it over long duration. but it's the perfect tool to explore and learn.
+
+ you will have to have an account on [[https://test.pypi.org/][test.pypi.org]] to continue.
+
+ Uploading python distributions to TestPyPI (and PyPI) is made easy by a small python utility called [[https://pypi.org/project/twine/][twine]].
+
+ First, within the ~tstools~ venv, install twine:
+ #+begin_example
+ $ (tstools) pip install twine
+ #+end_example
+
+ Then, upload the content of the ~lib/~ direcotry to TestPyPI
+
+ #+begin_example
+   $ (tstools) twine upload -i https://testpypi.org/simple lib/*
+ #+end_example
+ the switch ~-i https://testpypi.org/simple~ tells twine to upload the files to the test PyPI repo instead 
+ of the regular PyPI repo.
+
+ #+NAME: Upload distributions and install tstools
+ #+begin_exercise
+ - In the tstools virtualenv, install twine and upload the distributions
+ - Create a fresh virtualenv and install tstools from TestPyPI. 
+   Check the output of ~pip~ for the line(s) that show that the pacakge indeed comes from the TestPyPI index.
+
+ Congratulations: you made your package pip installable !!
+ #+end_exercise
+
+* Part 4 - Going further
+*** Source vs built distributions
+*** Inlude data in the distribution
+*** include tests in the distribution
+*** Custom setuptools commands
+*** Packaging C/C++/Fortran extensions
+*** tox
