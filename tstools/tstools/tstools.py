@@ -1,5 +1,7 @@
 import numpy as np
+from scipy.special import erf
 import matplotlib.pyplot as plt
+
 
 def get_mean_and_var(timeseries):
     """
@@ -17,7 +19,8 @@ def get_mean_and_var(timeseries):
         A tuple which first element is the mean and second the variance.
     """
 
-    return np.mean(timeseries), np.var(timeseries)
+    return np.mean(timeseries[:, 1]), np.var(timeseries[:, 1])
+
 
 def plot_trajectory_subset(timeseries, tmin, tmax):
     """
@@ -36,16 +39,23 @@ def plot_trajectory_subset(timeseries, tmin, tmax):
     -------
     """
 
-    t = timeseries[:,0]
-    if (tmin < np.amin(t) or tmax > np.amax(t)):
+    t = timeseries[:, 0]
+    if tmin < np.amin(t) or tmax > np.amax(t):
         raise ValueError("Interval is out of bounds")
 
-    indices_within_time_interval = (t>=tmin) & (t<=tmax)
+    indices_within_time_interval = (t >= tmin) & (t <= tmax)
 
-    values = timeseries[:,1]
-    return plt.plot(t[indices_within_time_interval], values[indices_within_time_interval])
+    values = timeseries[:, 1]
 
-def plot_histogram(timseries, nbins=10, mean=None, std=None):
+    fig, ax = plt.subplots()
+    ax.plot(
+        t[indices_within_time_interval], values[indices_within_time_interval]
+    )
+
+    return fig, ax
+
+
+def plot_histogram(timeseries, nbins=10, mean=None, std=None):
     """
     Plot the histogram for the timeseries TIMESERIES.
 
@@ -61,18 +71,29 @@ def plot_histogram(timseries, nbins=10, mean=None, std=None):
         The empirical standard deviation computed over the timeseries
     """
 
-    hist, bin_edges = np.histogram(timeseries[:,1], bins=nbins)
-    bin_centers = 0.5*(bin_edges[1:]+bin_edges[0:-1])
+    def get_gaussian_histogram(fluct_min, fluct_max, std, mean, nbins=100):
+        bin_edges = np.linspace(fluct_min, fluct_max, nbins + 1)
+        nb_samples = len(timeseries[:, 1])
+        rescaled_bin_edges = (bin_edges - mean) / (std * np.sqrt(2))
+        hist = (
+            0.5
+            * nb_samples
+            * (erf(rescaled_bin_edges[1:]) - erf(rescaled_bin_edges[:-1]))
+        )
+        return hist, bin_edges
 
-    plot_histogram = plt.plot(bin_centers, hist, "*")
+    hist, bin_edges = np.histogram(timeseries[:, 1], bins=nbins)
+    bin_centers = 0.5 * (bin_edges[1:] + bin_edges[0:-1])
 
-    # Plot gaussian distribution
+    fig, ax = plt.subplots()
+    ax.plot(bin_centers, hist, "*")
+
     if (not std) or (not mean):
-        mean, std = get_mean_and_var(timeseries)        
-    std_inverse = 1./std
-    normalisation = std_inverse/np.sqrt(2.0*np.pi)
-    gaussian = lambda x : normalisation*np.exp(-(x-mean)*(x-mean)*0.5*std_inverse)
-    fluctuation_domain = np.linspace(min(bin_centers),max(bin_centers),100)
-    plot_gaussian = plt.plot(fluctuation_domain, gaussian(fluctuation_domain))
+        mean, var = get_mean_and_var(timeseries)
+        std = np.sqrt(var)
+    hist, bin_edges = get_gaussian_histogram(
+        np.amin(bin_edges), np.amax(bin_edges), std, mean
+    )
+    ax.plot(bin_centers, hist)
 
-    return plot_histogram, plot_gaussian
+    return fig, ax

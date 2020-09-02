@@ -1,10 +1,11 @@
 import numpy as np
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
+
 
 def show_extremes(timeseries, threshold):
     """
-    Given a timeseries, this script identifies all independent fluctuations above
-    a specified threshold.
+    Given a timeseries, this script identifies all independent fluctuations
+    above a specified threshold.
 
     Parameters
     ----------
@@ -13,15 +14,15 @@ def show_extremes(timeseries, threshold):
     threshold: float
         the threshold above which to sample extremes
     min_time_between_extremes: float
-        the minimal time above which two extreme events are considered independant
-        from each other.
+        the minimal time above which two extreme events are considered
+        independant from each other.
 
     Returns
     -------
     plot_extremes
         A matplotlib figure representing the timeseries, with the identified
-        fluctations marked with red dots. The value of the threshold is represented
-        by a horizontal line.
+        fluctations marked with red dots. The value of the threshold is
+        represented by a horizontal line.
     """
 
     def group_correlated_points(series, dist):
@@ -53,50 +54,51 @@ def show_extremes(timeseries, threshold):
         list_of_groups.append(group.copy())
         return list_of_groups
 
+    timepoints_with_value_above_threshold = np.argwhere(
+        timeseries[:, 1] > threshold
+    )
+    distance_bet_extremes = 10
+    groups_of_correlated_points = group_correlated_points(
+        timepoints_with_value_above_threshold, distance_bet_extremes
+    )
+    # groups_of_correlated_points is a list of lists (each group is a list)
+    # Each group of points correspond to an independant fluctuations, but
+    # points within the group are correlated (oscillations above threshold).
+    # Next the maximum value within each group is identified.
+    extremes_timepoints = np.zeros(len(groups_of_correlated_points))
+    extremes_values = np.zeros(len(groups_of_correlated_points))
+    timepoints = timeseries[:, 0]
+    for i, bundle in enumerate(groups_of_correlated_points):
+        # argmax return the index relative to origin of timeseries[bundle,1]
+        # so must add offset bundle[0]
+        extremes_timepoints[i] = timepoints[
+            np.argmax(timeseries[bundle, 1]) + bundle[0]
+        ]
+        extremes_values[i] = np.amax(timeseries[bundle, 1])
 
-timepoints_with_value_above_threshold = np.argwhere(
-    timeseries[:, 1] > threshold
-)
-groups_of_correlated_points = group_correlated_points(
-    timepoints_with_value_above_threshold, correlation_time
-)
-# groups_of_correlated_points is a list of lists (each group is a list)
-# Each group of points correspond to an independant fluctuations, but points
-# within the group are correlated (oscillations above threshold).
-# Next the maximum value within each group is identified.
-extremes_timepoints = np.zeros(len(groups_of_correlated_points))
-extremes_values = np.zeros(len(groups_of_correlated_points))
-timepoints = timeseries[:, 0]
-for i, bundle in enumerate(groups_of_correlated_points):
-    # argmax return the index relative to origin of timeseries[bundle,1]
-    # so must add offset bundle[0]
-    extremes_timepoints[i] = timepoints[
-        np.argmax(timeseries[bundle, 1]) + bundle[0]
-    ]
-    extremes_values[i] = np.amax(timeseries[bundle, 1])
+    # Make figure
+    fig, ax = plt.subplots()
+    ax.set_xlim(0, np.amax(timepoints))
 
-###################
-### Make figure ###
-###################
-fig, ax = plt.subplots(1, 1, figsize=(12, 4), constrained_layout=True)
-ax.set_xlim(0, np.amax(timepoints))
+    (line,) = ax.plot(timepoints, timeseries[:, 1])  # Signal (or "trajectory")
 
-(line,) = ax.plot(timepoints, timeseries[:, 1])  # Signal (or "trajectory")
+    # Mark extremes above threshold with a dot
+    (line2,) = ax.plot(
+        extremes_timepoints,
+        extremes_values,
+        "o",
+        linestyle="None",
+        markersize=4,
+    )
 
-# Mark extremes above threshold with a dot
-(line2,) = ax.plot(
-    extremes_timepoints, extremes_values, "o", linestyle="None", markersize=4
-)
+    # Horizontal line at threshold value
+    (line3,) = ax.plot(
+        [timepoints[0], timepoints[-1]],
+        [threshold, threshold],
+        linestyle="--",
+        linewidth=0.7,
+    )
+    line3.set_color(line2.get_color())
+    line.set_linewidth(0.8)
 
-# Horizontal line at threshold value
-(line3,) = ax.plot(
-    [timepoints[0], timepoints[-1]],
-    [threshold, threshold],
-    linestyle="--",
-    linewidth=0.7,
-)
-line3.set_color(line2.get_color())
-line.set_linewidth(0.8)
-
-return fig, ax
-
+    return fig, ax
