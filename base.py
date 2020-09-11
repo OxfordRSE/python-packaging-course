@@ -1,20 +1,24 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-x = np.genfromtxt("./data/brownian.csv", delimiter=",")
-dt = 0.1
-
-# Plot trajectory between t=0 and t=50
-T = 50
-n = int(T/dt)+1
-plt.figure(1)
-plt.plot(x[0:n,0],x[0:n,1])
+timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
 
 # Compute and print mean and standard deviation
-mean = np.mean(x[:,1])
-std = np.std(x[:,1])
+mean = np.mean(timeseries[:,1])
+std = np.std(timeseries[:,1])
 print(f"The mean is {mean}")
 print(f"The standard deviation is {std}")
+
+# Plot trajectory between tmin=0 and tmax=50
+tmin = 0
+tmax = 50
+t = timeseries[:,0]
+values = timeseries[:,1]
+indices_within_time_interval = (t >= tmin) & (t <= tmax)
+fig1, ax1 = plt.subplots()
+ax1.plot(
+    t[indices_within_time_interval], values[indices_within_time_interval]
+)
 
 # Compute and plot PDF estimate
 hist, bin_edges = np.histogram(x[:,1], bins=100, density=True)
