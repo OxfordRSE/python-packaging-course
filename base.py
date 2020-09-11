@@ -21,16 +21,27 @@ ax1.plot(
 )
 
 # Compute and plot PDF estimate
-hist, bin_edges = np.histogram(x[:,1], bins=100, density=True)
-bin_centers = 0.5*(bin_edges[1:]+bin_edges[0:-1])
-plt.figure(2)
-plt.plot(bin_centers, hist, "*")
-# Plot gaussian distribution
-std_inverse = 1./std
-normalisation = std_inverse/np.sqrt(2.0*np.pi)
-gaussian = lambda x : normalisation*np.exp(-(x-mean)*(x-mean)*0.5*std_inverse)
-fluctuation_domain = np.linspace(min(bin_centers),max(bin_centers),100)
-plt.plot(fluctuation_domain, gaussian(fluctuation_domain))
+hist, bin_edges = np.histogram(timeseries[:, 1], bins=100)
+bin_centers = 0.5 * (bin_edges[1:] + bin_edges[0:-1])
+
+fig2, ax2 = plt.subplots()
+ax2.plot(bin_centers, hist, "*")
+
+# Now plot the "true" histogram (gaussian PDF)
+def get_gaussian_histogram(fluct_min, fluct_max, std, mean, nbins=100):
+    bin_edges = np.linspace(fluct_min, fluct_max, nbins + 1)
+    nb_samples = len(timeseries[:, 1])
+    rescaled_bin_edges = (bin_edges - mean) / (std * np.sqrt(2))
+    hist = (
+        0.5
+        * nb_samples
+        * (erf(rescaled_bin_edges[1:]) - erf(rescaled_bin_edges[:-1]))
+    )
+    return hist, bin_edges
+
+hist, bin_edges = get_gaussian_histogram(
+    np.amin(bin_edges), np.amax(bin_edges), std, mean
+)
+ax2.plot(bin_centers, hist)
+
 plt.show()
-
-
