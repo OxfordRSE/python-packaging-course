@@ -7,4 +7,5 @@ setup(name='tstools',
       author='Spam Eggs',
       author_email='spameggs@example.com',
       packages=['tstools'],
+      install_requires = ["numpy"],
       license='GPLv3')
