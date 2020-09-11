@@ -118,12 +118,96 @@ ensemble: a /package/.
 	  data/
 #+end_example
 
-*** TODO init dot pie
-A package /must/ contain a file ~__init__.py~ (even empty) (say init dot pie).
-It is this file that tells the python interpreter that ~pkg/~ directory is a package, and it is 
-the presence of this file that allows the use of the dot notation: ~from pkg.base import ...~.
-Try to remove the ~__init.py~ and see for yourself what happens then!
+The file ~__init.py__~ (/underscore/ /underscore/ ~init~ /underscore/ /underscore/ ~.py~) is
+just an empty file for now, and we will discuss it in the next section.
 
+We can now import the functions defined in the ~tstools~ package's modules:
+#+begin_src python
+import tstools.moments
+from tstools.vis import plot_histogram
+
+timeseries = np.genfromtxt("../../data/brownian.csv", delimiter=",")
+
+mean = tstools.moments.get_mean(timeseries)
+fig, ax = tstools.moments.plot_histogram(timeseries)
+#+end_src
+
+Note that src_python{import tstools} doesn't actually import anything!
+
+*** init dot pie
+Our pacakge isn't very big, and the internal structure with 3 different modules isnt
+very relevant for a user.
+Say we would prefer to have the functions accessible at the top level, for instance
+
+#+begin_src python
+import tstools
+
+timeseries = np.genfromtxt("../../data/brownian.csv", delimiter=",")
+
+mean = tstools.get_mean(timeseries)
+fig, ax = tstools.plot_histogram(timeseries)
+#+end_src
+
+To do this we can use a feature of the python interpreter called /package initialization/.
+
+Remember that ~__init.py__~ file next to the modules? The content of this file can be
+any valid python, that will be executed when the package or one of its submodule is
+imported.
+
+For instance, let's add a simple ~print~ statement to the ~__init__.py~ and import
+function ~get_mean_and_var~ from module ~tstools.py~:
+#+begin_src python
+filename = __file__
+print(f"Hello from {filename}")
+#+end_src
+
+#+begin_src python
+  from tstools.tstools import get_mean_and_var
+#+end_src
+
+Any object (variable, function, class) defined in the ~__inint__.py~ file is available
+under the paakge's namspace:
+
+#+begin_src python
+  import tstools
+  print(tstools.filename)
+#+end_src
+
+#+begin_exercise
+Write the ~__init__.py~ so that all functions defined in
+modules ~tstools.py~ and ~show_extremes.py~ are accessible directly
+at the top-lvel (under the ~tstools~ namespace), /i.e/
+
+#+begin_src python
+  import tstools
+  meab, var = tstools.get_mean_and_var
+  fig, ax = tstools.show_extremes(timeseries, 4*np.sqrt(var))
+#+end_src
+
+Hint: By default python looks for modules in the current directory
+and some other locations (more about that later). When using ~import~,
+you can refer to modules in the current package using the /dot notation/:
+#+begin_src python
+  # import something from module that resides
+  # in the current package (next to the __init__.py)
+  from .module import something
+#+end_src
+
+#+end_exercise
+
+*** TODO Whats the value of any empty ~__init__.py~ ?
+*** Note: objets defined in __init__.py are avaialbe when importing /the pacakge/
+#+begin_src python
+    # __init__.py
+    mysymbol = "something"
+    print(mysymbol)
+#+end_src
+
+#+begin_src python
+  from tstools.tstools import get_mean_and_var
+  # this prints "something" but mysymbol is not
+  # accessible from tstools' namespace
+#+end_src
 * Part 2 - using the package across analyses
 Now that we have a nice package, let's save us some time and reuse it.
 
