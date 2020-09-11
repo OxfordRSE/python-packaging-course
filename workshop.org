@@ -245,27 +245,48 @@ None of these are generally recommended.
 Recommended approach: use /setuptools/.
 
 ** TODO setuptools and setup dot pie
+/Installing/ a python package essentially means copying the package modules to a location
+where they can be found by the python interpreter, usually the ~site-packages~ directory.
 
-setuptools is a python library that provides functionality to /install/ packages.
+You could technically install your package by copying the package to the ~site-packages~
+directory, /i.e/
+#+begin_src shell
+cp -r tstools venv/lib/pythonX.Y/site-packages/
+#+end_src
+however, this is not recommended for two main reasons:
+- The installation location of python packages varies across systems (Windows, MacOS, various GNU/Linux distributions)
+  and python environments. For instance, if you are using a didicated python environment for
+your project (see below), you must make sure to install the package in the right location for this environment
+and not for , for instane, the system's global python environment.
+- It is likely that your python package will depend on other python packages. In our case,
+  ~numpy~ and ~matplotlib~. You and your users will have to manually install them.
 
-/Installing/ a python package essentially means copying to package to the ~site-packages~ dir,
-but it /can/ be more than that: *what ?*
+overall, manually installing packages would be error-prone and time consuming. Instead, we
+can use the utility ~pip~ to /automatise/ this process.
 
-Setuptool is used through a file ~setup.py~ located next to the package directory.
-*Piege* setup.py not located next to ~__init__.py~!!!
+*** setup dot pie
+Installing a package with ~pip~ looks like this
+#+begin_src shell
+pip install <package directory>
+#+end_src
+
+let's give it a try
+#+begin_src shell
+pip install .
+#+end_src
 
 #+begin_example
-  workshop/
-	  setup.py
-	  pkg/
-		  ___init__.py
-		  base.py
-		  show_extremes.py
-	  data/
+Error because no setup.py
 #+end_example
 
-Basic setup.py:
+For ~pip~ to be able to install our package, we must first give it some information about it.
+In fact ~pip~ expects to find a python file named ~setup.py~ in the directory that it is
+given as an argument. This file is expected to call the function ~setup~
+provided by the ~setuptools~ package (or the deprecated ~distutils~ package).
+
+Here is a minimal ~setup.py~ file
 #+begin_src python
+  # In directory tstools-proj
   from setuptools import setup
 
   setup(name='tstools',
@@ -274,21 +295,46 @@ Basic setup.py:
 	url='',
 	author='Spam Eggs',
 	author_email='spameggs@example.com',
-	package=['pkg'],
+	package=['tstools'],
 	license='GPLv3')
 #+end_src
 
-The package can now be installed through the command
+The above gives ~pip~ some metadata about our package and, more importantly, the location
+of the package to be install, in this case the directory ~tstools~.
+
+Our package project directory now looks like this
+#+begin_example
+  tstools-proj/
+	  setup.py
+	  tstools/
+		  ___init__.py
+		  tstools.py
+		  show_extremes.py
+	  data/
+#+end_example
+
+*Piege* setup.py not located next to ~__init__.py~!!!
+
+
+With that, let's install our package
 #+begin_src shell
-  python setup.py install
+  pip install .
 #+end_src
 
-Let's have a look at the output of that command.
+#+begin_exercise
+- Write the ~setup.py~ for your own package and install your package using ~pip~.
+  Notice how ~numpy~ and ~matplotlib~ are automatically downloaded (can you find from where?)
+  and installed.
+- Move to the directory ~analysis2/~ and check that you can import your package from there.
+  Where is this package located?
+  Hint: You can check the location a package using the ~__file__~ attribute.
+- The directory ~analysis2~ contains a timeseries under ~data/~. What is the average value
+  of the timeseries?
+#+end_exercise
 
-Let's try again to use the pkg in analysis2/
+** Maintaining your package indepently from the anaylises that use it
+Let's move the pkg out of analysis1/ and put it next to the two analyses that rely on it.
 
-** Maitaining your package indepently from the anaylises that use it
-let's move the pkg out of analysis1/
 #+begin_example
   tstools
 	  tstools/
@@ -299,19 +345,50 @@ let's move the pkg out of analysis1/
 	  data/
   analysis2/
 	  analysis2.py
-	  data/	
+	  data/
 #+end_example
 
-How do you update the package?
+We now have a package that can be reused across our analyses.
+However, it is not set in stone and you will likely make changes to the package, for
+instance to add functionalities or to fix bugs.
 
-*** Option 1 - Reinstalling every time
+You could just reinstall the package each time you make a modification to it.
+This obviously can beome a bit tedious if you're trying many different things to fix a bug
+and are constantly making changes and testing your package. In addition, you might forget
+to update your package, leading to potentially difficult errors.
 
-*** Option 2 - Use the develop command
+*** Editable installs
+~pip~ has the ability to install the package in a so-called "editable" mode.
+Instead of copying your package to the package installation location, pip will just
+write a link to your package directory.
+In this way, when import ing your package, the python interpreter is redirected to
+your package project directory.
+
+To install your package in editable mode, use the ~-e~ option for the ~install~ command:
 #+begin_src shell
-python setup.py develop
+pip install -e .
 #+end_src
 
-just pts a link towards the ~tstools/~ dir in ~site-packages~.
+#+begin_exercise
+1. Uninstall the package with src_shell{pip uninstall tstools}
+2. List all the installed packages and check that ~tstools~ is not amoing them
+   Hint: Use ~pip --help~ to get alist of available ~pip~ commands.
+3. re-install ~tstools~ in editable mode.
+4. Modify the ~tstools.tstools.plot_trajectory_subset~ so that it returns the maximum value
+   over the trajectory subset.
+   Hint: You can use the numpy function ~amax~ to find the maximum of an array.
+5. What is the maximum value of the timeseries in ~analysis1/data/timeseries1.csv~ between
+   t=0 and t = 4 ?
+#+end_exercise
+
+In editable mode, ~pip install~ just write a file ~<package-name>.egg-link~ at the package
+installation location in place of the actuall package. This file contains the location of the
+package in your package project directory:
+
+#+begin_src shell
+cat ~/venv/lib/python3.8/site-packages/tstools.egg-link
+/home/thibault/org/data/6d/ac010a-3c1b-4b90-8fe2-67f782781a9e/tstools
+#+end_src
 
 ** Summary and break
    State the benefits of the package structure.
