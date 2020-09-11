@@ -422,7 +422,7 @@ pip install tstools
 *** Creating distributions
 **** Building the distribution(s)
  The first is to generate a /distribution/ for the package, /i.e/ the ensemble of files and data
- necessary to both install and use the package. 
+ necessary to both install and use the package.
  This usually takes the from of, or is akin to, an archive (~.tar~, ~.zip~).
 
  Make sure that you are in the ~tstools~ project root (where the ~setup.py~ is).
@@ -433,7 +433,7 @@ pip install tstools
  - A source distribution. It is a ~.tar~ archive containing the source (the ~.py~ files) and possibly the data required
    to use and/or test the package (/e.g/ parameters, input files, input data for tests...)
  - A wheel (or built distribution). In many cases this is very similar to the source distribution, but can present important advantages.
-  
+
  We will discuss the difference between these twp distributions later.
  For now, suffice to remember that both are commonly generated together, and it is recommended
  to make both avaialable to users. Again, we'll understand why later.
@@ -458,11 +458,11 @@ pip install tstools
  Python distributions can be freely hosted on Python Package Index (PyPI).
  Looking at numpy for instance, we can see all the available distribtions.
 
- When installing a python package as 
+ When installing a python package as
  #+begin_src shell
  pip install numpy
  #+end_src
- by default ~pip~ makes a request to PyPI for the package ~numpy~ and downloads and install the 
+ by default ~pip~ makes a request to PyPI for the package ~numpy~ and downloads and install the
  relevant wheel.
  if no wheel availabe, it will download and install the ~sdist~.
 
@@ -471,7 +471,7 @@ pip install tstools
 *** Uploading distributions to PyPI
  In this section we upload the source and wheel distribtuion created earlier to the test PyPI
  repository.
- For the purposes of this workshop, we actually make use of the test resposioty. 
+ For the purposes of this workshop, we actually make use of the test resposioty.
  It is a reposotory intended for tests only and there is no garantuee that your package will remain
  avaialbe on it over long duration. but it's the perfect tool to explore and learn.
 
@@ -489,13 +489,13 @@ pip install tstools
  #+begin_example
    $ (tstools) twine upload -i https://testpypi.org/simple lib/*
  #+end_example
- the switch ~-i https://testpypi.org/simple~ tells twine to upload the files to the test PyPI repo instead 
+ the switch ~-i https://testpypi.org/simple~ tells twine to upload the files to the test PyPI repo instead
  of the regular PyPI repo.
 
  #+NAME: Upload distributions and install tstools
  #+begin_exercise
  - In the tstools virtualenv, install twine and upload the distributions
- - Create a fresh virtualenv and install tstools from TestPyPI. 
+ - Create a fresh virtualenv and install tstools from TestPyPI.
    Check the output of ~pip~ for the line(s) that show that the pacakge indeed comes from the TestPyPI index.
 
  Congratulations: you made your package pip installable !!
