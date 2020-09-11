@@ -110,9 +110,10 @@ ensemble: a /package/.
 *** Let's make a package out of our 2 sripts
 #+begin_example
   workshop/
-	  pkg/
-		  ___init__.py
-		  base.py
+	  tstools/
+	          __init__.py
+		  moments.py
+		  vis.py
 		  show_extremes.py
 	  data/
 #+end_example
