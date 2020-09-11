@@ -17,18 +17,18 @@ A numerical experiment has three components:
 - The operations performed on this data
 - The output (numbers, plots)
 
-At the moment parameters (input data), operations and output are intertwined in a single 
+At the moment parameters (input data), operations and output are intertwined in a single
 python script.
 
 This is often what we do in early exploratory phases, when the objective is to get insight
-into data quickly. /Quickly/ means without having to think about software, /i.e/ taking the 
+into data quickly. /Quickly/ means without having to think about software, /i.e/ taking the
 shortest path to the scientific output (the plot).
 
 However, this approach is (by design) messy.
 Depsite short term convenience, putting data, operations and output in the same file is very
 likely to slow down your research process on a longer term.
 
-The main reason is code-reuse. Consider the situation where you have a similar timeseries, 
+The main reason is code-reuse. Consider the situation where you have a similar timeseries,
 and want to visualise its histogram. A straightfoward solution would be to copy and paste
 lines 19 to 30 to the anaylis program for the new timeseries.
 This approach is risky:
@@ -60,17 +60,17 @@ The result could look like this:
 
 The above script is much shorter and easier to read, because the actual implementation of
 the various operations (computing the mean and variance, computing the histogram...) is now
-/encpsulated/ inside the package ~my_pkg~. All that remains are the actual steps of the 
+/encpsulated/ inside the package ~my_pkg~. All that remains are the actual steps of the
 analysis.
 
-If we were to make changes to the way some operations are implemented, we could simply make 
+If we were to make changes to the way some operations are implemented, we could simply make
 changes to the package, leaving the scripts unmodified. The changes are then made avaialble
 to all the programs that use the package: no more copying and pasting code around.
 
 Conversely, by making change to the operations, you are a no risk of modyfing the analysis
 itself (sequence of operations, data and parameters, output).
 
-Taking a step back, the idea of separating different components is pervasive in software developemt 
+Taking a step back, the idea of separating different components is pervasive in software developemt
 and software design. Different names depending on the field (encapsulation, separation of concerns,
 bounded contexts...).
 
@@ -101,11 +101,11 @@ bounded contexts...).
 
     result = add(a,b)
   #+end_src
-  
-*** TODO Step 1 - Rewrite scripts into collection of functions
+
+*** DONE Step 1 - Rewrite scripts into collection of functions
 So now it is technically possible to import each functions from the modules.
 But the script must be in this directory next to the modules.
-Plus we want to bundle both modules (and the ones to come) into a coherent 
+Plus we want to bundle both modules (and the ones to come) into a coherent
 ensemble: a /package/.
 *** Let's make a package out of our 2 sripts
 #+begin_example
