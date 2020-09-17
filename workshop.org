@@ -417,13 +417,147 @@ pytest for automated testing, sphinx for building you documentation, tox for aut
 of project-level tasks.
 
 * Intermezzo: Python virtual environments
-Why virtualenv
-What's a virtualenv
+** Problem: Installing different versions of a package
+In the previous section you learned how to share a package across several projects, or analysis.
+As your package and analyses evolve asynchronously, it is likely that you will readh a point when
+you'd like differnet analyses to use different versions of your package, or any third-party
+packages that your analysis rely on.
 
-In the examples above we had both analyses in the same virtualenv.
-Usually invidividual analyses have their own virtualenv as they require different packages
-or different versions.
-Package directory has its own virtualenv where pkg is installed in develop mode.
+How to install two different versions of a same package?
+The short answer is: you can't.
+
+If you type ~pip install numpy==1.18~, ~pip~ first looks for a version
+of ~numpy~ already installed (in the ~site-packages/~ directory).
+If it finds a different version, say 1.19, ~pip~ will uninstall it and
+install numpy 1.18 instead.
+
+** Solution: virtual environments
+Roughly speaking, the python executable ~/some_dir/lib/pythonX.Y/bin/python~
+and the package installation location ~/some_dir/lib/pythonX.Y/site-packages/~
+consitute what is commonly referred to your /python environment/.
+
+If you cannot install different versions of a package in a single environment,
+let's have multiple environments! This is the core idea of /python virtual environments/.
+Whenever a python environment is /activated/, the ~python~ command points to a
+python executable that is unique to this environment (~my-env/lib/pythonX.Y/bin/python~), with a unique package installation location
+specific to this environment (~my_env/lib/pythonX.Y/site-packages~).
+
+EXERCISE: Python virtualenvironmnes
+
+1. Move to the ~analysis1/~ directory and create a virtual-environment there:
+#+begin_src shell
+python -m venv analysis1_venv
+#+end_src
+This commands creates a new directory ~analysis_venv~ in the current directory.
+Feel free to explore its contents.
+
+2. Activate the virtual envoronment for analysis1
+#+begin_src shell
+source analysis1_venv/bin/activate
+#+end_src
+
+3. What is the location of the current python executable?
+   Hint: The built-in python package ~sys~ provides a variable ~executable~.
+
+4. Use ~pip list~ to list the currently installed packages.
+   Note that our package and its dependencies have disappeared, and only
+   the core python packages are installed. We have a "fresh" python environment.
+
+5. Move to the the ~tstools~ package prject directory and install it into the
+current envirinment:
+#+begin_src shell
+pip install .
+#+end_src
+
+6. Where was the package installed?
+   Hint: When importing package ~package~ in python, use ~package.__file__~
+   to check the location of the corresponding ~__init__.py~ file.
+
+
+The above exercise demonstrates that, after activating the ~analysis1_venv~, the command ~python~
+executes the python executable ~ analysis1/analysis1_venv/bin/python~, and python packages are installed
+in the ~analysis1/analysis1_venv/lib/pythonX.Y/site-packages~ directory.
+This means that we are now working in a python environment that is /isolated/ from other python environments
+in your machine:
+- other virtual environments
+- system python environment (see below)
+- other versions of python installed in your system
+- Anaconda environments
+
+You can therefore install all the packages necesseray to your projects, without worry of breaking
+other projects.
+
+** Always use a virtual environment
+You just learned what are python virtual environment and how to use them? Don't look back, and make them a habit.
+The limitation that only one version of a package can be installed at one time in one python environment can be the source
+of very frustrating problems, distracting you from your research.
+Moreover, using one python environment for all your projects means that this environment will change as you work on different projects,
+making it very hard to resolve dependency problems when they (and they will) occur.
+
+Most of the time, a better approach is to have one (or more if needed) virtual envirornments per analyses and projects.
+Coming back to our earlier example with the ~tstools~ package used in analysis analysis1 and analysis2, a recommnded setup
+would be
+#+begin_example
+  tstools/
+	  setup.py
+	  tstools
+	  venv_tstools
+  (venv_tstools) $ pip install -e tstools/
+
+  analysis1/
+	  analysis1.py
+	  data/
+	  venv_analysis1/
+  (venv_analysis1) $ pip install tstools/
+
+  analysis2/
+	  analysis2.py
+	  data/
+	  venv_analysis2/
+  (venv_analysis2) $ pip install tstools/
+#+end_example
+
+When working on the package itself, we work within the virtual environment ~venv_tstools~, in
+which the package is installed in editable mode. In this way, we avoid constant re-installation
+of the package each time we make a change to it.
+
+When working on either analyses, we activate the corresponding virtual environment, in which
+our package ~tstools~ is installed in normal, non-editable mode, possibly along all the
+other packages that we need for this particular analysis.
+
+** Never use the system python
+Most GNU/Linux distributions as well as MacOS come with a version of python already installed.
+This version is often referred to as the /system python/ or the /base python/. *Leave it alone*.
+As the name suggest, this version of python is used likely to be used by some parts of your system,
+and updating or breaking it would mean breaking these partsof your system that rely on it.
+
+Instead, you can install a more recent version of python by running, for instance
+#+begin_src shell
+apt install python3.8
+#+end_src
+ or
+#+begin_src shell
+brew install python3.8
+#+end_src
+
+and use it to create virtual environments for your projects:
+#+begin_src shell
+python3.8 -m venv my_venv
+#+end_src
+
+Once the virtual environment is activated, invoking the command ~python~ will start
+the python 3.8 interpreter located in ~my_venv~.
+
+*** TODO Installing utilities in global python 3.8
+*** TODO managing several versions of pytho nwith pyenv
+
+
+** Summary
+- One big limitations of python is that only one version of a package can be installed in a given environment.
+- virtual environments allow us to create multiple python environments, isolated from each other. Therefore we don't worry
+  about breaking other projects that may rely on other versions of some packages.
+- Having one virtual env per analysis is a good research practice since it faciliates reproducibility of your results.
+- never use the system python installation, unless your have a very good reason to.
 
 * Part 3 - Sharing the package
 You now have a python package that you can use independently in your analyses.
