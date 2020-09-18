@@ -145,8 +145,6 @@ mean = tstools.moments.get_mean(timeseries)
 fig, ax = tstools.moments.plot_histogram(timeseries)
 #+end_src
 
-Note that src_python{import tstools} doesn't actually import anything!
-
 *** init dot pie
 Let's try to import the package as a whole:
 #+begin_src python
