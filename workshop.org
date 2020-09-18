@@ -125,19 +125,16 @@ bounded contexts...).
 *** Let's make a package out of our 2 scripts
 We now have a ~tstools~ directory with 3 modules:
 #+begin_example
-  workshop/
+  analysis1/
 	  tstools/
-	          __init__.py
+		  __init__.py
 		  moments.py
 		  vis.py
 		  show_extremes.py
 	  data/
 #+end_example
 
-The file ~__init.py__~ (/underscore/ /underscore/ ~init~ /underscore/ /underscore/ ~.py~) is
-just an empty file for now, and we will discuss it in the next section.
-
-We can now import the functions defined in the ~tstools~ package's modules:
+In way, the directory ~tstools~ is already a pacakge, in the sens that it is possible to import each functions from the modules:
 #+begin_src python
 import tstools.moments
 from tstools.vis import plot_histogram
@@ -151,34 +148,26 @@ fig, ax = tstools.moments.plot_histogram(timeseries)
 Note that src_python{import tstools} doesn't actually import anything!
 
 *** init dot pie
-Our pacakge isn't very big, and the internal structure with 3 different modules isnt
-very relevant for a user.
-Say we would prefer to have the functions accessible at the top level, for instance
-
+Let's try to import the package as a whole:
 #+begin_src python
 import tstools
-
 timeseries = np.genfromtxt("../../data/brownian.csv", delimiter=",")
-
-mean = tstools.get_mean(timeseries)
-fig, ax = tstools.plot_histogram(timeseries)
+mean = tstools.moments.get_mean(timeseries)
 #+end_src
 
-To do this we can use a feature of the python interpreter called /package initialization/.
+#+begin_example
+Error because nothing was imported
+#+end_example
 
-Remember that ~__init.py__~ file next to the modules? The content of this file can be
-any valid python, that will be executed when the package or one of its submodule is
-imported.
+What happened here? When importing the directory ~tstools~, the python interpreter
+looks for a file named ~__init__.py~ inside this directory and imports this python file.
+If this python file is empty, or simply doesnt exists... nothing is imported.
 
-For instance, let's add a simple ~print~ statement to the ~__init__.py~ and import
+For example, let's add a simple ~print~ statement to the ~__init__.py~ and import
 function ~get_mean_and_var~ from module ~tstools.py~:
 #+begin_src python
 filename = __file__
 print(f"Hello from {filename}")
-#+end_src
-
-#+begin_src python
-  from tstools.tstools import get_mean_and_var
 #+end_src
 
 Any object (variable, function, class) defined in the ~__inint__.py~ file is available
@@ -188,6 +177,10 @@ under the paakge's namspace:
   import tstools
   print(tstools.filename)
 #+end_src
+
+Our pacakge isn't very big, and the internal strucure with 3 different modules isnt
+very relevant for a user.
+Instead of ~mean, var = tstools.moments.get_mean(timseries)~ we would prefer, ~tstools.get_mean(timeseries)~.
 
 #+begin_exercise
 Write the ~__init__.py~ so that all functions defined in
@@ -208,8 +201,25 @@ you can refer to modules in the current package using the /dot notation/:
   # in the current package (next to the __init__.py)
   from .module import something
 #+end_src
-
 #+end_exercise
+
+Our package is ready to be used!
+
+#+begin_src python
+  # In directory python-packaging-workshop/
+  import numpy as np
+  import matplotlib.pyplot as plt
+  import tstools
+
+  timeseries = np.genfromtxt("./data/my_timeseries.csv", delimiter=",")
+
+  mean, var = tstools.get_mean_and_var(timeseries)
+
+  fig, ax = tstools.get_pdf(timeseries)
+
+  threshold = 3*np.sqrt(var)
+  fig, ax = tstools.show_extremes(timeseries, threshold)
+#+end_src
 
 *** TODO Whats the value of any empty ~__init__.py~ ?
 *** Note: objets defined in __init__.py are avaialbe when importing /the pacakge/
