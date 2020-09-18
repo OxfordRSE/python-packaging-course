@@ -466,13 +466,13 @@ of project-level tasks.
 
 * Intermezzo: Python virtual environments
 ** Problem: Installing different versions of a package
-In the previous section you learned how to share a package across several projects, or analysis.
-As your package and analyses evolve asynchronously, it is likely that you will readh a point when
-you'd like differnet analyses to use different versions of your package, or any third-party
+In the previous section you learned how to share a package across several projects, or analyses.
+However, as your package and analyses evolve asynchronously, it is likely that you will reach a point when
+you'd like differnet analyses to use different versions of your package, or different versions of  third-party
 packages that your analysis rely on.
 
-How to install two different versions of a same package?
-The short answer is: you can't.
+The question is then: /how to install two different versions of a same package?/
+And the (short) answer is: /you can't./
 
 If you type ~pip install numpy==1.18~, ~pip~ first looks for a version
 of ~numpy~ already installed (in the ~site-packages/~ directory).
@@ -482,15 +482,15 @@ install numpy 1.18 instead.
 ** Solution: virtual environments
 Roughly speaking, the python executable ~/some_dir/lib/pythonX.Y/bin/python~
 and the package installation location ~/some_dir/lib/pythonX.Y/site-packages/~
-consitute what is commonly referred to your /python environment/.
+consitute what is commonly referred to as the /python environment/.
 
 If you cannot install different versions of a package in a single environment,
 let's have multiple environments! This is the core idea of /python virtual environments/.
-Whenever a python environment is /activated/, the ~python~ command points to a
+Whenever a python virtual environment ~my_env~ is /activated/, the ~python~ command points to a
 python executable that is unique to this environment (~my-env/lib/pythonX.Y/bin/python~), with a unique package installation location
 specific to this environment (~my_env/lib/pythonX.Y/site-packages~).
 
-EXERCISE: Python virtualenvironmnes
+*** EXERCISE: Python virtualenvironmnes
 
 1. Move to the ~analysis1/~ directory and create a virtual-environment there:
 #+begin_src shell
@@ -598,7 +598,6 @@ the python 3.8 interpreter located in ~my_venv~.
 
 *** TODO Installing utilities in global python 3.8
 *** TODO managing several versions of pytho nwith pyenv
-
 
 ** Summary
 - One big limitations of python is that only one version of a package can be installed in a given environment.
