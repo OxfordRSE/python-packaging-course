@@ -33,7 +33,7 @@ Python 3 installation, and not the Anaconda or Miniconda distribution.
 If you're using Anaconda/Miniconda - don't remove it - just install Python 3 alongside it 
 following the instructions below.
 
-If you already have the above requirements satisfied, jump to [[* Setup the python environment for the course]],
+If you already have the above requirements satisfied, jump to [[https://github.com/OxfordRSE/python-packaging-course#setup-the-python-environment-for-the-course][Setup the python environment for the course]].
 otherwise, read on.
 
 *** Installing Python 3
@@ -71,25 +71,41 @@ otherwise, read on.
    1. Download the installer for the latest stable version of python [[https://www.python.org/downloads/windows/][here]].
       (Most likely the /Windows x86-64 executable installer/).
    2. Execute the Python installer - be sure to tick /Add Python 3.8 to PATH/.
-   3. Move on to [[*Checking your installation]]
+   3. Move on to [[https://github.com/OxfordRSE/python-packaging-course#checking-your-installation][Checking your installation]].
 
 *** Checking your installation
 Let's check that Python 3, pip and the venv modules are correctly installed.
 
-#+begin_src shell
+#+begin_src shell :results output
 python3 --version
 #+end_src
 
-#+begin_src shell
+#+RESULTS:
+: Python 3.8.5
+
+#+begin_src shell :results output
 python3 -m pip --version
 #+end_src
 
-#+begin_src shell
+#+RESULTS:
+: pip 20.2.3 from /home/thibault/.pyenv/versions/python-pkg-workshop/lib/python3.8/site-packages/pip (python 3.8)
+
+#+begin_src shell :results output
 python3 -m venv --help
 #+end_src
 
+#+RESULTS:
+#+begin_example
+usage: venv [-h] [--system-site-packages] [--symlinks | --copies] [--clear]
+            [--upgrade] [--without-pip] [--prompt PROMPT]
+            ENV_DIR [ENV_DIR ...]
+
+Creates virtual Python environments in one or more target directories.
+...
+#+end_example
+
 If any of the three commands above results in an error, please refer to 
-the [[*Installing Python 3][installation instructions]]. If you get stuck, just [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][open an issue]] 
+the [[https://github.com/OxfordRSE/python-packaging-course#installing-python-3][installation instructions]]. If you get stuck, just [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][open an issue]] 
 this repository and we'll help you.
 
 If not, congratulations! You have Python 3 installed and ready to go.
