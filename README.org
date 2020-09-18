@@ -74,83 +74,83 @@ otherwise, read on.
    3. Move on to [[*Checking your installation]]
 
 *** Checking your installation
- Let's check that Python 3, pip and the venv modules are correctly installed.
+Let's check that Python 3, pip and the venv modules are correctly installed.
 
- #+begin_src shell
-  python3 --version
-  #+end_src
+#+begin_src shell
+python3 --version
+#+end_src
 
-  #+begin_src shell
-  python3 -m pip --version
-  #+end_src
+#+begin_src shell
+python3 -m pip --version
+#+end_src
 
-  #+begin_src shell
-  python3 -m venv --help
-  #+end_src
+#+begin_src shell
+python3 -m venv --help
+#+end_src
 
- If any of the three commands above results in an error, please refer to 
- the [[*Installing Python 3][installation instructions]]. If you get stuck, just [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][open an issue]] in
- this repository and we'll help you.
+If any of the three commands above results in an error, please refer to 
+the [[*Installing Python 3][installation instructions]]. If you get stuck, just [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][open an issue]] 
+this repository and we'll help you.
 
- If not, congratulations! You have Python 3 installed and ready to go.
- One last step, let's [[* Setup the python environment for the course]].
+If not, congratulations! You have Python 3 installed and ready to go.
+One last step, let's [[* Setup the python environment for the course]].
 
 *** Setup the python environment for the course
-  0. Make sure you have Git installed.
-     #+begin_src shell
-     git --version
-     #+end_src
+0. Make sure you have Git installed.
+#+begin_src shell
+git --version
+#+end_src
 
-     If not, please install Git. On GNU/Linux Git is available /via/ your package manager, for instance
-     on Ubuntu:
-  #+begin_src shell
-  sudo apt install git
-  #+end_src
+If not, please install Git. On GNU/Linux Git is available /via/ your package manager, for instance
+on Ubuntu:
+#+begin_src shell
+sudo apt install git
+#+end_src
 
-  On MacOS, you can use [[https://brew.sh/][Homebrew]] once again:
-  #+begin_src shell
-  brew install git
-  #+end_src
+On MacOS, you can use [[https://brew.sh/][Homebrew]] once again:
+#+begin_src shell
+brew install git
+#+end_src
 
-  On Windows, we recommend that you use [[https://git-scm.com/download/win][Git for Windows]].
+On Windows, we recommend that you use [[https://git-scm.com/download/win][Git for Windows]].
 
-  1. Clone the course GitHub repository
-  Open a terminal (or git-bash on Windows) and run the following command:
-  #+begin_src shell
-  git clone https://github.com/OxfordRSE/python-packaging-course.git
-  #+end_src
+1. Clone the course GitHub repository
+Open a terminal (or git-bash on Windows) and run the following command:
+#+begin_src shell
+git clone https://github.com/OxfordRSE/python-packaging-course.git
+#+end_src
 
-  2. Move to the course directory
-  #+begin_src shell
-  mv python-packaging-course/
-  #+end_src
+2. Move to the course directory
+#+begin_src shell
+mv python-packaging-course/
+#+end_src
 
-  3. Create a virtual environment
-  #+begin_src shell
-  # In directory python-packaging-course/
-  python3 -m venv python-packaging-venv
-  #+end_src
+3. Create a virtual environment
+#+begin_src shell
+# In directory python-packaging-course/
+python3 -m venv python-packaging-venv
+#+end_src
 
-  4. Activate the virtual environment
+4. Activate the virtual environment
 
-  On GNU/Linux and MacOS:
-  #+begin_src shell
-  source python-packaging-venv/bin/activate
-  #+end_src
+On GNU/Linux and MacOS:
+#+begin_src shell
+source python-packaging-venv/bin/activate
+#+end_src
 
-  On Windows
-  #+begin_src shell
-  python-packaging-venv\Scripts\activate.bat
-  #+end_src
+On Windows
+#+begin_src shell
+python-packaging-venv\Scripts\activate.bat
+#+end_src
 
-  5. Update ~pip~ and install some utilities
-  #+begin_src shell
-  pip install --upgrade pip setuptools wheel
-  #+end_src
+5. Update ~pip~ and install some utilities
+#+begin_src shell
+pip install --upgrade pip setuptools wheel
+#+end_src
 
-  6. Deactivate your environment
-  #+begin_src shell
-  deactivate
-  #+end_src
+6. Deactivate your environment
+#+begin_src shell
+deactivate
+#+end_src
 
-  You're done! See you at the workshop.
+You're done! See you at the workshop.
