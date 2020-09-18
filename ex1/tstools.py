@@ -19,7 +19,7 @@ def get_mean_and_var(timeseries):
         A tuple which first element is the mean and second the variance.
     """
 
-    return np.mean(timeseries[:, 1]), np.var(timeseries[:, 1])
+    return np.mean(timeseries[:, 1]), "######"
 
 
 def plot_trajectory_subset(timeseries, tmin, tmax):
