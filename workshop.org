@@ -235,12 +235,18 @@ Our package is ready to be used!
   # accessible from tstools' namespace
 #+end_src
 * Part 2 - using the package across analyses
-Now that we have a nice package, let's save us some time and reuse it.
-the main value of having a package is to reuse it.
+Let's say that we have another directory ~analysis2~, that contains another
+but similar dataset to ~analysis1~.
+Now that we've separated structured our software into a python package, we would like
+to reuse that package for our second analysis.
 
+Let us simply write a python scripts ~analysis2.py~, that imports the ~tstools~ package
+created in the previous section.
 #+begin_example
   analysis2/
 	  analysis2.py
+	  data/
+		  timeseries.csv
 #+end_example
 
 #+begin_src python
@@ -252,46 +258,66 @@ the main value of having a package is to reuse it.
   fig, ax = tstools.plot_trajectory_subset(timeseries, 0, 50, dt=0.1)
 #+end_src
 
-*Problem* python cannot find the package!
+Unfortunately, Python cannot find the package (which at the moment lives in the directory ~analysis1/~).
 
 ** Where does python look for packages?
+When using the ~import~ statement, the python interpreter looks for the package (or module) in a list of directories
+known as the /python path/.
+
+We can find out about what directories constitute the python path:
+
 #+begin_example
 >>> import sys
 >>> sys.path
 #+end_example
 
-Lesson: python first looks inside the current dir, then inside the ~lib/pythonX.Y/site-packages~ dir.
+The order of this list is important: python first looks inside the current directory.
+
+If the package/module is not found in the current directory, Python looks for it in the following directories
+- ~/usr/lib/python38.zip~
+- ~/usr/lib/python3.8~
+- ~/usr/lib/python3.8/lib-dynload~
+The above contain the modules and packages in the /standard library/, /i.e/ the packages and modules that
+come "pre-installed" with Python.
+
+Finally, the python interpreter looks inside the directory ~python-workshop/lib/python3.8/site-packages/~.
+
+
+For Python to find out package ~tstools~ it must be located in one of the directories listed in
+the ~sys.path~ list. If it is the case, the package is said to be /installed/.
 
 Potential solutions:
-- Copy pkg dir inside current analysis dir
-- Add ~analysis1/pkg~ to ~sys.path~
-- Copy ~pkg~ dir to ~site-packages~ dir
-  Difficult to update?
+1. *Copy package directory (~analysis1/tstools/~) in the current analysis directory (~analysis2/~)*.
+  You end up with two independant packages. If you make changes to one, you have to remember to make the same
+  changes to the other. It's the usual copy and paste problems: inefficient and error-prone.
+2. *Add ~analysis1/pkg~ to ~sys.path~*.
+  At the beginning of your script, you could just
+#+begin_src python
+  import sys
+  sys.path.append("../analysis1/")
+#+end_src
+This approach can be sufficient in some situations, but generally not recommended. What if the package directory is relocated?
+3. *Copy ~analysis1/tstools~ dir to ~site-packages~ dir.*
+  You have to know where the ~site-packages~ is. This depends on your current system and python environment (see below).
+  The location on your macine may very well be differnt from the location on your colleague's machine.
 
-None of these are generally recommended.
-Recommended approach: use /setuptools/.
+Generally, the three approaches above overlook a very important point: *dependencies*.
+Our package has two: numpy and matplotlib.
+If you were to give your package to a colleague, nothing garantees that they have both packages installed.
+This is a pedagogical example. In a real case scenario, it is likely that they would have both installed, are they are widely used.
+However, if your package relies on less used packages, or specific versions of them, it is important to make sure that they
+are available.
+
+Note that all three above approaches work. However, unless you have a good reason to use one of them, they are not recommended.
 
 ** setuptools and setup dot pie
-/Installing/ a python package essentially means copying the package modules to a location
-where they can be found by the python interpreter, usually the ~site-packages~ directory.
+The recommended way to install a package is to use the ~setuptools~ library in conjunction with
+~pip~, the official python /package manager/.
 
-You could technically install your package by copying the package to the ~site-packages~
-directory, /i.e/
-#+begin_src shell
-cp -r tstools venv/lib/pythonX.Y/site-packages/
-#+end_src
-however, this is not recommended for two main reasons:
-- The installation location of python packages varies across systems (Windows, MacOS, various GNU/Linux distributions)
-  and python environments. For instance, if you are using a didicated python environment for
-your project (see below), you must make sure to install the package in the right location for this environment
-and not for , for instane, the system's global python environment.
-- It is likely that your python package will depend on other python packages. In our case,
-  ~numpy~ and ~matplotlib~. You and your users will have to manually install them.
+In effect, this approach is roughly equivalent to appraoch number (3) described in the previous section.
+However, the installation is *automated*.
 
-overall, manually installing packages would be error-prone and time consuming. Instead, we
-can use the utility ~pip~ to /automatise/ this process.
-
-*** setup dot pie
+*** setup dot pie and distribution packages
 Installing a package with ~pip~ looks like this
 #+begin_src shell
 pip install <package directory>
@@ -299,7 +325,8 @@ pip install <package directory>
 
 let's give it a try
 #+begin_src shell
-pip install .
+# In directory analysis1/
+pip install tstools
 #+end_src
 
 #+begin_example
@@ -311,6 +338,7 @@ In fact ~pip~ expects to find a python file named ~setup.py~ in the directory th
 given as an argument. This file is expected to call the function ~setup~
 provided by the ~setuptools~ package (or the deprecated ~distutils~ package).
 
+
 Here is a minimal ~setup.py~ file
 #+begin_src python
   # In directory tstools-proj
@@ -321,7 +349,6 @@ Here is a minimal ~setup.py~ file
 	description='A package to analyse timeseries',
 	url='',
 	author='Spam Eggs',
-	author_email='spameggs@example.com',
 	package=['tstools'],
 	license='GPLv3')
 #+end_src
@@ -329,27 +356,38 @@ Here is a minimal ~setup.py~ file
 The above gives ~pip~ some metadata about our package and, more importantly, the location
 of the package to be install, in this case the directory ~tstools~.
 
-Our package project directory now looks like this
+*IMPORTANT*: The above ~setup.py~ states \src_python{(...,package=["tstools"],...)}. In English, this means:
+"setuptools, please install the package ~tstools/~ located in the same directory as the file ~setup.py~".
+this means that the file ~setup.py~ resides in the directory that contains the package, in this case ~analysis1/~.
+
+Actually, there are no reasons why our ~tstools~ package should be located in the ~analysis1/~ directory.
+Indeed, the package is independant from it and we aim at reusing it across multiple analyses.
+To reflect this, let's move the ~tstools~ package into a new directory ~tstools-dist~ located next to the ~anaylis1~ and
+~analysis2~ directories:
+
 #+begin_example
-  tstools-proj/
-	  setup.py
-	  tstools/
-		  ___init__.py
-		  tstools.py
-		  show_extremes.py
-	  data/
+  python-workshop/
+	  analysis1/
+		  data/
+		  analysis1.py
+	  analysis2/
+		  data/
+		  analysis2.py
+	  tsools-dist/
+		  setup.py
+		  tstools/
 #+end_example
 
-*Piege* setup.py not located next to ~__init__.py~!!!
+The directory ~tstools-dist~ is a /distribution package/. We will later use this directory to... well, distribute our package ~tsools~.
 
-
-With that, let's install our package
-#+begin_src shell
-  pip install .
-#+end_src
-
+*** EXERCICE: Installing ~tsools~ with pip
 #+begin_exercise
-- Write the ~setup.py~ for your own package and install your package using ~pip~.
+
+- Write a new Python file ~setup.py~ in direcotry ~tstools-dist~ and write its minimal content.
+- Add your email in the package metadata.
+  Hint: A list of optional keywords for ~setuptools.setup~ can be found [[https://setuptools.readthedocs.io/en/latest/setuptools.html#new-and-changed-setup-keywords][here]].
+- Install the ~tstools~ package with ~pip~.
+  Remember: ~pip install <location of setup file>~
   Notice how ~numpy~ and ~matplotlib~ are automatically downloaded (can you find from where?)
   and installed.
 - Move to the directory ~analysis2/~ and check that you can import your package from there.
@@ -360,35 +398,22 @@ With that, let's install our package
 #+end_exercise
 
 ** Maintaining your package indepently from the anaylises that use it
-Let's move the pkg out of analysis1/ and put it next to the two analyses that rely on it.
+Congratulations! Your ~tstools~ package is now installed can be reused across your analyses...
+no more hasardous copying and pasting!
 
-#+begin_example
-  tstools
-	  tstools/
-		  base.py
-		  show_extremes.py
-  analysis1/
-	  analysis1.py
-	  data/
-  analysis2/
-	  analysis2.py
-	  data/
-#+end_example
-
-We now have a package that can be reused across our analyses.
-However, it is not set in stone and you will likely make changes to the package, for
-instance to add functionalities or to fix bugs.
+However, the package is not set in stone and, as you work on your analysis, you will likely make changes to it.
+For instance to add functionalities or to fix bugs.
 
 You could just reinstall the package each time you make a modification to it.
 This obviously can beome a bit tedious if you're trying many different things to fix a bug
 and are constantly making changes and testing your package. In addition, you might forget
-to update your package, leading to potentially difficult errors.
+to update your package, leading to potentially very frustrating and time-consuming errors.
 
 *** Editable installs
 ~pip~ has the ability to install the package in a so-called "editable" mode.
 Instead of copying your package to the package installation location, pip will just
 write a link to your package directory.
-In this way, when import ing your package, the python interpreter is redirected to
+In this way, when importing your package, the python interpreter is redirected to
 your package project directory.
 
 To install your package in editable mode, use the ~-e~ option for the ~install~ command:
@@ -398,22 +423,22 @@ pip install -e .
 
 #+begin_exercise
 1. Uninstall the package with src_shell{pip uninstall tstools}
-2. List all the installed packages and check that ~tstools~ is not amoing them
+2. List all the installed packages and check that ~tstools~ is not among them
    Hint: Use ~pip --help~ to get alist of available ~pip~ commands.
 3. re-install ~tstools~ in editable mode.
-4. Modify the ~tstools.tstools.plot_trajectory_subset~ so that it returns the maximum value
-   over the trajectory subset.
+4. Modify the ~tstools.vis.plot_trajectory_subset~ so that it returns the maximum value
+   over the trajectory subset, in addition to the ~figure~ and ~axis~.
    Hint: You can use the numpy function ~amax~ to find the maximum of an array.
 5. What is the maximum value of the timeseries in ~analysis1/data/timeseries1.csv~ between
    t=0 and t = 4 ?
 #+end_exercise
 
 In editable mode, ~pip install~ just write a file ~<package-name>.egg-link~ at the package
-installation location in place of the actuall package. This file contains the location of the
+installation location in place of the actual package. This file contains the location of the
 package in your package project directory:
 
 #+begin_src shell
-cat ~/venv/lib/python3.8/site-packages/tstools.egg-link
+cat ~/python-workshop-venv/lib/python3.8/site-packages/tstools.egg-link
 /home/thibault/org/data/6d/ac010a-3c1b-4b90-8fe2-67f782781a9e/tstools
 #+end_src
 
