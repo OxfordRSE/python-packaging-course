@@ -7,144 +7,150 @@ reuse it across them, using virtual environments.
 You will then learn the simple steps to make it possible for anyone to "pip
 install" your package, automatically installing the required dependencies.
 
-* Contents
+** Contents
 
-I - Making a python package from a collection of python sripts
-II - Reusing package(s) across research projects
-III - Python virtual environments
-IV - Sharing your package with the world
-V - Overview of advanced topics
+- *I* Making a python package from a collection of python sripts
+- *II* Reusing package(s) across research projects
+- *III* Python virtual environments
+- *IV* Sharing your package with the world
+- *V* Overview of advanced topics
 
-* Course requirements
+** Course requirements
 - A basic familiarity with Python 3 syntax
 - Python 3, pip and Git
 
 
 ** Getting ready for the course
- The course assumes that you have Python 3.3 or above 
-installed, alongside with the ~pip~ package manager and the ~venv~ Python module.
-If you are in doubt, you can just check your Python installation.
+The course assumes that he following software is installed on your system:
+- Python 3 (3.3 or above)
+- The ~pip~ package manager
+- The ~venv~ Python module.
 
- *Note to Anaconda or Miniconda users*: This course assumes that you are using a regular 
- Python 3, not an Anaconda version.
- If you're using Anaconda, don't remove it, just install Python 3 alongside it 
- following the instructions below.
+Not sure? Just [[** Checking your installation][check your Python installation.]]
 
-If you already have the above requirements satified, jump to [[* Setup the python environment for the course]],
+*Note to Anaconda or Miniconda users*: This course assumes that you are using a regular 
+Python 3 installation, and not the Anaconda or Miniconda distribution.
+If you're using Anaconda/Miniconda - don't remove it - just install Python 3 alongside it 
+following the instructions below.
+
+If you already have the above requirements satisfied, jump to [[* Setup the python environment for the course]],
 otherwise, read on.
 
-** Installing Python 3
-*** GNU/Linux
-  On most GNU/Linux distributions, the command ~python~ points to 
-  the system's Python 2 interpreter.
-  Instead, Python 3 is often available as the ~python3~ package (and the
-  ~python3~ command).
+*** Installing Python 3
+    If you encounter issues following these instructions, or if your operatiinf system
+    isn't listed, feel free to [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][open an issue]] describing your problem.
+**** GNU/Linux
+   On most GNU/Linux distributions, the command ~python~ points to 
+   the system's Python 2 interpreter.
+   Instead, Python 3 is often available as the ~python3~ package (and the
+   ~python3~ command).
 
-  On *Ubuntu*/*Debian* (and probably *Linux Mint*), you can install Python 3, the ~pip~ package manager
-  and the ~venv~ module using the ~apt~ package manager:
-  #+begin_src shell
-  sudo apt install python3 python3-pip python3-venv
-  #+end_src
-
-  On *Fedora*, Python 3 should already be there. In case it's not, you can install it
-  with
-  #+begin_src shell
-  sudo dnf python3
-  #+end_src
-  This should include ~pip~ and the ~venv~ module.
-
-** MacOS
- 1. Install homebrew (see the [[https://brew.sh/][installation instructions]]).
- 2. Install Python 3
- #+begin_src shell
- brew install python3
- #+end_src
-
- That should be it.
-
-** Windows
- 1. Download the installer for the latest stable version of python [[https://www.python.org/downloads/windows/][here]].
-    (Most likely the /Windows x86-64 executable installer/).
- 2. Execute the Python installer - be sure to tick /Add Python 3.8 to PATH/.
- 3. Move on to [[*Checking your installation]]
-
-** Checking your installation
-Let's check that Python 3, pip and the venv modules are correctly installed.
-
-#+begin_src shell
- python3 --version
- #+end_src
-
- #+begin_src shell
- python3 -m pip --version
- #+end_src
-
- #+begin_src shell
- python3 -m venv --help
- #+end_src
-
-If any of the three commands above results in an error, please refer to 
-the [[*Installing Python 3][installation instructions]].
-
-If not, congratulations! You have Python 3 installed and ready to go.
-One last step, let's [[* Setup the python environment for the course]].
-
-* Setup the python environment for the course
-0. Make sure you have Git installed.
+   On *Ubuntu*/*Debian* (and probably *Linux Mint*), you can install Python 3, the ~pip~ package manager
+   and the ~venv~ module using the ~apt~ package manager:
    #+begin_src shell
-   git --version
+   sudo apt install python3 python3-pip python3-venv
    #+end_src
 
-   If not, please install Git. On GNU/Linux Git is available /via/ your package manager, for instance
-   on Ubuntu:
-#+begin_src shell
-sudo apt install git
-#+end_src
+   On *Fedora*, Python 3 should already be there. In case it's not, you can install it
+   with
+   #+begin_src shell
+   sudo dnf python3
+   #+end_src
+   This should include ~pip~ and the ~venv~ module.
 
-On MacOS, you can use [[https://brew.sh/][Homebrew]] once again:
-#+begin_src shell
-brew install git
-#+end_src
+**** MacOS
+   1. Install homebrew (see the [[https://brew.sh/][installation instructions]]).
+   2. Install Python 3
+   #+begin_src shell
+   brew install python3
+   #+end_src
 
-On Windows, we recommend that you use [[https://git-scm.com/download/win][Git for Windows]].
+   That should be it.
 
-1. Clone the course GitHub repository
-Open a terminal (or git-bash on Windows) and run the following command:
-#+begin_src shell
-git clone https://github.com/OxfordRSE/python-packaging-course.git
-#+end_src
+**** Windows
+   1. Download the installer for the latest stable version of python [[https://www.python.org/downloads/windows/][here]].
+      (Most likely the /Windows x86-64 executable installer/).
+   2. Execute the Python installer - be sure to tick /Add Python 3.8 to PATH/.
+   3. Move on to [[*Checking your installation]]
 
-2. Move to the course directory
-#+begin_src shell
-mv python-packaging-course/
-#+end_src
+*** Checking your installation
+ Let's check that Python 3, pip and the venv modules are correctly installed.
 
-3. Create a virtual environment
-#+begin_src shell
-# In directory python-packaging-course/
-python3 -m venv python-packaging-venv
-#+end_src
+ #+begin_src shell
+  python3 --version
+  #+end_src
 
-4. Activate the virtual environment
+  #+begin_src shell
+  python3 -m pip --version
+  #+end_src
 
-On GNU/Linux and MacOS:
-#+begin_src shell
-source python-packaging-venv/bin/activate
-#+end_src
+  #+begin_src shell
+  python3 -m venv --help
+  #+end_src
 
-On Windows
-#+begin_src shell
-python-packaging-venv\Scripts\activate.bat
-#+end_src
+ If any of the three commands above results in an error, please refer to 
+ the [[*Installing Python 3][installation instructions]]. If you get stuck, just [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][open an issue]] in
+ this repository and we'll help you.
 
-5. Update ~pip~ and install some utilities
-#+begin_src shell
-pip install --upgrade pip setuptools wheel
-#+end_src
+ If not, congratulations! You have Python 3 installed and ready to go.
+ One last step, let's [[* Setup the python environment for the course]].
 
-6. Deactivate your environment
-#+begin_src shell
-deactivate
-#+end_src
+*** Setup the python environment for the course
+  0. Make sure you have Git installed.
+     #+begin_src shell
+     git --version
+     #+end_src
 
-You're done! See you at the workshop.
+     If not, please install Git. On GNU/Linux Git is available /via/ your package manager, for instance
+     on Ubuntu:
+  #+begin_src shell
+  sudo apt install git
+  #+end_src
+
+  On MacOS, you can use [[https://brew.sh/][Homebrew]] once again:
+  #+begin_src shell
+  brew install git
+  #+end_src
+
+  On Windows, we recommend that you use [[https://git-scm.com/download/win][Git for Windows]].
+
+  1. Clone the course GitHub repository
+  Open a terminal (or git-bash on Windows) and run the following command:
+  #+begin_src shell
+  git clone https://github.com/OxfordRSE/python-packaging-course.git
+  #+end_src
+
+  2. Move to the course directory
+  #+begin_src shell
+  mv python-packaging-course/
+  #+end_src
+
+  3. Create a virtual environment
+  #+begin_src shell
+  # In directory python-packaging-course/
+  python3 -m venv python-packaging-venv
+  #+end_src
+
+  4. Activate the virtual environment
+
+  On GNU/Linux and MacOS:
+  #+begin_src shell
+  source python-packaging-venv/bin/activate
+  #+end_src
+
+  On Windows
+  #+begin_src shell
+  python-packaging-venv\Scripts\activate.bat
+  #+end_src
+
+  5. Update ~pip~ and install some utilities
+  #+begin_src shell
+  pip install --upgrade pip setuptools wheel
+  #+end_src
+
+  6. Deactivate your environment
+  #+begin_src shell
+  deactivate
+  #+end_src
+
+  You're done! See you at the workshop.
