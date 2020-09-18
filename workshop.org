@@ -13,7 +13,7 @@
 * Part 1 - Making a package
 ** Initial motivation: separating methods from parameters and data
 A numerical experiment has three components:
-- The data (dataset, parameters of simulation)
+- The data (dataset, or parameters of simulation)
 - The operations performed on this data
 - The output (numbers, plots)
 
@@ -74,7 +74,7 @@ Taking a step back, the idea of separating different components is pervasive in 
 and software design. Different names depending on the field (encapsulation, separation of concerns,
 bounded contexts...).
 
-** making a python package
+** Making a python package
 *** The python hierachy: objects, modules, packages
 - functions, classes
 #+begin_src python
@@ -102,12 +102,28 @@ bounded contexts...).
     result = add(a,b)
   #+end_src
 
-*** DONE Step 1 - Rewrite scripts into collection of functions
-So now it is technically possible to import each functions from the modules.
-But the script must be in this directory next to the modules.
-Plus we want to bundle both modules (and the ones to come) into a coherent
-ensemble: a /package/.
-*** Let's make a package out of our 2 sripts
+**** EXERCISE 1. Rewrite scripts into collection of functions
+ Let's rewrite both scripts ~analyse_timeseries.py~ and ~show_extremes.py~
+ as a collection of functions that can be reused in separate scripts.
+
+ The directory ~tstools/~ contains 3 python modules that
+ contain (incomplete) functions performing the operations on data described in the original scripts
+ ~analysis_timeseries.py~ and ~show_extremes.py~
+
+ 1. Open ~tstools/moments.py~ and complete function ~get_mean_and_var~ (replace the
+    string ~"######"~).
+ 2. Open file ~tstools/vis.py~ and complete functions ~plot_trajectory_subset~ and
+    ~plot_histogram~ (replace the strings ~"######"~).
+
+ File ~tstools/extremes.py~ implements a function ~show_extremes~ corresponding to script ~show_extremes.py~.
+ It is already complete.
+ So now it is technically possible to import each functions from the modules.
+ But the script must be in this directory next to the modules.
+ Plus we want to bundle both modules (and the ones to come) into a coherent
+ ensemble: a /package/.
+
+*** Let's make a package out of our 2 scripts
+We now have a ~tstools~ directory with 3 modules:
 #+begin_example
   workshop/
 	  tstools/
