@@ -1,17 +1,46 @@
 #+SEQ_TODO: TODO | DONE
 
+#+HUGO_BASE_DIR: ./site
+
+* Table of content
+  :PROPERTIES:
+  
+  :END:
+** Introduction
+  :PROPERTIES:
+  :EXPORT_CUSTOM_FRONT_MATTER: :chapter "true"
+  :EXPORT_FILE_NAME: _index
+  :EXPORT_HUGO_SECTION: introduction
+  :END:
+   What we are concerned about today: the problem(s) we want to solve.
+   What we are going to do, the tools that we are going to use.
+   The example that we are going to consider.
+** Making a package
+  :PROPERTIES:
+  :EXPORT_CUSTOM_FRONT_MATTER: :chapter "true"
+  :EXPORT_FILE_NAME: _index
+  :EXPORT_HUGO_SECTION: part1_making_a_package
+  :END:
+
+** Resusing a package across analyses
+  :PROPERTIES:
+  :EXPORT_CUSTOM_FRONT_MATTER: :chapter "true"
+  :EXPORT_FILE_NAME: _index
+  :EXPORT_HUGO_SECTION: part2_reusing_a_package
+  :END:
 * glossary
 - package
 - project
 - analysis
 - virtual environement
-* Introduction
-  What we are concerned about today: the problem(s) we want to solve.
-  What we are going to do, the tools that we are going to use.
-  The example that we are going to consider.
 
-* Part 1 - Making a package
-** Initial motivation: separating methods from parameters and data
+* part 1 - Making a package
+** Separating methods from parameters and data
+   :PROPERTIES:
+   :EXPORT_HUGO_SECTION: part1_making_a_package
+   :EXPORT_FILE_NAME: separating_methods_from_parameters_and_data
+   :EXPORT_HUGO_WEIGHT: auto
+   :END:
 A numerical experiment has three components:
 - The data (dataset, or parameters of simulation)
 - The operations performed on this data
@@ -75,6 +104,11 @@ and software design. Different names depending on the field (encapsulation, sepa
 bounded contexts...).
 
 ** Making a python package
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: make_a_python_package
+   :EXPORT_HUGO_SECTION: part1_making_a_package
+   :EXPORT_HUGO_WEIGHT: auto
+   :END:
 *** The python hierachy: objects, modules, packages
 - functions, classes
 #+begin_src python
@@ -219,8 +253,8 @@ Our package is ready to be used!
   fig, ax = tstools.show_extremes(timeseries, threshold)
 #+end_src
 
-*** TODO Whats the value of any empty ~__init__.py~ ?
-*** Note: objets defined in __init__.py are avaialbe when importing /the pacakge/
+*** TODO Whats the value of any empty ~__init__.py~ ?              :noexport:
+*** Note: objets defined in __init__.py are avaialbe when importing /the pacakge/ :noexport:
 #+begin_src python
     # __init__.py
     mysymbol = "something"
@@ -233,6 +267,12 @@ Our package is ready to be used!
   # accessible from tstools' namespace
 #+end_src
 * Part 2 - using the package across analyses
+** Another analysis
+   :PROPERTIES:
+   :EXPORT_HUGO_WEIGHT: auto
+   :EXPORT_HUGO_SECTION: part2_reusing_a_package
+   :EXPORT_FILE_NAME: another-analysis
+   :END:
 Let's say that we have another directory ~analysis2~, that contains another
 but similar dataset to ~analysis1~.
 Now that we've separated structured our software into a python package, we would like
@@ -259,6 +299,11 @@ created in the previous section.
 Unfortunately, Python cannot find the package (which at the moment lives in the directory ~analysis1/~).
 
 ** Where does python look for packages?
+   :PROPERTIES:
+   :EXPORT_HUGO_WEIGHT: auto
+   :EXPORT_HUGO_SECTION: part2_reusing_a_package
+   :EXPORT_FILE_NAME: where-does-python-look-for-packages
+   :END:
 When using the ~import~ statement, the python interpreter looks for the package (or module) in a list of directories
 known as the /python path/.
 
@@ -309,6 +354,11 @@ are available.
 Note that all three above approaches work. However, unless you have a good reason to use one of them, they are not recommended.
 
 ** setuptools and setup dot pie
+   :PROPERTIES:
+   :EXPORT_HUGO_WEIGHT: auto
+   :EXPORT_HUGO_SECTION: part2_reusing_a_package
+   :EXPORT_FILE_NAME: setuptools-and-setup-do-_pie
+   :END:
 The recommended way to install a package is to use the ~setuptools~ library in conjunction with
 ~pip~, the official python /package manager/.
 
@@ -396,6 +446,11 @@ The directory ~tstools-dist~ is a /distribution package/. We will later use this
 #+end_exercise
 
 ** Maintaining your package indepently from the anaylises that use it
+   :PROPERTIES:
+   :EXPORT_HUGO_WEIGHT: auto
+   :EXPORT_HUGO_SECTION: part2_reusing_a_package
+   :EXPORT_FILE_NAME: maintaining-your-pkg-independantly-from-your-analysis
+   :END:
 Congratulations! Your ~tstools~ package is now installed can be reused across your analyses...
 no more hasardous copying and pasting!
 
@@ -441,6 +496,10 @@ cat ~/python-workshop-venv/lib/python3.8/site-packages/tstools.egg-link
 #+end_src
 
 ** Summary and break
+   :PROPERTIES:
+   :EXPORT_HUGO_WEIGHT: auto
+   :EXPORT_HUGO_SECTION: part2_reusing_a_package
+   :END:
    - In order to reuse our package across different analyses, we must /install/ it.
      In effect, this means copying the package into a directory that is in the python path.
      This shouldn't be done manually, but instead using the ~setuptools~ package to write a
