@@ -28,7 +28,7 @@ fig2, ax2 = plt.subplots()
 ax2.plot(bin_centers, hist, "*")
 
 # Now plot the "true" histogram (gaussian PDF)
-def get_gaussian_histogram(fluct_min, fluct_max, std, mean, nbins=100):
+def get_theoritical_histogram(fluct_min, fluct_max, std, mean, nbins=100):
     bin_edges = np.linspace(fluct_min, fluct_max, nbins + 1)
     nb_samples = len(timeseries[:, 1])
     rescaled_bin_edges = (bin_edges - mean) / (std * np.sqrt(2))
@@ -39,7 +39,7 @@ def get_gaussian_histogram(fluct_min, fluct_max, std, mean, nbins=100):
     )
     return hist, bin_edges
 
-hist, bin_edges = get_gaussian_histogram(
+hist, bin_edges = get_theoritical_histogram(
     np.amin(bin_edges), np.amax(bin_edges), std, mean
 )
 ax2.plot(bin_centers, hist)
