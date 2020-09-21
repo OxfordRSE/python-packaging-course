@@ -241,19 +241,30 @@ bounded contexts...).
 #+end_src
 
 *** Activity 1 - Turning scripts into a collection of functions
- Let's rewrite both scripts ~analysis.py~ and ~show_extremes.py~
+ Let's rewrite both scripts ~scripts/analysis.py~ and ~scripts/show_extremes.py~
  as a collection of functions that can be reused in separate scripts.
 
 The directory ~analysis1/tstools/~ contains 3 python modules that contain (incomplete) functions performing 
 the same operations on data described in the original scripts ~analysis.py~ and ~show_extremes.py~
 
- 1. Open ~tstools/moments.py~ and complete function ~get_mean_and_var~ (replace the
-    string ~"######"~).
- 2. Open file ~tstools/vis.py~ and complete functions ~plot_trajectory_subset~ and
-    ~plot_histogram~ (replace the strings ~"######"~).
+#+begin_example
+  python-packaging-workshop/
+	  scripts/
+	  analysis1/
+		  tstools/
+			  moments.py
+			  vis.py
+			  extremes.py
+#+end_example
 
- The file ~tstools/extremes.py~ implements a function ~show_extremes~ corresponding to script ~show_extremes.py~.
- It is already complete.
+1. Open ~moments.py~ and complete function ~get_mean_and_var~ (replace the
+   string ~"######"~).
+2. Open file ~vis.py~ and complete functions ~plot_trajectory_subset~ and
+   ~plot_histogram~ (replace the strings ~"######"~).
+*Hint*: Use ~scripts/analysis.py~ as a reference.
+
+The file ~tstools/extremes.py~ implements a function ~show_extremes~ corresponding to script ~show_extremes.py~.
+It is already complete.
 
 ** The ~tstools~ package
   :PROPERTIES:
