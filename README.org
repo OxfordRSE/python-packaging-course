@@ -169,3 +169,18 @@ deactivate
 #+end_src
 
 You're done! See you at the workshop.
+** Building the course site
+1. Install [[https://gohugo.io/][Hugo]]
+2. Clone this repository
+   #+begin_src shell
+   git clone https://github.com/OxfordRSE/python-packaging-course.git
+   #+end_src
+3. Install the [[https://learn.netlify.app/en/][Hugo Learn theme]]
+   #+begin_src shell
+   cd python-packaging-course/site/
+   git clone git@github.com:matcornic/hugo-theme-learn.git themes/hugo-theme-learn
+   #+end_src
+4. Build the site
+   #+begin_src shell
+   hugo server
+   #+end_src
