@@ -21,7 +21,7 @@
   :EXPORT_HUGO_SECTION: part1_making_a_package
   :END:
 
-** Resusing a package across analyses
+** Reusing a package across analyses
   :PROPERTIES:
   :EXPORT_CUSTOM_FRONT_MATTER: :chapter "true"
   :EXPORT_FILE_NAME: _index
@@ -252,6 +252,7 @@ the same operations on data described in the original scripts ~analysis.py~ and 
 	  scripts/
 	  analysis1/
 		  tstools/
+			  __init__.py
 			  moments.py
 			  vis.py
 			  extremes.py
@@ -284,25 +285,30 @@ We now have a ~tstools~ directory with 3 modules:
 #+end_example
 
 In way, the directory ~tstools~ is already a pacakge, in the sens that it is possible to import each functions from the modules:
-#+begin_src python
+#+begin_src python :exports code
 import tstools.moments
 from tstools.vis import plot_histogram
 
-timeseries = np.genfromtxt("../../data/brownian.csv", delimiter=",")
+timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
 
 mean = tstools.moments.get_mean(timeseries)
 fig, ax = tstools.moments.plot_histogram(timeseries)
 #+end_src
 
 Let's try to import the package as a whole:
-#+begin_src python
-import tstools
-timeseries = np.genfromtxt("../../data/brownian.csv", delimiter=",")
-mean = tstools.moments.get_mean(timeseries)
+#+begin_src python :dir ".infrastructure/tstools-no-init" :results output :exports code
+  # compute-mean.py
+  import numpy as np
+  import tstools
+  timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
+  mean = tstools.moments.get_mean(timeseries)
 #+end_src
 
 #+begin_example
-Error because nothing was imported
+$ python compute_mean.py
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+AttributeError: module 'tstools' has no attribute 'moments'
 #+end_example
 
 What happened here? When importing the directory ~tstools~, the python interpreter
@@ -325,36 +331,40 @@ package[fn:1].
 
 As a first example, let's add the following code to ~__init__.py~:
 #+begin_src python
-# tstools/__init__.py
-filename = __file__
-print(f"Hello from {filename}")
+  # tstools/__init__.py
+  from os.path import basename
+  filename = basename(__file__)
+  print(f"Hello from {filename}")
 #+end_src
 
-#+begin_src python
+If we now import the ~tstools~ package:
+#+begin_src python :dir ".infrastructure/simple_init_dot_pie" :results output :exports both
   import tstools
   print(tstools.filename)
 #+end_src
 
-Any object (variable, function, class) defined in the ~__init__.py~ file is available
+#+RESULTS:
+: Hello from __init__.py
+: __init__.py
+
+The lesson here is that any object (variable, function, class) defined in the ~__init__.py~ file is available
 under the package's namespace.
 
 *** Activity 2 - Bringing all functions under a single namespace
 Our package isn't very big, and the internal strucure with 3 different modules isnt
 very relevant for a user.
-Instead of ~mean, var = tstools.moments.get_mean(timseries)~ we would prefer
-~tstools.get_mean(timeseries)~.
 
-Write the ~__init__.py~ so that all functions defined in
+*Write* the ~__init__.py~ so that all functions defined in
 modules ~tstools.py~ and ~show_extremes.py~ are accessible directly
 at the top-lvel (under the ~tstools~ namespace), /i.e/
 
 #+begin_src python
   import tstools
-  meab, var = tstools.get_mean_and_var
-  fig, ax = tstools.show_extremes(timeseries, 4*np.sqrt(var))
+  mean, var = tstools.get_mean_and_var(timeseries) # instead of mean, var = tstools.moments.get_mean_and_var(...)
+  fig, ax = tstools.show_extremes(timeseries, 4*np.sqrt(var)) # instead of fig, ax = tstools.vis.show_extremes(...)
 #+end_src
 
-Hint: By default python looks for modules in the current directory
+*Hint*: By default python looks for modules in the current directory
 and some other locations (more about that later). When using ~import~,
 you can refer to modules in the current package using the /dot notation/:
 #+begin_src python
@@ -363,10 +373,12 @@ you can refer to modules in the current package using the /dot notation/:
   from .module import something
 #+end_src
 
-Our package is ready to be used!
+*** Using the package
+
+Our package is now ready to be used in our analysis, and a analysis scripts could look like this:
 
 #+begin_src python
-  # In directory python-packaging-workshop/
+  # analysis1/analysis1.py
   import numpy as np
   import matplotlib.pyplot as plt
   import tstools
@@ -380,6 +392,8 @@ Our package is ready to be used!
   threshold = 3*np.sqrt(var)
   fig, ax = tstools.show_extremes(timeseries, threshold)
 #+end_src
+
+Note that the above does the job for both scripts ~scripts/analysis.py~ and ~scripts/show_extremes.py~! Much better don't you think?
 *** TODO Whats the value of any empty ~__init__.py~ ?              :noexport:
 *** Note: objets defined in __init__.py are avaialbe when importing /the pacakge/ :noexport:
 #+begin_src python
@@ -414,16 +428,25 @@ created in the previous section.
 		  timeseries.csv
 #+end_example
 
-#+begin_src python
-  # analysis2.py
+#+begin_src python :dir "analysis2" :exports code
+  # analysis2/analysis2.py
   import numpy as np
   import tstools
 
-  timeseries = np.genfromtxt("./data/data.csv")
+  timeseries = np.genfromtxt("./data/data_analysis2.csv")
   fig, ax = tstools.plot_trajectory_subset(timeseries, 0, 50, dt=0.1)
 #+end_src
 
-Unfortunately, Python cannot find the package (which at the moment lives in the directory ~analysis1/~).
+#+begin_example
+$ python analysis2.py
+Traceback (most recent call last):
+  File "<stdin>", line 10, in <module>
+  File "<stdin>", line 5, in main
+ModuleNotFoundError: No module named 'tstools'
+#+end_example
+
+At the moment lives in the directory ~analysis1/~, and, unfortunately, Python cannot find it!
+How can we tell Python where our package is?
 
 ** Where does python look for packages?
    :PROPERTIES:
@@ -437,6 +460,7 @@ known as the /python path/.
 Let's find out about what directories constitute the python path:
 
 #+begin_example
+$ python
 >>> import sys
 >>> sys.path
 #+end_example
@@ -463,13 +487,13 @@ for the ~tstools~ package to be importable in ~analysis2/~.:
   You end up with two independant packages. If you make changes to one, you have to remember to make the same
   changes to the other. It's the usual copy and paste problems: inefficient and error-prone.
 2. *Add ~analysis1/~ to ~sys.path~*.
-  At the beginning of your script, you could just
-#+begin_src python
-  import sys
-  sys.path.append("../analysis1/")
-#+end_src
-This approach can be sufficient in some situations, but generally not recommended. What if the package directory is relocated?
-3. *Copy ~analysis1/tstools~ dir to ~site-packages~ dir.*
+  At the beginning of ~analysis2.py~, you could just add
+  #+begin_src python
+    import sys
+    sys.path.append("../analysis1/")
+  #+end_src
+  This approach can be sufficient in some situations, but generally not recommended. What if the package directory is relocated?
+3. *Copy ~analysis1/tstools~ directory to the ~site-packages/~ directory.*
   You have to know where the ~site-packages~ is. This depends on your current system and python environment (see below).
   The location on your macine may very well be differnt from the location on your colleague's machine.
 
@@ -508,14 +532,15 @@ pip install <package directory>
 #+end_src
 
 let's give it a try
-#+begin_src shell
+#+header: :prologue "exec 2>&1" :epilogue "true"
+#+header: :results output :exports both
+#+begin_src shell :dir  ".infrastructure/pip_example_no_setup" 
 # In directory analysis1/
-pip install tstools
+pip install ./tstools
 #+end_src
 
-#+begin_example
-Error because no setup.py
-#+end_example
+#+RESULTS:
+: ERROR: Directory './tstools' is not installable. Neither 'setup.py' nor 'pyproject.toml' found.
 
 The above doesn't really look like our package got installed properly.
 For ~pip~ to be able to install our package, we must first give it some information about it.
@@ -546,7 +571,7 @@ its authors, ad its license.
 In addition, it gives ~setup~ the location of the package to be installed, in this case
 the directory ~tstools~.
 
-*IMPORTANT*: The above ~setup.py~ ~(...,package=["tstools"],...)~.
+*IMPORTANT*: The above ~setup.py~ states ~(...,package=["tstools"],...)~.
 In English, this means "setuptools, please install the package ~tstools/~ located in the same directory as the file ~setup.py~".
 This therefore assumes that the file ~setup.py~ resides in the directory that /contains/ the package, in this case ~analysis1/~.
 #+begin_example
@@ -581,7 +606,7 @@ The directory ~tstools-dist~ is a /distribution package/, containing the ~setup.
 These are the two minimal ingredients required to /distribute/ a package, see section ??.
 
 *** Activity 3 -  Installing ~tsools~ with pip
-- Write a new ~setup.py~ file in directory ~tstools-dist~ including the following metadata:
+1. Write a new ~setup.py~ file in directory ~tstools-dist~ including the following metadata:
   + The name of the package (could be ~tstools~ but also could be anything else)
   + The version of the package (for example 0.1)
   + A one-line description
@@ -589,19 +614,19 @@ These are the two minimal ingredients required to /distribute/ a package, see se
   + Your email
   + The GPLv3 license
   Hint: A list of optional keywords for ~setuptools.setup~ can be found [[https://setuptools.readthedocs.io/en/latest/setuptools.html#new-and-changed-setup-keywords][here]].
-- Uninstall numpy and matplotlib
-#+begin_src shell
-pip uninstall numpy matplotlib
-#+end_src
-- Install the ~tstools~ package with ~pip~.
-  Remember: ~pip install <location of setup file>~
-  Notice how ~numpy~ and ~matplotlib~ are automatically downloaded (can you find from where?)
-  and installed.
-- Move to the directory ~analysis2/~ and check that you can import your package from there.
-  Where is this package located?
-  Hint: You can check the location a package using the ~__file__~ attribute.
-- The directory ~analysis2~ contains a timeseries under ~data/~. What is the average value
-  of the timeseries?
+2. Uninstall numpy and matplotlib
+   #+begin_src shell
+     pip uninstall numpy matplotlib
+   #+end_src
+3. Install the ~tstools~ package with ~pip~.
+   Remember: ~pip install <location of setup file>~
+   Notice how ~numpy~ and ~matplotlib~ are automatically downloaded (can you find from where?)
+   and installed.
+4. Move to the directory ~analysis2/~ and check that you can import your package from there.
+   Where is this package located?
+   Hint: You can check the location a package using the ~__file__~ attribute.
+5. The directory ~analysis2~ contains a timeseries under ~data/~. What is the average value
+   of the timeseries?
 
 Congratulations! Your ~tstools~ package is now installed can be reused across your analyses...
 no more dangerous copying and pasting!
@@ -651,7 +676,7 @@ package in your package project directory:
 
 #+begin_src shell
 cat ~/python-workshop-venv/lib/python3.8/site-packages/tstools.egg-link
-/home/thibault/org/data/6d/ac010a-3c1b-4b90-8fe2-67f782781a9e/tstools
+/home/thibault/python-packaging-workshop/tstools
 #+end_src
 
 ** Summary and break
@@ -699,13 +724,14 @@ you'd like differnet analyses to use different versions of your package, or diff
 packages that your analysis rely on.
 
 The question is then: /how to install two different versions of a same package?/
-And the (short) answer is: /you can't./
+And the (short) answer is: *you cannot*.
 
 If you type ~pip install numpy==1.18~, ~pip~ first looks for a version
 of ~numpy~ already installed (in the ~site-packages/~ directory).
 If it finds a different version, say 1.19, ~pip~ will uninstall it and
 install numpy 1.18 instead.
 
+This limitation is very inconvenient, and is the /raison d'être/ for virtual environments, which we disuss next.
 ** Virtual environments
    :PROPERTIES:
    :EXPORT_HUGO_WEIGHT: auto
@@ -726,15 +752,16 @@ specific to this environment (~my_env/lib/pythonX.Y/site-packages~).
 *** Activity 5 - Virtual environments
 
 1. Move to the ~analysis1/~ directory and create a virtual-environment there:
-  #+begin_src shell
-    python -m venv analysis1_venv
+  #+begin_src shell :exports code
+    cd python-packaging-workshop/analysis1/
+    python -m venv venv-analysis1
   #+end_src
   This commands creates a new directory ~analysis_venv~ in the current directory.
   Feel free to explore its contents.
 
 2. Activate the virtual envoronment for analysis1
-  #+begin_src shell
-    source analysis1_venv/bin/activate
+  #+begin_src shell :exports code
+    source venv-analysis1/bin/activate
   #+end_src
 
 3. What is the location of the current python executable?
@@ -744,9 +771,9 @@ specific to this environment (~my_env/lib/pythonX.Y/site-packages~).
    Note that our package and its dependencies have disappeared, and only
    the core python packages are installed. We have a "fresh" python environment.
 
-5. Move to the the ~tstools~ package prject directory and install it into the
+5. Move to the the ~tstools~ package project directory and install it into the
    current envirinment:
-  #+begin_src shell
+  #+begin_src shell :exports code
     pip install .
   #+end_src
 
@@ -755,9 +782,9 @@ specific to this environment (~my_env/lib/pythonX.Y/site-packages~).
    to check the location of the corresponding ~__init__.py~ file.
 
 
-The above exercise demonstrates that, after activating the ~analysis1_venv~, the command ~python~
-executes the python executable ~ analysis1/analysis1_venv/bin/python~, and python packages are installed
-in the ~analysis1/analysis1_venv/lib/pythonX.Y/site-packages~ directory.
+The above exercise demonstrates that, after activating the ~venv-analysis1~, the command ~python~
+executes the python executable ~ analysis1/venv-analysis1/bin/python~, and python packages are installed
+in the ~analysis1/venv-analysis1/lib/pythonX.Y/site-packages~ directory.
 This means that we are now working in a python environment that is /isolated/ from other python environments
 in your machine:
 - other virtual environments
@@ -765,7 +792,7 @@ in your machine:
 - other versions of python installed in your system
 - Anaconda environments
 
-You can therefore install all the packages necesseray to your projects, without worry of breaking
+You can therefore install all the packages necessery to your projects, without worry of breaking
 other projects.
 
 ** Make virtual environments a habit
@@ -788,23 +815,23 @@ would be
   tstools/
 	  setup.py
 	  tstools
-	  venv_tstools
-  (venv_tstools) $ pip install -e tstools/
+	  venv-tstools
+  (venv-tstools) $ pip install -e tstools/
 
   analysis1/
 	  analysis1.py
 	  data/
-	  venv_analysis1/
-  (venv_analysis1) $ pip install tstools/
+	  venv-analysis1/
+  (venv-analysis1) $ pip install tstools/
 
   analysis2/
 	  analysis2.py
 	  data/
-	  venv_analysis2/
-  (venv_analysis2) $ pip install tstools/
+	  venv-analysis2/
+  (venv-analysis2) $ pip install tstools/
 #+end_example
 
-When working on the package itself, we work within the virtual environment ~venv_tstools~, in
+When working on the package itself, we work within the virtual environment ~venv-tstools~, in
 which the package is installed in editable mode. In this way, we avoid constant re-installation
 of the package each time we make a change to it.
 
@@ -812,12 +839,12 @@ When working on either analyses, we activate the corresponding virtual environme
 our package ~tstools~ is installed in normal, non-editable mode, possibly along all the
 other packages that we need for this particular analysis.
 
-#+begin_comment
+#+begin_quote
 Most GNU/Linux distributions as well as MacOS come with a version of python already installed.
 This version is often referred to as the /system python/ or the /base python/. *Leave it alone*.
 As the name suggest, this version of python is used likely to be used by some parts of your system,
 and updating or breaking it would mean breaking these partsof your system that rely on it.
-#+end_comment
+#+end_quote
 
 
 *** TODO Installing utilities in global python 3.8                 :noexport:
