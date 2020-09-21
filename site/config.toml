@@ -1,0 +1,8 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "OxRSE Python Packaging Workshop"
+theme = "hugo-theme-learn"
+[params]
+# Change default color scheme with a variant one. Can be "red", "blue", "green".
+themeVariant = "oxrse"
+
