@@ -160,11 +160,11 @@ python-packaging-venv\Scripts\activate.bat
 
 **** 5. Update ~pip~ and install some utilities
 #+begin_src shell
-pip install --upgrade pip setuptools wheel
+python -m pip install --upgrade pip setuptools wheel
 #+end_src
 **** 6. Install numpy and matplotlib
 #+begin_src shell
-pip install numpy matplotlib
+python -m pip install numpy matplotlib
 #+end_src
 **** 7. Deactivate your environment
 #+begin_src shell
