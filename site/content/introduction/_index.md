@@ -2,6 +2,7 @@
 title = "Introduction"
 author = ["Thibault Lestang"]
 draft = false
+weight = 1001
 +++
 
 In this workshop, you are going to learn how to organise your Python software into
@@ -94,7 +95,7 @@ backfire if maintained over longer period of time, perhaps even over your whole 
 Going back to `base.py`, consider the following questions:
 
 -   What would you do if you wanted to plot the timeseries over the last 50 time units instead of the first 50?
--   What would you do if you wanted to visualise the _Probablity Density Function_ instead of the histogram (effectively passing the optional argument ==
+-   What would you do if you wanted to visualise the _Probablity Density Function_ instead of the histogram (effectively passing the optional argument
     to `numpy.histogram`).
 -   What would you do if you were given a similar dataset to `brownian.csv` and asked to compute the mean, compute the histogram along with other things not implemented in `base.py` ?
 
