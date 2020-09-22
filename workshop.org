@@ -740,7 +740,7 @@ of project-level tasks.
 
 Next, we'll talk about python virtual environments. But before, fancy a little break?
 
-[[/kisspng-cafe-coffee-cup-tea-cafe-graphic-5ac8dcf5aa0815.5906502615231132056965.png]]
+[[/python-packaging-course/kisspng-cafe-coffee-cup-tea-cafe-graphic-5ac8dcf5aa0815.5906502615231132056965.png]]
 * Intermezzo: Python virtual environments
 ** Installing different versions of a package
    :PROPERTIES:
