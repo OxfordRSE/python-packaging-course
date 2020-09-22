@@ -49,7 +49,7 @@ def group_correlated_points(series, dist):
     return list_of_groups
 
 
-timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
+timeseries = np.genfromtxt("../analysis1/data/brownian.csv", delimiter=",")
 
 threshold = 2.5
 timepoints_with_value_above_threshold = np.argwhere(
