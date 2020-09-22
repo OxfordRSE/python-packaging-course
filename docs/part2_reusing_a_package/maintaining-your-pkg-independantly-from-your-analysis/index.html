@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Maintaining your package indepently from the anaylises that use it :: OxRSE Python Packaging Workshop</title>
+
+    
+    <link href="/css/nucleus.css?1600779828" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1600779828" rel="stylesheet">
+    <link href="/css/hybrid.css?1600779828" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1600779828" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1600779828" rel="stylesheet">
+    <link href="/css/auto-complete.css?1600779828" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1600779828" rel="stylesheet">
+    <link href="/css/theme.css?1600779828" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1600779828" rel="stylesheet">
+    
+    <link href="/css/theme-oxrse.css?1600779828" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1600779828"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="http://example.org/">
+    <img src="/banner_ox_rse.png" alt="oxrse banner logo"/>
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1600779828"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1600779828"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/example.org\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1600779828"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/introduction/" title="Introduction" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/introduction/">
+          Introduction
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/part1_making_a_package/" title="Making a package" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/part1_making_a_package/">
+          Making a package
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part1_making_a_package/from_scripts_to_modules/" title="From scripts to modules" class="dd-item ">
+        <a href="/part1_making_a_package/from_scripts_to_modules/">
+        From scripts to modules
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part1_making_a_package/separating_methods_from_parameters_and_data/" title="Separating methods from parameters and data" class="dd-item ">
+        <a href="/part1_making_a_package/separating_methods_from_parameters_and_data/">
+        Separating methods from parameters and data
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part1_making_a_package/the_tstools_package/" title="The tstools package" class="dd-item ">
+        <a href="/part1_making_a_package/the_tstools_package/">
+        The tstools package
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part1_making_a_package/init_dot_pie/" title="init dot pie" class="dd-item ">
+        <a href="/part1_making_a_package/init_dot_pie/">
+        init dot pie
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/part2_reusing_a_package/" title="Reusing a package across analyses" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/part2_reusing_a_package/">
+          Reusing a package across analyses
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/another-analysis/" title="Another analysis" class="dd-item ">
+        <a href="/part2_reusing_a_package/another-analysis/">
+        Another analysis
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/where-does-python-look-for-packages/" title="Where does python look for packages?" class="dd-item ">
+        <a href="/part2_reusing_a_package/where-does-python-look-for-packages/">
+        Where does python look for packages?
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/setuptools-and-setup-do-_pie/" title="setuptools, setup dot pie and pip" class="dd-item ">
+        <a href="/part2_reusing_a_package/setuptools-and-setup-do-_pie/">
+        setuptools, setup dot pie and pip
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package indepently from the anaylises that use it" class="dd-item active">
+        <a href="/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/">
+        Maintaining your package indepently from the anaylises that use it
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/summary_and_break/" title="Summary and break" class="dd-item ">
+        <a href="/part2_reusing_a_package/summary_and_break/">
+        Summary and break
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/intermezzo_virtual_environments/" title="Virtual environments" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/intermezzo_virtual_environments/">
+          Virtual environments
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/intermezzo_virtual_environments/installing_different_versions_of_a_package/" title="Installing different versions of a package" class="dd-item ">
+        <a href="/intermezzo_virtual_environments/installing_different_versions_of_a_package/">
+        Installing different versions of a package
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/intermezzo_virtual_environments/virtual_environments/" title="Virtual environments" class="dd-item ">
+        <a href="/intermezzo_virtual_environments/virtual_environments/">
+        Virtual environments
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/intermezzo_virtual_environments/make_virtual_environments_a_habit/" title="Make virtual environments a habit" class="dd-item ">
+        <a href="/intermezzo_virtual_environments/make_virtual_environments_a_habit/">
+        Make virtual environments a habit
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/intermezzo_virtual_environments/summary/" title="Summary" class="dd-item ">
+        <a href="/intermezzo_virtual_environments/summary/">
+        Summary
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/part3_sharing_a_package/" title="Sharing a package" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/part3_sharing_a_package/">
+          Sharing a package
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part3_sharing_a_package/building_distributions/" title="Building python distributions" class="dd-item ">
+        <a href="/part3_sharing_a_package/building_distributions/">
+        Building python distributions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part3_sharing_a_package/uploading_to_pypi/" title="Uploading distributions to PyPI" class="dd-item ">
+        <a href="/part3_sharing_a_package/uploading_to_pypi/">
+        Uploading distributions to PyPI
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/part2_reusing_a_package/'>Reusing a package across analyses</a> > Maintaining your package indepently from the anaylises that use it
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#editable-installs">Editable installs</a></li>
+    <li><a href="#actvity-4-editable-install">Actvity 4 - Editable install</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Maintaining your package indepently from the anaylises that use it
+            </h1>
+          
+
+        
+
+
+<p>In the previous section you made your package &ldquo;pip installable&rdquo; by creating a <code>setup.py</code> file.
+You then installed the package, effectively making accessible between different analysis directories.</p>
+<p>However, a package is never set in stone: as you work on your analyses, you will almost certainly likely make changes to it,
+for instance to add functionalities or to fix bugs.</p>
+<p>You could just reinstall the package each time you make a modification to it, but this
+obviously becomes tedious if you are constantly making changes (maybe to hunt down a bug) and/or testing your package.
+In addition, you may simply forget to reinstall your package, leading to potentially very frustrating and time-consuming errors.</p>
+<h2 id="editable-installs">Editable installs</h2>
+<p><code>pip</code> has the ability to install the package in a so-called &ldquo;editable&rdquo; mode.
+Instead of copying your package to the package installation location, pip will just
+write a link to your package directory.
+In this way, when importing your package, the python interpreter is redirected to
+your package project directory.</p>
+<p>To install your package in editable mode, use the <code>-e</code> option for the <code>install</code> command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install -e .
+</code></pre></div><h2 id="actvity-4-editable-install">Actvity 4 - Editable install</h2>
+<ol>
+<li>Uninstall the package with <code>pip uninstall tstools</code></li>
+<li>List all the installed packages and check that <code>tstools</code> is not among them
+Hint: Use <code>pip --help</code> to get alist of available <code>pip</code> commands.</li>
+<li>re-install <code>tstools</code> in editable mode.</li>
+<li>Modify the <code>tstools.vis.plot_trajectory_subset</code> so that it returns the maximum value
+over the trajectory subset, in addition to the <code>figure</code> and <code>axis</code>.
+Hint: You can use the numpy function <code>amax</code> to find the maximum of an array.</li>
+<li>What is the maximum value of the timeseries in <code>analysis1/data/timeseries1.csv</code> between
+t=0 and t = 4 ?</li>
+</ol>
+<p>In editable mode, <code>pip install</code> just write a file <code>&lt;package-name&gt;.egg-link</code> at the package
+installation location in place of the actual package. This file contains the location of the
+package in your package project directory:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat ~/python-workshop-venv/lib/python3.8/site-packages/tstools.egg-link
+/home/thibault/python-packaging-workshop/tstools
+</code></pre></div>
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/part2_reusing_a_package/setuptools-and-setup-do-_pie/" title="setuptools, setup dot pie and pip"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/part2_reusing_a_package/summary_and_break/" title="Summary and break" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1600779828"></script>
+    <script src="/js/perfect-scrollbar.min.js?1600779828"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1600779828"></script>
+    <script src="/js/jquery.sticky.js?1600779828"></script>
+    <script src="/js/featherlight.min.js?1600779828"></script>
+    <script src="/js/highlight.pack.js?1600779828"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1600779828"></script>
+    <script src="/js/learn.js?1600779828"></script>
+    <script src="/js/hugo-learn.js?1600779828"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1600779828"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

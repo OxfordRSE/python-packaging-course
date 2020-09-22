@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Building python distributions :: OxRSE Python Packaging Workshop</title>
+
+    
+    <link href="/css/nucleus.css?1600779828" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1600779828" rel="stylesheet">
+    <link href="/css/hybrid.css?1600779828" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1600779828" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1600779828" rel="stylesheet">
+    <link href="/css/auto-complete.css?1600779828" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1600779828" rel="stylesheet">
+    <link href="/css/theme.css?1600779828" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1600779828" rel="stylesheet">
+    
+    <link href="/css/theme-oxrse.css?1600779828" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1600779828"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/part3_sharing_a_package/building_distributions/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="http://example.org/">
+    <img src="/banner_ox_rse.png" alt="oxrse banner logo"/>
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1600779828"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1600779828"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/example.org\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1600779828"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/introduction/" title="Introduction" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/introduction/">
+          Introduction
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/part1_making_a_package/" title="Making a package" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/part1_making_a_package/">
+          Making a package
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part1_making_a_package/from_scripts_to_modules/" title="From scripts to modules" class="dd-item ">
+        <a href="/part1_making_a_package/from_scripts_to_modules/">
+        From scripts to modules
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part1_making_a_package/separating_methods_from_parameters_and_data/" title="Separating methods from parameters and data" class="dd-item ">
+        <a href="/part1_making_a_package/separating_methods_from_parameters_and_data/">
+        Separating methods from parameters and data
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part1_making_a_package/the_tstools_package/" title="The tstools package" class="dd-item ">
+        <a href="/part1_making_a_package/the_tstools_package/">
+        The tstools package
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part1_making_a_package/init_dot_pie/" title="init dot pie" class="dd-item ">
+        <a href="/part1_making_a_package/init_dot_pie/">
+        init dot pie
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/part2_reusing_a_package/" title="Reusing a package across analyses" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/part2_reusing_a_package/">
+          Reusing a package across analyses
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/another-analysis/" title="Another analysis" class="dd-item ">
+        <a href="/part2_reusing_a_package/another-analysis/">
+        Another analysis
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/where-does-python-look-for-packages/" title="Where does python look for packages?" class="dd-item ">
+        <a href="/part2_reusing_a_package/where-does-python-look-for-packages/">
+        Where does python look for packages?
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/setuptools-and-setup-do-_pie/" title="setuptools, setup dot pie and pip" class="dd-item ">
+        <a href="/part2_reusing_a_package/setuptools-and-setup-do-_pie/">
+        setuptools, setup dot pie and pip
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package indepently from the anaylises that use it" class="dd-item ">
+        <a href="/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/">
+        Maintaining your package indepently from the anaylises that use it
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part2_reusing_a_package/summary_and_break/" title="Summary and break" class="dd-item ">
+        <a href="/part2_reusing_a_package/summary_and_break/">
+        Summary and break
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/intermezzo_virtual_environments/" title="Virtual environments" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/intermezzo_virtual_environments/">
+          Virtual environments
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/intermezzo_virtual_environments/installing_different_versions_of_a_package/" title="Installing different versions of a package" class="dd-item ">
+        <a href="/intermezzo_virtual_environments/installing_different_versions_of_a_package/">
+        Installing different versions of a package
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/intermezzo_virtual_environments/virtual_environments/" title="Virtual environments" class="dd-item ">
+        <a href="/intermezzo_virtual_environments/virtual_environments/">
+        Virtual environments
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/intermezzo_virtual_environments/make_virtual_environments_a_habit/" title="Make virtual environments a habit" class="dd-item ">
+        <a href="/intermezzo_virtual_environments/make_virtual_environments_a_habit/">
+        Make virtual environments a habit
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/intermezzo_virtual_environments/summary/" title="Summary" class="dd-item ">
+        <a href="/intermezzo_virtual_environments/summary/">
+        Summary
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/part3_sharing_a_package/" title="Sharing a package" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/part3_sharing_a_package/">
+          Sharing a package
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part3_sharing_a_package/building_distributions/" title="Building python distributions" class="dd-item active">
+        <a href="/part3_sharing_a_package/building_distributions/">
+        Building python distributions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/part3_sharing_a_package/uploading_to_pypi/" title="Uploading distributions to PyPI" class="dd-item ">
+        <a href="/part3_sharing_a_package/uploading_to_pypi/">
+        Uploading distributions to PyPI
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/part3_sharing_a_package/'>Sharing a package</a> > Building python distributions
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#source-distributions">Source distributions</a></li>
+    <li><a href="#wheel-distributions">Wheel distributions</a>
+      <ul>
+        <li><a href="#activity-6-building-a-python-wheel">Activity 6 - Building a Python wheel</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Building python distributions
+            </h1>
+          
+
+        
+
+
+<p>Before you can distribute a package, you must first create a <em>distribution</em>.
+A distribution is a single file that bundles all the files and data necessary to install and use
+the package - but also sometimes compile and test it.</p>
+<p>A distribution usually takes the from of an archive (<code>.tar</code>, <code>.zip</code> or similar).
+There are several possible distribution formats, but in 2020, only two are really important: the <em>source distribution</em> (sdist) and the <em>wheel</em> (bdist_wheel).</p>
+<h2 id="source-distributions">Source distributions</h2>
+<p>Python distributions are commonly built using the <code>setuptools</code> library, <em>via</em> the <code>setup.py</code> file.
+Building a source distribution looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">python setup.py sdist
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">running sdist
+running egg_info
+writing tstools.egg-info/PKG-INFO
+writing dependency_links to tstools.egg-info/dependency_links.txt
+writing requirements to tstools.egg-info/requires.txt
+writing top-level names to tstools.egg-info/top_level.txt
+reading manifest file &#39;tstools.egg-info/SOURCES.txt&#39;
+writing manifest file &#39;tstools.egg-info/SOURCES.txt&#39;
+running check
+creating tstools-0.1
+creating tstools-0.1/tstools
+creating tstools-0.1/tstools.egg-info
+copying files to tstools-0.1...
+copying setup.py -&gt; tstools-0.1
+copying tstools/__init__.py -&gt; tstools-0.1/tstools
+copying tstools/show_extremes.py -&gt; tstools-0.1/tstools
+copying tstools/tstools.py -&gt; tstools-0.1/tstools
+copying tstools.egg-info/PKG-INFO -&gt; tstools-0.1/tstools.egg-info
+copying tstools.egg-info/SOURCES.txt -&gt; tstools-0.1/tstools.egg-info
+copying tstools.egg-info/dependency_links.txt -&gt; tstools-0.1/tstools.egg-info
+copying tstools.egg-info/requires.txt -&gt; tstools-0.1/tstools.egg-info
+copying tstools.egg-info/top_level.txt -&gt; tstools-0.1/tstools.egg-info
+Writing tstools-0.1/setup.cfg
+creating dist
+Creating tar archive
+removing &#39;tstools-0.1&#39; (and everything under it)
+</code></pre></div><p>This mainly does three things:</p>
+<ul>
+<li>It gathers the python source files that consitute the package (incuding the <code>setup.py</code>).</li>
+<li>It writes some metadata about the package in a directory <code>&lt;package name&gt;.egg-info</code>.</li>
+<li>It bundles everyting into a tar archive.</li>
+</ul>
+<p>The newly created sdist is written in a directory <code>dist</code> next to the <code>setup.py</code> file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tar --list -f dist/tstools-0.1.tar.gz
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">tstools-0.1/
+tstools-0.1/PKG-INFO
+tstools-0.1/setup.cfg
+tstools-0.1/setup.py
+tstools-0.1/tstools/
+tstools-0.1/tstools/__init__.py
+tstools-0.1/tstools/show_extremes.py
+tstools-0.1/tstools/tstools.py
+tstools-0.1/tstools.egg-info/
+tstools-0.1/tstools.egg-info/PKG-INFO
+tstools-0.1/tstools.egg-info/SOURCES.txt
+tstools-0.1/tstools.egg-info/dependency_links.txt
+tstools-0.1/tstools.egg-info/requires.txt
+tstools-0.1/tstools.egg-info/top_level.txt
+</code></pre></div><blockquote>
+<p>Take a moment to explore the content of the archive.</p>
+</blockquote>
+<p>As the name suggest a source distribution is nothing more than the source code of your package,
+along with the <code>setup.py</code> necessary to install it.
+Anyone with the source distribution therefore has everything they need to install your package.
+Actually it&rsquo;s even possible to give the sdist directly to <code>pip</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install tstools-0.1.tar.gz
+</code></pre></div><p>And you&rsquo;re done!</p>
+<h2 id="wheel-distributions">Wheel distributions</h2>
+<p>Source distributions are very basic, and installing them basically amount
+to running the package&rsquo;s <code>setup.py</code> script.
+These poses two issues:</p>
+<ul>
+<li>In addition to the call to <code>setup</code>, the <code>setup.py</code> can contain any valid Python.
+Thinking about security for moment, this means that installing a package could
+result in the execution of malicious code.</li>
+<li>To install from a source distribution, <code>pip</code> must first unpack the distribution, then
+execute the <code>setup.py</code> script. Directly unpacking to the correct location in the python
+path would be much faster.</li>
+<li>Package can contain code written in a compiled language like C or Fortran. Source
+distributions assume that the recipient has all the tools necesseray to compile
+this code. Compiling code can also takes time (hours!).</li>
+</ul>
+<p>This issues can be overcome by using <em>wheel distributions</em>.
+For pure-Python packages, a wheel is very similar to a source distribution: it&rsquo;s an
+archive that contains both the python source of the package and some metadata.
+The main difference with sdists is that <strong>wheels doesn&rsquo;t require pip to execute
+the <code>setup.py</code></strong> file, instead the content of wheels is directly unpacked in the correct
+location - most likely your current environment&rsquo;s <code>site-packages/</code> directory.
+This makes the installation of wheels both safer and faster.</p>
+<blockquote>
+<p>Another very important feature of python wheels is that they can embed compiled code,
+effectively alleviating the need for the recipient to compile (<em>build</em>) anything.
+As a result, the wheel is platform-dependant, but makes the installation considerably easier
+and faster. For this reason, wheels are part of the family of <em>built distrubtions</em>.
+Another type of built distribution is the python <em>egg</em>. However, the wheel format was
+created in response to the shortcomings of Python eggs and this format is now obsolete.
+See <a href="https://packaging.python.org/discussions/wheel-vs-egg/">Wheel vs Egg</a> on the Python Packaging User Guide.</p>
+</blockquote>
+<h3 id="activity-6-building-a-python-wheel">Activity 6 - Building a Python wheel</h3>
+<ol>
+<li>
+<p>Create a new virtual environment for this activity</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">python -m venv test-wheel
+source test-wheel/bin/activate <span style="color:#75715e"># (GNU/Linux and MacOS)</span>
+test-wheel<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\a</span>ctivate.bat <span style="color:#75715e"># (Windows)</span>
+</code></pre></div></li>
+<li>
+<p>Build a wheel</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">python setup.py bdist_wheel
+</code></pre></div></li>
+<li>
+<p>Install the wheel using <code>pip</code>.
+Hint: wheels are written in the <code>dist/</code> directory, next to the <code>setup.pt</code> file, just
+like source distributions.</p>
+</li>
+</ol>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/part3_sharing_a_package/" title="Sharing a package"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/part3_sharing_a_package/uploading_to_pypi/" title="Uploading distributions to PyPI" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1600779828"></script>
+    <script src="/js/perfect-scrollbar.min.js?1600779828"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1600779828"></script>
+    <script src="/js/jquery.sticky.js?1600779828"></script>
+    <script src="/js/featherlight.min.js?1600779828"></script>
+    <script src="/js/highlight.pack.js?1600779828"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1600779828"></script>
+    <script src="/js/learn.js?1600779828"></script>
+    <script src="/js/hugo-learn.js?1600779828"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1600779828"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+
