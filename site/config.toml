@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "https://oxfordrse.github.io/python-packaging-course/"
 languageCode = "en-us"
 title = "OxRSE Python Packaging Workshop"
 theme = "hugo-theme-learn"

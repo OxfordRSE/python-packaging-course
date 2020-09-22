@@ -3,96 +3,96 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/introduction/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/introduction/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part2_reusing_a_package/another-analysis/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/another-analysis/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part3_sharing_a_package/building_distributions/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part3_sharing_a_package/building_distributions/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part1_making_a_package/from_scripts_to_modules/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part1_making_a_package/from_scripts_to_modules/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/intermezzo_virtual_environments/installing_different_versions_of_a_package/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/intermezzo_virtual_environments/installing_different_versions_of_a_package/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part1_making_a_package/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part1_making_a_package/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part1_making_a_package/separating_methods_from_parameters_and_data/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part2_reusing_a_package/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part1_making_a_package/the_tstools_package/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part1_making_a_package/the_tstools_package/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part3_sharing_a_package/uploading_to_pypi/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part3_sharing_a_package/uploading_to_pypi/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/intermezzo_virtual_environments/virtual_environments/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/intermezzo_virtual_environments/virtual_environments/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part2_reusing_a_package/where-does-python-look-for-packages/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/where-does-python-look-for-packages/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part1_making_a_package/init_dot_pie/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part1_making_a_package/init_dot_pie/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/intermezzo_virtual_environments/make_virtual_environments_a_habit/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/intermezzo_virtual_environments/make_virtual_environments_a_habit/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part2_reusing_a_package/setuptools-and-setup-do-_pie/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/setuptools-and-setup-do-_pie/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/intermezzo_virtual_environments/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/intermezzo_virtual_environments/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part3_sharing_a_package/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part3_sharing_a_package/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/intermezzo_virtual_environments/summary/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/intermezzo_virtual_environments/summary/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/part2_reusing_a_package/summary_and_break/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/summary_and_break/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/categories/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://oxfordrse.github.io/python-packaging-course/tags/</loc>
   </url>
   
 </urlset>
