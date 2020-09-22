@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="/python-packaging-course/images/favicon.png" type="image/png">
+
+    <title>init dot pie :: OxRSE Python Packaging Workshop</title>
+
+    
+    <link href="/python-packaging-course/css/nucleus.css?1600784964" rel="stylesheet">
+    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600784964" rel="stylesheet">
+    <link href="/python-packaging-course/css/hybrid.css?1600784964" rel="stylesheet">
+    <link href="/python-packaging-course/css/featherlight.min.css?1600784964" rel="stylesheet">
+    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600784964" rel="stylesheet">
+    <link href="/python-packaging-course/css/auto-complete.css?1600784964" rel="stylesheet">
+    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600784964" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme.css?1600784964" rel="stylesheet">
+    <link href="/python-packaging-course/css/hugo-theme.css?1600784964" rel="stylesheet">
+    
+    <link href="/python-packaging-course/css/theme-oxrse.css?1600784964" rel="stylesheet">
+    
+    
+
+    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600784964"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/python-packaging-course/part1_making_a_package/init_dot_pie/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://oxfordrse.github.io/python-packaging-course/">
+    <img src="/banner_ox_rse.png" alt="oxrse banner logo"/>
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600784964"></script>
+<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600784964"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/oxfordrse.github.io\/python-packaging-course\/";
+    
+</script>
+<script type="text/javascript" src="/python-packaging-course/js/search.js?1600784964"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/python-packaging-course/introduction/" title="Introduction" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/python-packaging-course/introduction/">
+          Introduction
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/python-packaging-course/part1_making_a_package/" title="Making a package" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/python-packaging-course/part1_making_a_package/">
+          Making a package
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/" title="From scripts to modules" class="dd-item ">
+        <a href="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/">
+        From scripts to modules
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/" title="Separating methods from parameters and data" class="dd-item ">
+        <a href="/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/">
+        Separating methods from parameters and data
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part1_making_a_package/the_tstools_package/" title="The tstools package" class="dd-item ">
+        <a href="/python-packaging-course/part1_making_a_package/the_tstools_package/">
+        The tstools package
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part1_making_a_package/init_dot_pie/" title="init dot pie" class="dd-item active">
+        <a href="/python-packaging-course/part1_making_a_package/init_dot_pie/">
+        init dot pie
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/python-packaging-course/part2_reusing_a_package/" title="Reusing a package across analyses" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/python-packaging-course/part2_reusing_a_package/">
+          Reusing a package across analyses
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/another-analysis/" title="Another analysis" class="dd-item ">
+        <a href="/python-packaging-course/part2_reusing_a_package/another-analysis/">
+        Another analysis
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/where-does-python-look-for-packages/" title="Where does python look for packages?" class="dd-item ">
+        <a href="/python-packaging-course/part2_reusing_a_package/where-does-python-look-for-packages/">
+        Where does python look for packages?
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/setuptools-and-setup-do-_pie/" title="setuptools, setup dot pie and pip" class="dd-item ">
+        <a href="/python-packaging-course/part2_reusing_a_package/setuptools-and-setup-do-_pie/">
+        setuptools, setup dot pie and pip
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package indepently from the anaylises that use it" class="dd-item ">
+        <a href="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/">
+        Maintaining your package indepently from the anaylises that use it
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/summary_and_break/" title="Summary and break" class="dd-item ">
+        <a href="/python-packaging-course/part2_reusing_a_package/summary_and_break/">
+        Summary and break
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/python-packaging-course/intermezzo_virtual_environments/" title="Virtual environments" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/python-packaging-course/intermezzo_virtual_environments/">
+          Virtual environments
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/intermezzo_virtual_environments/installing_different_versions_of_a_package/" title="Installing different versions of a package" class="dd-item ">
+        <a href="/python-packaging-course/intermezzo_virtual_environments/installing_different_versions_of_a_package/">
+        Installing different versions of a package
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/intermezzo_virtual_environments/virtual_environments/" title="Virtual environments" class="dd-item ">
+        <a href="/python-packaging-course/intermezzo_virtual_environments/virtual_environments/">
+        Virtual environments
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/intermezzo_virtual_environments/make_virtual_environments_a_habit/" title="Make virtual environments a habit" class="dd-item ">
+        <a href="/python-packaging-course/intermezzo_virtual_environments/make_virtual_environments_a_habit/">
+        Make virtual environments a habit
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/intermezzo_virtual_environments/summary/" title="Summary" class="dd-item ">
+        <a href="/python-packaging-course/intermezzo_virtual_environments/summary/">
+        Summary
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/python-packaging-course/part3_sharing_a_package/" title="Sharing a package" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/python-packaging-course/part3_sharing_a_package/">
+          Sharing a package
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part3_sharing_a_package/building_distributions/" title="Building python distributions" class="dd-item ">
+        <a href="/python-packaging-course/part3_sharing_a_package/building_distributions/">
+        Building python distributions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/python-packaging-course/part3_sharing_a_package/uploading_to_pypi/" title="Uploading distributions to PyPI" class="dd-item ">
+        <a href="/python-packaging-course/part3_sharing_a_package/uploading_to_pypi/">
+        Uploading distributions to PyPI
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/python-packaging-course/'></a> > <a href='/python-packaging-course/part1_making_a_package/'>Making a package</a> > init dot pie
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#activity-2-bringing-all-functions-under-a-single-namespace">Activity 2 - Bringing all functions under a single namespace</a></li>
+    <li><a href="#using-the-package">Using the package</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              init dot pie
+            </h1>
+          
+
+        
+
+
+<p>Whenever you import a directory, Python will look for a file <!-- raw HTML omitted --><!-- raw HTML omitted -->init<!-- raw HTML omitted --><!-- raw HTML omitted -->.py at the root of this
+directory, and, if found, will import it.
+It is the presence of this initialization file that truly makes the <code>tstools</code> directory a Python
+package<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>As a first example, let&rsquo;s add the following code to <code>__init__.py</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># tstools/__init__.py</span>
+<span style="color:#f92672">from</span> os.path <span style="color:#f92672">import</span> basename
+filename <span style="color:#f92672">=</span> basename(__file__)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Hello from {filename}&#34;</span>)
+</code></pre></div><p>If we now import the <code>tstools</code> package:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> tstools
+<span style="color:#66d9ef">print</span>(tstools<span style="color:#f92672">.</span>filename)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Hello from __init__.py
+__init__.py
+</code></pre></div><p>The lesson here is that any object (variable, function, class) defined in the <code>__init__.py</code> file is available
+under the package&rsquo;s namespace.</p>
+<h2 id="activity-2-bringing-all-functions-under-a-single-namespace">Activity 2 - Bringing all functions under a single namespace</h2>
+<p>Our package isn&rsquo;t very big, and the internal strucure with 3 different modules isnt
+very relevant for a user.</p>
+<p><strong>Write</strong> the <code>__init__.py</code> so that all functions defined in
+modules <code>tstools.py</code> and <code>show_extremes.py</code> are accessible directly
+at the top-lvel (under the <code>tstools</code> namespace), <em>i.e</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> tstools
+mean, var <span style="color:#f92672">=</span> tstools<span style="color:#f92672">.</span>get_mean_and_var(timeseries) <span style="color:#75715e"># instead of mean, var = tstools.moments.get_mean_and_var(...)</span>
+fig, ax <span style="color:#f92672">=</span> tstools<span style="color:#f92672">.</span>show_extremes(timeseries, <span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sqrt(var)) <span style="color:#75715e"># instead of fig, ax = tstools.vis.show_extremes(...)</span>
+</code></pre></div><p><strong>Hint</strong>: By default python looks for modules in the current directory
+and some other locations (more about that later). When using <code>import</code>,
+you can refer to modules in the current package using the <em>dot notation</em>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># import something from module that resides</span>
+<span style="color:#75715e"># in the current package (next to the __init__.py)</span>
+<span style="color:#f92672">from</span> .module <span style="color:#f92672">import</span> something
+</code></pre></div><h2 id="using-the-package">Using the package</h2>
+<p>Our package is now ready to be used in our analysis, and a analysis scripts could look like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># analysis1/analysis1.py</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> tstools
+
+timeseries <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>genfromtxt(<span style="color:#e6db74">&#34;./data/my_timeseries.csv&#34;</span>, delimiter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;,&#34;</span>)
+
+mean, var <span style="color:#f92672">=</span> tstools<span style="color:#f92672">.</span>get_mean_and_var(timeseries)
+
+fig, ax <span style="color:#f92672">=</span> tstools<span style="color:#f92672">.</span>get_pdf(timeseries)
+
+threshold <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sqrt(var)
+fig, ax <span style="color:#f92672">=</span> tstools<span style="color:#f92672">.</span>show_extremes(timeseries, threshold)
+</code></pre></div><p>Note that the above does the job for both scripts <code>scripts/analysis.py</code> and <code>scripts/show_extremes.py</code>! Much better don&rsquo;t you think?</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Since Python 3.3, this isn&rsquo;t technically true. Directories without a <code>__init__.py</code> file are called namespace packages, see <a href="https://packaging.python.org/guides/packaging-namespace-packages/">Packaging namespace packages</a> on the Python Packaging User Guide). However, their discussion is beyond the scope of this course. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/python-packaging-course/part1_making_a_package/the_tstools_package/" title="The tstools package"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/python-packaging-course/part2_reusing_a_package/" title="Reusing a package across analyses" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/python-packaging-course/js/clipboard.min.js?1600784964"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600784964"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600784964"></script>
+    <script src="/python-packaging-course/js/jquery.sticky.js?1600784964"></script>
+    <script src="/python-packaging-course/js/featherlight.min.js?1600784964"></script>
+    <script src="/python-packaging-course/js/highlight.pack.js?1600784964"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600784964"></script>
+    <script src="/python-packaging-course/js/learn.js?1600784964"></script>
+    <script src="/python-packaging-course/js/hugo-learn.js?1600784964"></script>
+    
+        
+            <script src="/python-packaging-course/mermaid/mermaid.js?1600784964"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+
