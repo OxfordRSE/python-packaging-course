@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Virtual environments on OxRSE Python Packaging Workshop</title>
+    <link>http://example.org/intermezzo_virtual_environments/</link>
+    <description>Recent content in Virtual environments on OxRSE Python Packaging Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://example.org/intermezzo_virtual_environments/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Installing different versions of a package</title>
+      <link>http://example.org/intermezzo_virtual_environments/installing_different_versions_of_a_package/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/intermezzo_virtual_environments/installing_different_versions_of_a_package/</guid>
+      <description>In the previous section you learned how to share a package across several projects, or analyses. However, as your package and analyses evolve asynchronously, it is likely that you will reach a point when you&amp;rsquo;d like differnet analyses to use different versions of your package, or different versions of third-party packages that your analysis rely on.
+The question is then: how to install two different versions of a same package? And the (short) answer is: you cannot.</description>
+    </item>
+    
+    <item>
+      <title>Virtual environments</title>
+      <link>http://example.org/intermezzo_virtual_environments/virtual_environments/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/intermezzo_virtual_environments/virtual_environments/</guid>
+      <description>Roughly speaking, the python executable /some_dir/lib/pythonX.Y/bin/python and the package installation location /some_dir/lib/pythonX.Y/site-packages/ consitute what is commonly referred to as the python environment.
+If you cannot install different versions of a package in a single environment, let&amp;rsquo;s have multiple environments! This is the core idea of python virtual environments. Whenever a python virtual environment my_env is activated, the python command points to a python executable that is unique to this environment (my-env/lib/pythonX.</description>
+    </item>
+    
+    <item>
+      <title>Make virtual environments a habit</title>
+      <link>http://example.org/intermezzo_virtual_environments/make_virtual_environments_a_habit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/intermezzo_virtual_environments/make_virtual_environments_a_habit/</guid>
+      <description>You just learned what are python virtual environment and how to use them? Don&amp;rsquo;t look back, and make them a habit. The limitation that only one version of a package can be installed at one time in one python environment can be the source of very frustrating problems, distracting you from your research. Moreover, using one python environment for all your projects means that this environment will change as you work on different projects, making it very hard to resolve dependency problems when they (and they will) occur.</description>
+    </item>
+    
+    <item>
+      <title>Summary</title>
+      <link>http://example.org/intermezzo_virtual_environments/summary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/intermezzo_virtual_environments/summary/</guid>
+      <description>One big limitations of python is that only one version of a package can be installed in a given environment. virtual environments allow us to create multiple python environments, isolated from each other. Therefore we don&amp;rsquo;t worry about breaking other projects that may rely on other versions of some packages. Having one virtual env per analysis is a good research practice since it faciliates reproducibility of your results. never use the system python installation, unless your have a very good reason to.</description>
+    </item>
+    
+  </channel>
+</rss>

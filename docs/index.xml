@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OxRSE Python Packaging Workshop</title>
+    <link>http://example.org/</link>
+    <description>Recent content on OxRSE Python Packaging Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Another analysis</title>
+      <link>http://example.org/part2_reusing_a_package/another-analysis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part2_reusing_a_package/another-analysis/</guid>
+      <description>Let&amp;rsquo;s say that we have another directory analysis2, that contains another but similar dataset to analysis1/data/brownian.csv. Now that we&amp;rsquo;ve structured our software into a python package, we would like to reuse that package for our second analysis.
+Let us simply write a python scripts analysis2.py, that imports the tstools package created in the previous section.
+analysis2/ analysis2.py data/ timeseries.csv # analysis2/analysis2.py import numpy as np import tstools timeseries = np.genfromtxt(&amp;#34;./data/data_analysis2.csv&amp;#34;) fig, ax = tstools.</description>
+    </item>
+    
+    <item>
+      <title>Building python distributions</title>
+      <link>http://example.org/part3_sharing_a_package/building_distributions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part3_sharing_a_package/building_distributions/</guid>
+      <description>Before you can distribute a package, you must first create a distribution. A distribution is a single file that bundles all the files and data necessary to install and use the package - but also sometimes compile and test it.
+A distribution usually takes the from of an archive (.tar, .zip or similar). There are several possible distribution formats, but in 2020, only two are really important: the source distribution (sdist) and the wheel (bdist_wheel).</description>
+    </item>
+    
+    <item>
+      <title>From scripts to modules</title>
+      <link>http://example.org/part1_making_a_package/from_scripts_to_modules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part1_making_a_package/from_scripts_to_modules/</guid>
+      <description>Functions, modules, packages  functions, classes  # operations.py def add(a,b): return a+b  modules Collection of python objects (classes, functions, variables)  from operations import add # &amp;#34;From file (or module) operations.py import object add&amp;#34; result = add(1,2)  packages Collection of modules (.py files)  from calculator.operations import add from calculator.representations import hexa a = hexa(1) b = hexa(2) result = add(a,b) Activity 1 - Turning scripts into a collection of functions Let&amp;rsquo;s rewrite both scripts scripts/analysis.</description>
+    </item>
+    
+    <item>
+      <title>Installing different versions of a package</title>
+      <link>http://example.org/intermezzo_virtual_environments/installing_different_versions_of_a_package/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/intermezzo_virtual_environments/installing_different_versions_of_a_package/</guid>
+      <description>In the previous section you learned how to share a package across several projects, or analyses. However, as your package and analyses evolve asynchronously, it is likely that you will reach a point when you&amp;rsquo;d like differnet analyses to use different versions of your package, or different versions of third-party packages that your analysis rely on.
+The question is then: how to install two different versions of a same package? And the (short) answer is: you cannot.</description>
+    </item>
+    
+    <item>
+      <title>Separating methods from parameters and data</title>
+      <link>http://example.org/part1_making_a_package/separating_methods_from_parameters_and_data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part1_making_a_package/separating_methods_from_parameters_and_data/</guid>
+      <description>Roughly speaking, a numerical experiment is made of three components:
+ The data (dataset, or parameters of simulation) The operations performed on this data The output (numbers, plots)  As we saw, scripts base.py, and show_extremes.py mix the three above components into a single .py file, making the analysis difficult (sometimes even risky!) to modify and test. Re-using part of the code means copying and pasting blocks of code out of their original context, which is a dangerous practice.</description>
+    </item>
+    
+    <item>
+      <title>The tstools package</title>
+      <link>http://example.org/part1_making_a_package/the_tstools_package/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part1_making_a_package/the_tstools_package/</guid>
+      <description>We now have a tstools directory with 3 modules:
+analysis1/ tstools/ __init__.py moments.py vis.py show_extremes.py data/ In way, the directory tstools is already a pacakge, in the sens that it is possible to import each functions from the modules:
+import tstools.moments from tstools.vis import plot_histogram timeseries = np.genfromtxt(&amp;#34;./data/brownian.csv&amp;#34;, delimiter=&amp;#34;,&amp;#34;) mean = tstools.moments.get_mean(timeseries) fig, ax = tstools.moments.plot_histogram(timeseries) Let&amp;rsquo;s try to import the package as a whole:
+# compute-mean.py import numpy as np import tstools timeseries = np.</description>
+    </item>
+    
+    <item>
+      <title>Uploading distributions to PyPI</title>
+      <link>http://example.org/part3_sharing_a_package/uploading_to_pypi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part3_sharing_a_package/uploading_to_pypi/</guid>
+      <description>In the previous section you learned how to create distributions for your packages. In this section, we look at how to share them with others, so that other people can easily install and use your packages.
+Package repositories Let&amp;rsquo;s think about distributing packages for a minute. If you wanted to share one of your distributions (whether it&amp;rsquo;s a source distribution or a wheel distribution) with a colleague, how would you proceed?</description>
+    </item>
+    
+    <item>
+      <title>Virtual environments</title>
+      <link>http://example.org/intermezzo_virtual_environments/virtual_environments/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/intermezzo_virtual_environments/virtual_environments/</guid>
+      <description>Roughly speaking, the python executable /some_dir/lib/pythonX.Y/bin/python and the package installation location /some_dir/lib/pythonX.Y/site-packages/ consitute what is commonly referred to as the python environment.
+If you cannot install different versions of a package in a single environment, let&amp;rsquo;s have multiple environments! This is the core idea of python virtual environments. Whenever a python virtual environment my_env is activated, the python command points to a python executable that is unique to this environment (my-env/lib/pythonX.</description>
+    </item>
+    
+    <item>
+      <title>Where does python look for packages?</title>
+      <link>http://example.org/part2_reusing_a_package/where-does-python-look-for-packages/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part2_reusing_a_package/where-does-python-look-for-packages/</guid>
+      <description>When using the import statement, the python interpreter looks for the package (or module) in a list of directories known as the python path.
+Let&amp;rsquo;s find out about what directories constitute the python path:
+$ python &amp;gt;&amp;gt;&amp;gt; import sys &amp;gt;&amp;gt;&amp;gt; sys.path The order of this list matters: it is the order in which python looks into the directories that constitute the python path. To begin with, Python first looks in the current directory.</description>
+    </item>
+    
+    <item>
+      <title>init dot pie</title>
+      <link>http://example.org/part1_making_a_package/init_dot_pie/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part1_making_a_package/init_dot_pie/</guid>
+      <description>Whenever you import a directory, Python will look for a file init.py at the root of this directory, and, if found, will import it. It is the presence of this initialization file that truly makes the tstools directory a Python package1.
+As a first example, let&amp;rsquo;s add the following code to __init__.py:
+# tstools/__init__.py from os.path import basename filename = basename(__file__) print(f&amp;#34;Hello from {filename}&amp;#34;) If we now import the tstools package:</description>
+    </item>
+    
+    <item>
+      <title>Make virtual environments a habit</title>
+      <link>http://example.org/intermezzo_virtual_environments/make_virtual_environments_a_habit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/intermezzo_virtual_environments/make_virtual_environments_a_habit/</guid>
+      <description>You just learned what are python virtual environment and how to use them? Don&amp;rsquo;t look back, and make them a habit. The limitation that only one version of a package can be installed at one time in one python environment can be the source of very frustrating problems, distracting you from your research. Moreover, using one python environment for all your projects means that this environment will change as you work on different projects, making it very hard to resolve dependency problems when they (and they will) occur.</description>
+    </item>
+    
+    <item>
+      <title>setuptools, setup dot pie and pip</title>
+      <link>http://example.org/part2_reusing_a_package/setuptools-and-setup-do-_pie/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part2_reusing_a_package/setuptools-and-setup-do-_pie/</guid>
+      <description>The recommended way to install a package is to use the setuptools library in conjunction with pip, the official python package manager. Effectively, this approach is roughly equivalent to copying the package to the site-packages directory, expect that the process in automated.
+pip Pip is the de facto package manager for Python packages. It&amp;rsquo;s main job is to install, remove, upgrade, configure and manage Python packages, both available locally on your machine but also hosted on on the Python Package Index (PyPI).</description>
+    </item>
+    
+    <item>
+      <title>Maintaining your package indepently from the anaylises that use it</title>
+      <link>http://example.org/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/</guid>
+      <description>In the previous section you made your package &amp;ldquo;pip installable&amp;rdquo; by creating a setup.py file. You then installed the package, effectively making accessible between different analysis directories.
+However, a package is never set in stone: as you work on your analyses, you will almost certainly likely make changes to it, for instance to add functionalities or to fix bugs.
+You could just reinstall the package each time you make a modification to it, but this obviously becomes tedious if you are constantly making changes (maybe to hunt down a bug) and/or testing your package.</description>
+    </item>
+    
+    <item>
+      <title>Summary</title>
+      <link>http://example.org/intermezzo_virtual_environments/summary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/intermezzo_virtual_environments/summary/</guid>
+      <description>One big limitations of python is that only one version of a package can be installed in a given environment. virtual environments allow us to create multiple python environments, isolated from each other. Therefore we don&amp;rsquo;t worry about breaking other projects that may rely on other versions of some packages. Having one virtual env per analysis is a good research practice since it faciliates reproducibility of your results. never use the system python installation, unless your have a very good reason to.</description>
+    </item>
+    
+    <item>
+      <title>Summary and break</title>
+      <link>http://example.org/part2_reusing_a_package/summary_and_break/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/part2_reusing_a_package/summary_and_break/</guid>
+      <description>In order to reuse our package across different analyses, we must install it. In effect, this means copying the package into a directory that is in the python path. This shouldn&amp;rsquo;t be done manually, but instead using the setuptools package to write a setup.py file that is then processed by the pip install command. It would be both cumbersome and error-prone to have to reinstall the package each time we make a change to it (to fix a bug for instance).</description>
+    </item>
+    
+  </channel>
+</rss>
