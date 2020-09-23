@@ -52,9 +52,7 @@ def group_correlated_points(series, dist):
 timeseries = np.genfromtxt("../analysis1/data/brownian.csv", delimiter=",")
 
 threshold = 2.5
-timepoints_with_value_above_threshold = np.argwhere(
-    timeseries[:, 1] > threshold
-)
+timepoints_with_value_above_threshold = np.argwhere(timeseries[:, 1] > threshold)
 
 correlation_time = 10
 groups_of_correlated_points = group_correlated_points(
@@ -70,9 +68,7 @@ timepoints = timeseries[:, 0]
 for i, bundle in enumerate(groups_of_correlated_points):
     # argmax return the index relative to origin of timeseries[bundle,1]
     # so must add offset bundle[0]
-    extremes_timepoints[i] = timepoints[
-        np.argmax(timeseries[bundle, 1]) + bundle[0]
-    ]
+    extremes_timepoints[i] = timepoints[np.argmax(timeseries[bundle, 1]) + bundle[0]]
     extremes_values[i] = np.amax(timeseries[bundle, 1])
 
 ###################

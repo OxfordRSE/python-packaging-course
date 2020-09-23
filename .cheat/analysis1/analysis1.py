@@ -9,5 +9,5 @@ mean, var = tstools.get_mean_and_var(timeseries)
 
 fig, ax = tstools.plot_histogram(timeseries, nbins=100)
 
-threshold = 3*np.sqrt(var)
+threshold = 3 * np.sqrt(var)
 fig, ax = tstools.show_extremes(timeseries, threshold)

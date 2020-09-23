@@ -22,16 +22,14 @@ def plot_trajectory_subset(timeseries, tmin, tmax):
     -------
     """
 
-    t = timeseries[:,0]
+    t = timeseries[:, 0]
     if tmin < np.amin(t) or tmax > np.amax(t):
         raise ValueError("Interval is out of bounds")
 
-    values = timeseries[:,1]
+    values = timeseries[:, 1]
     indices_within_time_interval = (t >= tmin) & (t <= tmax)
     fig, ax = plt.subplots()
-    ax.plot(
-        t[indices_within_time_interval], values[indices_within_time_interval]
-    )
+    ax.plot(t[indices_within_time_interval], values[indices_within_time_interval])
 
     return fig, ax, np.amax(values[indices_within_time_interval])
 

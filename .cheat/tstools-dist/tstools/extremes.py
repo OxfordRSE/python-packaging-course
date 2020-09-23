@@ -54,9 +54,7 @@ def show_extremes(timeseries, threshold):
         list_of_groups.append(group.copy())
         return list_of_groups
 
-    timepoints_with_value_above_threshold = np.argwhere(
-        timeseries[:, 1] > threshold
-    )
+    timepoints_with_value_above_threshold = np.argwhere(timeseries[:, 1] > threshold)
     distance_bet_extremes = 10
     groups_of_correlated_points = group_correlated_points(
         timepoints_with_value_above_threshold, distance_bet_extremes

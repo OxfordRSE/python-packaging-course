@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def get_mean_and_var(timeseries):
     """
     Compute and return the average (empirical mean) and empirical variance
