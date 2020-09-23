@@ -1,25 +1,8 @@
+import matplotlib.pyplot as plt
 import numpy as np
 from scipy.special import erf
-import matplotlib.pyplot as plt
 
-
-def get_mean_and_var(timeseries):
-    """
-    Compute and return the average (empirical mean) and empirical variance
-    over TIMESERIES.
-
-    Parameters
-    ----------
-    timeseries: numpy.array
-        The timeseries
-
-    Returns
-    -------
-    mean, var: float
-        A tuple which first element is the mean and second the variance.
-    """
-
-    return np.mean(timeseries[:, 1]), np.var(timeseries[:, 1])
+from .moments import get_mean_and_var
 
 
 def plot_trajectory_subset(timeseries, tmin, tmax):
@@ -39,20 +22,18 @@ def plot_trajectory_subset(timeseries, tmin, tmax):
     -------
     """
 
-    t = timeseries[:, 0]
+    t = timeseries[:,0]
     if tmin < np.amin(t) or tmax > np.amax(t):
         raise ValueError("Interval is out of bounds")
 
+    values = timeseries[:,1]
     indices_within_time_interval = (t >= tmin) & (t <= tmax)
-
-    values = timeseries[:, 1]
-
     fig, ax = plt.subplots()
     ax.plot(
         t[indices_within_time_interval], values[indices_within_time_interval]
     )
 
-    return fig, ax
+    return fig, ax, np.amax(values[indices_within_time_interval])
 
 
 def plot_histogram(timeseries, nbins=10, mean=None, std=None):
@@ -71,7 +52,7 @@ def plot_histogram(timeseries, nbins=10, mean=None, std=None):
         The empirical standard deviation computed over the timeseries
     """
 
-    def get_gaussian_histogram(fluct_min, fluct_max, std, mean, nbins=100):
+    def get_theoritical_histogram(fluct_min, fluct_max, std, mean, nbins=100):
         bin_edges = np.linspace(fluct_min, fluct_max, nbins + 1)
         nb_samples = len(timeseries[:, 1])
         rescaled_bin_edges = (bin_edges - mean) / (std * np.sqrt(2))
@@ -82,7 +63,7 @@ def plot_histogram(timeseries, nbins=10, mean=None, std=None):
         )
         return hist, bin_edges
 
-    hist, bin_edges = np.histogram(timeseries[:, 1], bins=nbins)
+    hist, bin_edges = np.histogram(timeseries[:, 1], bins=100)
     bin_centers = 0.5 * (bin_edges[1:] + bin_edges[0:-1])
 
     fig, ax = plt.subplots()
@@ -91,7 +72,7 @@ def plot_histogram(timeseries, nbins=10, mean=None, std=None):
     if (not std) or (not mean):
         mean, var = get_mean_and_var(timeseries)
         std = np.sqrt(var)
-    hist, bin_edges = get_gaussian_histogram(
+    hist, bin_edges = get_theoritical_histogram(
         np.amin(bin_edges), np.amax(bin_edges), std, mean
     )
     ax.plot(bin_centers, hist)
