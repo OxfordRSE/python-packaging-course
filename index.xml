@@ -13,8 +13,8 @@
       
       <guid>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/another-analysis/</guid>
       <description>Let&amp;rsquo;s say that we have another directory analysis2, that contains another but similar dataset to analysis1/data/brownian.csv. Now that we&amp;rsquo;ve structured our software into a python package, we would like to reuse that package for our second analysis.
-Let us simply write a python scripts analysis2.py, that imports the tstools package created in the previous section.
-analysis2/ analysis2.py data/ timeseries.csv # analysis2/analysis2.py import numpy as np import tstools timeseries = np.genfromtxt(&amp;#34;./data/data_analysis2.csv&amp;#34;) fig, ax = tstools.</description>
+In the directory analysis2/, let&amp;rsquo;s simply write a script analysis2.py, that imports the tstools package created in the previous section.
+analysis2/ analysis2.py data/ data_analysis2.csv # analysis2/analysis2.py import numpy as np import tstools timeseries = np.</description>
     </item>
     
     <item>
@@ -42,18 +42,8 @@ A distribution usually takes the from of an archive (.tar, .zip or similar). The
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://oxfordrse.github.io/python-packaging-course/intermezzo_virtual_environments/installing_different_versions_of_a_package/</guid>
-      <description>In the previous section you learned how to share a package across several projects, or analyses. However, as your package and analyses evolve asynchronously, it is likely that you will reach a point when you&amp;rsquo;d like differnet analyses to use different versions of your package, or different versions of third-party packages that your analysis rely on.
+      <description>In the previous section you learned how to share a package across several projects, or analyses. However, as your package and analyses evolve asynchronously, it is likely that you will reach a point when you&amp;rsquo;d like different analyses to use different versions of your package, or different versions of third-party packages that your analysis rely on.
 The question is then: how to install two different versions of a same package? And the (short) answer is: you cannot.</description>
-    </item>
-    
-    <item>
-      <title>Separating methods from parameters and data</title>
-      <link>https://oxfordrse.github.io/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://oxfordrse.github.io/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/</guid>
-      <description>Roughly speaking, a numerical experiment is made of three components:
- The data (dataset, or parameters of simulation) The operations performed on this data The output (numbers, plots)  As we saw, scripts base.py, and show_extremes.py mix the three above components into a single .py file, making the analysis difficult (sometimes even risky!) to modify and test. Re-using part of the code means copying and pasting blocks of code out of their original context, which is a dangerous practice.</description>
     </item>
     
     <item>
@@ -63,9 +53,8 @@ The question is then: how to install two different versions of a same package? A
       
       <guid>https://oxfordrse.github.io/python-packaging-course/part1_making_a_package/the_tstools_package/</guid>
       <description>We now have a tstools directory with 3 modules:
-analysis1/ tstools/ __init__.py moments.py vis.py show_extremes.py data/ In way, the directory tstools is already a pacakge, in the sens that it is possible to import each functions from the modules:
-import tstools.moments from tstools.vis import plot_histogram timeseries = np.genfromtxt(&amp;#34;./data/brownian.csv&amp;#34;, delimiter=&amp;#34;,&amp;#34;) mean = tstools.moments.get_mean(timeseries) fig, ax = tstools.moments.plot_histogram(timeseries) Let&amp;rsquo;s try to import the package as a whole:
-# compute-mean.py import numpy as np import tstools timeseries = np.</description>
+analysis1/ tstools/ __init__.py moments.py vis.py show_extremes.py data/ In a way, the directory tstools is already a package, in the sense that it is possible to import functions from the modules:
+import numpy as np import tstools.moments from tstools.vis import plot_histogram timeseries = np.genfromtxt(&amp;#34;./data/brownian.csv&amp;#34;, delimiter=&amp;#34;,&amp;#34;) mean, var = tstools.moments.get_mean_and_var(timeseries) fig, ax = tstools.vis.plot_histogram(timeseries) Let&amp;rsquo;s try to import the package as a whole:</description>
     </item>
     
     <item>
@@ -96,7 +85,7 @@ If you cannot install different versions of a package in a single environment, l
       <guid>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/where-does-python-look-for-packages/</guid>
       <description>When using the import statement, the python interpreter looks for the package (or module) in a list of directories known as the python path.
 Let&amp;rsquo;s find out about what directories constitute the python path:
-$ python &amp;gt;&amp;gt;&amp;gt; import sys &amp;gt;&amp;gt;&amp;gt; sys.path The order of this list matters: it is the order in which python looks into the directories that constitute the python path. To begin with, Python first looks in the current directory.</description>
+$ python &amp;gt;&amp;gt;&amp;gt; import sys &amp;gt;&amp;gt;&amp;gt; sys.path [&amp;#39;&amp;#39;, &amp;#39;/usr/lib/python38.zip&amp;#39;, &amp;#39;/usr/lib/python3.8&amp;#39;, &amp;#39;/usr/lib/python3.8/lin-dynload&amp;#39;, &amp;#39;/home/thibault/python-workshop-venv/lib/python3.8/site-packages/&amp;#39;] The order of this list matters: it is the order in which python looks into the directories that constitute the python path. To begin with, Python first looks in the current directory.</description>
     </item>
     
     <item>
@@ -130,7 +119,7 @@ pip Pip is the de facto package manager for Python packages. It&amp;rsquo;s main
     </item>
     
     <item>
-      <title>Maintaining your package indepently from the anaylises that use it</title>
+      <title>Maintaining your package</title>
       <link>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -146,7 +135,7 @@ You could just reinstall the package each time you make a modification to it, bu
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://oxfordrse.github.io/python-packaging-course/intermezzo_virtual_environments/summary/</guid>
-      <description>One big limitations of python is that only one version of a package can be installed in a given environment. virtual environments allow us to create multiple python environments, isolated from each other. Therefore we don&amp;rsquo;t worry about breaking other projects that may rely on other versions of some packages. Having one virtual env per analysis is a good research practice since it faciliates reproducibility of your results. never use the system python installation, unless your have a very good reason to.</description>
+      <description>One big limitations of Python is that only one version of a package can be installed in a given environment. Virtual environments allow us to create multiple python environments, isolated from each other. Therefore we don&amp;rsquo;t worry about breaking other projects that may rely on other versions of some packages. Having one virtual environment per analysis is a good research practice since it faciliates reproducibility of your results. Never use the system python installation, unless your have a very good reason to.</description>
     </item>
     
     <item>

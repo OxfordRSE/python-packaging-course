@@ -13,8 +13,8 @@
       
       <guid>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/another-analysis/</guid>
       <description>Let&amp;rsquo;s say that we have another directory analysis2, that contains another but similar dataset to analysis1/data/brownian.csv. Now that we&amp;rsquo;ve structured our software into a python package, we would like to reuse that package for our second analysis.
-Let us simply write a python scripts analysis2.py, that imports the tstools package created in the previous section.
-analysis2/ analysis2.py data/ timeseries.csv # analysis2/analysis2.py import numpy as np import tstools timeseries = np.genfromtxt(&amp;#34;./data/data_analysis2.csv&amp;#34;) fig, ax = tstools.</description>
+In the directory analysis2/, let&amp;rsquo;s simply write a script analysis2.py, that imports the tstools package created in the previous section.
+analysis2/ analysis2.py data/ data_analysis2.csv # analysis2/analysis2.py import numpy as np import tstools timeseries = np.</description>
     </item>
     
     <item>
@@ -25,7 +25,7 @@ analysis2/ analysis2.py data/ timeseries.csv # analysis2/analysis2.py import num
       <guid>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/where-does-python-look-for-packages/</guid>
       <description>When using the import statement, the python interpreter looks for the package (or module) in a list of directories known as the python path.
 Let&amp;rsquo;s find out about what directories constitute the python path:
-$ python &amp;gt;&amp;gt;&amp;gt; import sys &amp;gt;&amp;gt;&amp;gt; sys.path The order of this list matters: it is the order in which python looks into the directories that constitute the python path. To begin with, Python first looks in the current directory.</description>
+$ python &amp;gt;&amp;gt;&amp;gt; import sys &amp;gt;&amp;gt;&amp;gt; sys.path [&amp;#39;&amp;#39;, &amp;#39;/usr/lib/python38.zip&amp;#39;, &amp;#39;/usr/lib/python3.8&amp;#39;, &amp;#39;/usr/lib/python3.8/lin-dynload&amp;#39;, &amp;#39;/home/thibault/python-workshop-venv/lib/python3.8/site-packages/&amp;#39;] The order of this list matters: it is the order in which python looks into the directories that constitute the python path. To begin with, Python first looks in the current directory.</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@ pip Pip is the de facto package manager for Python packages. It&amp;rsquo;s main
     </item>
     
     <item>
-      <title>Maintaining your package indepently from the anaylises that use it</title>
+      <title>Maintaining your package</title>
       <link>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

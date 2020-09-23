@@ -12,21 +12,21 @@
     <title>Another analysis :: OxRSE Python Packaging Workshop</title>
 
     
-    <link href="/python-packaging-course/css/nucleus.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/hybrid.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/featherlight.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/auto-complete.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/theme.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/hugo-theme.css?1600786696" rel="stylesheet">
+    <link href="/python-packaging-course/css/nucleus.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/hybrid.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/featherlight.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/auto-complete.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/hugo-theme.css?1600862808" rel="stylesheet">
     
-    <link href="/python-packaging-course/css/theme-oxrse.css?1600786696" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme-oxrse.css?1600862808" rel="stylesheet">
     
     
 
-    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600786696"></script>
+    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600862808"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -55,14 +55,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600786696"></script>
-<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600786696"></script>
+<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600862808"></script>
+<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600862808"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/oxfordrse.github.io\/python-packaging-course\/";
     
 </script>
-<script type="text/javascript" src="/python-packaging-course/js/search.js?1600786696"></script>
+<script type="text/javascript" src="/python-packaging-course/js/search.js?1600862808"></script>
 
     
   </div>
@@ -134,27 +134,6 @@
       <li data-nav-id="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/" title="From scripts to modules" class="dd-item ">
         <a href="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/">
         From scripts to modules
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/" title="Separating methods from parameters and data" class="dd-item ">
-        <a href="/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/">
-        Separating methods from parameters and data
         
         </a>
     </li>
@@ -312,9 +291,9 @@
  
   
     
-      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package indepently from the anaylises that use it" class="dd-item ">
+      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package" class="dd-item ">
         <a href="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/">
-        Maintaining your package indepently from the anaylises that use it
+        Maintaining your package
         
         </a>
     </li>
@@ -635,18 +614,19 @@
 but similar dataset to <code>analysis1/data/brownian.csv</code>.
 Now that we&rsquo;ve structured our software into a python package, we would like
 to reuse that package for our second analysis.</p>
-<p>Let us simply write a python scripts <code>analysis2.py</code>, that imports the <code>tstools</code> package
+<p>In the directory <code>analysis2/</code>, let&rsquo;s simply write a script <code>analysis2.py</code>, that imports the <code>tstools</code> package
 created in the previous section.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">analysis2/
       analysis2.py
       data/
-  	      timeseries.csv
+  	      data_analysis2.csv
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># analysis2/analysis2.py</span>
 <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+
 <span style="color:#f92672">import</span> tstools
 
-timeseries <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>genfromtxt(<span style="color:#e6db74">&#34;./data/data_analysis2.csv&#34;</span>)
-fig, ax <span style="color:#f92672">=</span> tstools<span style="color:#f92672">.</span>plot_trajectory_subset(timeseries, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">50</span>, dt<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+timeseries <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>genfromtxt(<span style="color:#e6db74">&#34;./data/data_analysis2.csv&#34;</span>, delimiter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;,&#34;</span>)
+fig, ax <span style="color:#f92672">=</span> tstools<span style="color:#f92672">.</span>plot_trajectory_subset(timeseries, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">50</span>)
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ python analysis2.py
 Traceback (most recent call last):
   File &#34;&lt;stdin&gt;&#34;, line 10, in &lt;module&gt;
@@ -717,22 +697,6 @@ How can we tell Python where our package is?</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1036,19 +1000,19 @@ How can we tell Python where our package is?</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/python-packaging-course/js/clipboard.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/jquery.sticky.js?1600786696"></script>
-    <script src="/python-packaging-course/js/featherlight.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/highlight.pack.js?1600786696"></script>
+    <script src="/python-packaging-course/js/clipboard.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/jquery.sticky.js?1600862808"></script>
+    <script src="/python-packaging-course/js/featherlight.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/highlight.pack.js?1600862808"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600786696"></script>
-    <script src="/python-packaging-course/js/learn.js?1600786696"></script>
-    <script src="/python-packaging-course/js/hugo-learn.js?1600786696"></script>
+    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600862808"></script>
+    <script src="/python-packaging-course/js/learn.js?1600862808"></script>
+    <script src="/python-packaging-course/js/hugo-learn.js?1600862808"></script>
     
         
-            <script src="/python-packaging-course/mermaid/mermaid.js?1600786696"></script>
+            <script src="/python-packaging-course/mermaid/mermaid.js?1600862808"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

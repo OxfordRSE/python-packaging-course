@@ -12,21 +12,21 @@
     <title>Virtual environments :: OxRSE Python Packaging Workshop</title>
 
     
-    <link href="/python-packaging-course/css/nucleus.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/hybrid.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/featherlight.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/auto-complete.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/theme.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/hugo-theme.css?1600786696" rel="stylesheet">
+    <link href="/python-packaging-course/css/nucleus.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/hybrid.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/featherlight.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/auto-complete.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/hugo-theme.css?1600862808" rel="stylesheet">
     
-    <link href="/python-packaging-course/css/theme-oxrse.css?1600786696" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme-oxrse.css?1600862808" rel="stylesheet">
     
     
 
-    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600786696"></script>
+    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600862808"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -55,14 +55,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600786696"></script>
-<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600786696"></script>
+<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600862808"></script>
+<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600862808"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/oxfordrse.github.io\/python-packaging-course\/";
     
 </script>
-<script type="text/javascript" src="/python-packaging-course/js/search.js?1600786696"></script>
+<script type="text/javascript" src="/python-packaging-course/js/search.js?1600862808"></script>
 
     
   </div>
@@ -134,27 +134,6 @@
       <li data-nav-id="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/" title="From scripts to modules" class="dd-item ">
         <a href="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/">
         From scripts to modules
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/" title="Separating methods from parameters and data" class="dd-item ">
-        <a href="/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/">
-        Separating methods from parameters and data
         
         </a>
     </li>
@@ -312,9 +291,9 @@
  
   
     
-      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package indepently from the anaylises that use it" class="dd-item ">
+      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package" class="dd-item ">
         <a href="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/">
-        Maintaining your package indepently from the anaylises that use it
+        Maintaining your package
         
         </a>
     </li>
@@ -610,7 +589,7 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#activity-5-virtual-environments">Activity 5 - Virtual environments</a></li>
+    <li><a href="#activity-4-virtual-environments">Activity 5 - Virtual environments</a></li>
   </ul>
 </nav>
     </div>
@@ -643,18 +622,20 @@ let&rsquo;s have multiple environments! This is the core idea of <em>python virt
 Whenever a python virtual environment <code>my_env</code> is <em>activated</em>, the <code>python</code> command points to a
 python executable that is unique to this environment (<code>my-env/lib/pythonX.Y/bin/python</code>), with a unique package installation location
 specific to this environment (<code>my_env/lib/pythonX.Y/site-packages</code>).</p>
-<h2 id="activity-5-virtual-environments">Activity 5 - Virtual environments</h2>
+<h2 id="activity-4-virtual-environments">Activity 5 - Virtual environments</h2>
 <ol>
 <li>
-<p>Move to the <code>analysis1/</code> directory and create a virtual-environment there:</p>
+<p>Move to the <code>analysis1/</code> directory and create a virtual environment there:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cd python-packaging-workshop/analysis1/
 python -m venv venv-analysis1
-</code></pre></div><p>This commands creates a new directory <code>analysis_venv</code> in the current directory.
+</code></pre></div><p>This commands creates a new directory <code>venv-analysis1</code> in the current directory.
 Feel free to explore its contents.</p>
 </li>
 <li>
 <p>Activate the virtual envoronment for analysis1</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">source venv-analysis1/bin/activate
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">source venv-analysis1/bin/activate <span style="color:#75715e"># GNU/Linux and MacOS</span>
+venv-analysis1<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\a</span>ctivate.bat <span style="color:#75715e"># Windows command prompt</span>
+venv-analysis1<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\A</span>ctivate.ps1 <span style="color:#75715e"># Windows PowerShell</span>
 </code></pre></div></li>
 <li>
 <p>What is the location of the current python executable?
@@ -662,12 +643,16 @@ Hint: The built-in python package <code>sys</code> provides a variable <code>exe
 </li>
 <li>
 <p>Use <code>pip list</code> to list the currently installed packages.
-Note that our package and its dependencies have disappeared, and only
-the core python packages are installed. We have a &ldquo;fresh&rdquo; python environment.</p>
+Note that your package and its dependencies have disappeared, and only
+the core python packages are installed. We effectively have a &ldquo;fresh&rdquo; python environment.</p>
 </li>
 <li>
-<p>Move to the the <code>tstools</code> package project directory and install it into the
-current envirinment:</p>
+<p>Update <code>pip</code> and install utility packages</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install --upgrade pip setuptools wheel
+</code></pre></div></li>
+<li>
+<p>Move to the the <code>tstools-dist</code> distribution package directory and install it into the
+current environment:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install .
 </code></pre></div></li>
 <li>
@@ -677,7 +662,7 @@ to check the location of the corresponding <code>__init__.py</code> file.</p>
 </li>
 </ol>
 <p>The above exercise demonstrates that, after activating the <code>venv-analysis1</code>, the command <code>python</code>
-executes the python executable ~ analysis1/venv-analysis1/bin/python~, and python packages are installed
+executes the python executable <code>analysis1/venv-analysis1/bin/python</code>, and python packages are installed
 in the <code>analysis1/venv-analysis1/lib/pythonX.Y/site-packages</code> directory.
 This means that we are now working in a python environment that is <em>isolated</em> from other python environments
 in your machine:</p>
@@ -752,22 +737,6 @@ other projects.</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1074,19 +1043,19 @@ other projects.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/python-packaging-course/js/clipboard.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/jquery.sticky.js?1600786696"></script>
-    <script src="/python-packaging-course/js/featherlight.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/highlight.pack.js?1600786696"></script>
+    <script src="/python-packaging-course/js/clipboard.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/jquery.sticky.js?1600862808"></script>
+    <script src="/python-packaging-course/js/featherlight.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/highlight.pack.js?1600862808"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600786696"></script>
-    <script src="/python-packaging-course/js/learn.js?1600786696"></script>
-    <script src="/python-packaging-course/js/hugo-learn.js?1600786696"></script>
+    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600862808"></script>
+    <script src="/python-packaging-course/js/learn.js?1600862808"></script>
+    <script src="/python-packaging-course/js/hugo-learn.js?1600862808"></script>
     
         
-            <script src="/python-packaging-course/mermaid/mermaid.js?1600786696"></script>
+            <script src="/python-packaging-course/mermaid/mermaid.js?1600862808"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

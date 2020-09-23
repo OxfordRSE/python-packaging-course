@@ -12,21 +12,21 @@
     <title>Summary and break :: OxRSE Python Packaging Workshop</title>
 
     
-    <link href="/python-packaging-course/css/nucleus.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/hybrid.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/featherlight.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/auto-complete.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/theme.css?1600786696" rel="stylesheet">
-    <link href="/python-packaging-course/css/hugo-theme.css?1600786696" rel="stylesheet">
+    <link href="/python-packaging-course/css/nucleus.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/hybrid.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/featherlight.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/auto-complete.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/hugo-theme.css?1600862808" rel="stylesheet">
     
-    <link href="/python-packaging-course/css/theme-oxrse.css?1600786696" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme-oxrse.css?1600862808" rel="stylesheet">
     
     
 
-    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600786696"></script>
+    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600862808"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -55,14 +55,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600786696"></script>
-<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600786696"></script>
+<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600862808"></script>
+<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600862808"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/oxfordrse.github.io\/python-packaging-course\/";
     
 </script>
-<script type="text/javascript" src="/python-packaging-course/js/search.js?1600786696"></script>
+<script type="text/javascript" src="/python-packaging-course/js/search.js?1600862808"></script>
 
     
   </div>
@@ -134,27 +134,6 @@
       <li data-nav-id="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/" title="From scripts to modules" class="dd-item ">
         <a href="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/">
         From scripts to modules
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/" title="Separating methods from parameters and data" class="dd-item ">
-        <a href="/python-packaging-course/part1_making_a_package/separating_methods_from_parameters_and_data/">
-        Separating methods from parameters and data
         
         </a>
     </li>
@@ -312,9 +291,9 @@
  
   
     
-      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package indepently from the anaylises that use it" class="dd-item ">
+      <li data-nav-id="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package" class="dd-item ">
         <a href="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/">
-        Maintaining your package indepently from the anaylises that use it
+        Maintaining your package
         
         </a>
     </li>
@@ -640,14 +619,14 @@ This shouldn&rsquo;t be done manually, but instead using the <code>setuptools</c
 we make a change to it (to fix a bug for instance). Instead, the package can be installed
 in &ldquo;editable&rdquo; mode using the <code>pip install -e</code> command. This just redirects the python
 interpreter to your project directory.</li>
-<li>The main value of packaging software is to faciliate its reuse across different projects.
-One you have extracted the right operations into a package that is independant of your
-analysis, you can easily &ldquo;share&rdquo; it between projects. In this way you avoid innefficient
+<li>The main value of packaging software is to facilitate its reuse across different projects.
+One you have extracted the right operations into a package that is independent of your
+analysis, you can easily &ldquo;share&rdquo; it between projects. In this way you avoid inefficient
 and dangerous duplication of code.</li>
 </ul>
 <p>Beyond greatly facilitating code reuse, writing a python package (as opposed to a loosely
 organised collection of modules) enables a clear organisation of your software into modules
-and possibly subpackages. It makes it much easier for others, as well as yourself, to
+and possibly sub-packages. It makes it much easier for others, as well as yourself, to
 understand the structure of your software, <em>i.e</em> what-does-what.</p>
 <p>Moreover, organising your python software into a package gives you access to a myriad
 of fantastic tools used by thousands of python developers everyday. Examples include
@@ -655,7 +634,7 @@ pytest for automated testing, sphinx for building you documentation, tox for aut
 of project-level tasks.</p>
 <p>Next, we&rsquo;ll talk about python virtual environments. But before, fancy a little break?</p>
 <figure>
-    <img src="/kisspng-cafe-coffee-cup-tea-cafe-graphic-5ac8dcf5aa0815.5906502615231132056965.png"/> 
+    <img src="/python-packaging-course/kisspng-cafe-coffee-cup-tea-cafe-graphic-5ac8dcf5aa0815.5906502615231132056965.png"/> 
 </figure>
 
 
@@ -770,22 +749,6 @@ of project-level tasks.</p>
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -1030,7 +993,7 @@ of project-level tasks.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package indepently from the anaylises that use it"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/python-packaging-course/part2_reusing_a_package/maintaining-your-pkg-independantly-from-your-analysis/" title="Maintaining your package"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="/python-packaging-course/intermezzo_virtual_environments/" title="Virtual environments" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -1043,19 +1006,19 @@ of project-level tasks.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/python-packaging-course/js/clipboard.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/jquery.sticky.js?1600786696"></script>
-    <script src="/python-packaging-course/js/featherlight.min.js?1600786696"></script>
-    <script src="/python-packaging-course/js/highlight.pack.js?1600786696"></script>
+    <script src="/python-packaging-course/js/clipboard.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/jquery.sticky.js?1600862808"></script>
+    <script src="/python-packaging-course/js/featherlight.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/highlight.pack.js?1600862808"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600786696"></script>
-    <script src="/python-packaging-course/js/learn.js?1600786696"></script>
-    <script src="/python-packaging-course/js/hugo-learn.js?1600786696"></script>
+    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600862808"></script>
+    <script src="/python-packaging-course/js/learn.js?1600862808"></script>
+    <script src="/python-packaging-course/js/hugo-learn.js?1600862808"></script>
     
         
-            <script src="/python-packaging-course/mermaid/mermaid.js?1600786696"></script>
+            <script src="/python-packaging-course/mermaid/mermaid.js?1600862808"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
