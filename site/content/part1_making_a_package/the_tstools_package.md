@@ -51,9 +51,12 @@ Traceback (most recent call last):
 AttributeError: module 'tstools' has no attribute 'moments'
 ```
 
-What happened here? When importing the directory `tstools`, the python interpreter
+What happened here?
+{{% notice info %}}
+When importing the directory `tstools`, the python interpreter
 looks for a file named `__init__.py` inside this directory and imports this python file.
 If this python file is empty, or simply doesnt exists... nothing is imported.
+{{% /notice %}}
 
 In the following section we add some `import` statements into the `__init__.py` so that
 all our functions (in the three modules) ar available under the single namespae `tstools`.

@@ -169,6 +169,9 @@ changes to the package, leaving the scripts unmodified. This reduces the risk of
 some opearation of data.
 The changes are then made available to all the programs that use the package: no more copying and pasting code around.
 
+{{% notice note %}}
 Taking a step back, the idea of separating different components is pervasive in software developemt
 and software design. Different names depending on the field (encapsulation, separation of concerns,
 bounded contexts...).
+{{% /notice %}}
+

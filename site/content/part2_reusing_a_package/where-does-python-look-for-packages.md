@@ -31,9 +31,11 @@ The above contain the modules and packages in the _standard library_, _i.e_ the 
 come "pre-installed" with Python.
 Finally, the python interpreter looks inside the directory `/home/thibault/python-workshop-venv/lib/python3.8/site-packages/`.
 
-> The output of `sys.path` is probaby different on your machine. It depends on many factors,
-> like your operating system, your version of Python, the location of your current active Python
-> environment.
+{{% notice note %}}
+The output of `sys.path` is probaby different on your machine. It depends on many factors,
+like your operating system, your version of Python, the location of your current active Python
+environment.
+{{% /notice %}}
 
 For Python to find out package `tstools` it must be located in one of the directories listed in
 the `sys.path` list. If it is the case, the package is said to be _installed_.

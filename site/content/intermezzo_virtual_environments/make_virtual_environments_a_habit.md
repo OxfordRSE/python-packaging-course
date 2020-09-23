@@ -43,7 +43,9 @@ When working on either analyses, we activate the corresponding virtual environme
 our package `tstools` is installed in normal, non-editable mode, possibly along all the
 other packages that we need for this particular analysis.
 
-> Most GNU/Linux distributions as well as MacOS come with a version of python already installed.
-> This version is often referred to as the _system python_ or the _base python_. **Leave it alone**.
-> As the name suggest, this version of python is used likely to be used by some parts of your system,
-> and updating or breaking it would mean breaking these partsof your system that rely on it.
+{{% notice warning %}}
+Most GNU/Linux distributions as well as MacOS come with a version of python already installed.
+This version is often referred to as the _system python_ or the _base python_. **Leave it alone**.
+As the name suggest, this version of python is used likely to be used by some parts of your system,
+and updating or breaking it would mean breaking these partsof your system that rely on it.
+{{% /notice %}}

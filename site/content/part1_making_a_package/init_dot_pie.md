@@ -49,16 +49,18 @@ very relevant for a user.
     mean, var = tstools.get_mean_and_var(timeseries) # instead of mean, var = tstools.moments.get_mean_and_var(...)
     fig, ax = tstools.show_extremes(timeseries, 4*np.sqrt(var)) # instead of fig, ax = tstools.vis.show_extremes(...)
     ```
+	
+{{% notice tip %}}
+By default python looks for modules in the current directory
+and some other locations (more about that later). When using `import`,
+you can refer to modules in the current package using the _dot notation_:
 
-    **Hint**: By default python looks for modules in the current directory
-    and some other locations (more about that later). When using `import`,
-    you can refer to modules in the current package using the _dot notation_:
-
-    ```python
-    # import something from module that resides
-    # in the current package (next to the __init__.py)
-    from .module import something
-    ```
+```python
+# import something from module that resides
+# in the current package (next to the __init__.py)
+from .module import something
+```
+{{% /notice %}}
 
 
 ## Using the package {#using-the-package}

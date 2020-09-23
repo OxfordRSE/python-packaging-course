@@ -68,9 +68,11 @@ our package, _i.e_ `numpy` and `matplotlib`.
 In addition, it gives `setup` the location of the package to be installed, in this case
 the directory `tstools`.
 
-**IMPORTANT**: The above `setup.py` states `(...,package=["tstools"],...)`.
+{{% notice warning %}}
+The above `setup.py` states `(...,package=["tstools"],...)`.
 In English, this means "setuptools, please install the package `tstools/` located in the same directory as the file `setup.py`".
 This therefore assumes that the file `setup.py` resides in the directory that _contains_ the package, in this case `analysis1/`.
+{{% /notice %}}
 
 ```text
 python-workshop/

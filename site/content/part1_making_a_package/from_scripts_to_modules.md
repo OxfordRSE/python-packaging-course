@@ -69,7 +69,13 @@ python-packaging-workshop/
 2.  Open file `vis.py` and complete functions `plot_trajectory_subset` and
     `plot_histogram` (replace the strings `"######"`).
 
-**Hint**: Use `scripts/analysis.py` as a reference.
+{{% notice tip %}}
+Use `scripts/analysis.py` as a reference.
+{{% /notice %}}
+
+{{% notice tip %}}
+You can run the test script `tests.py` in `analysis1/` to test that everything is working fine.
+{{% /notice %}}
 
 The file `tstools/extremes.py` implements a function `show_extremes` corresponding to script `show_extremes.py`.
 It is already complete.
