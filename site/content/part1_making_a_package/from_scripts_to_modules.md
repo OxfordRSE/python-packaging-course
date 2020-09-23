@@ -51,7 +51,7 @@ Let's rewrite both scripts `scripts/analysis.py` and `scripts/show_extremes.py`
 as a collection of functions that can be reused in separate scripts.
 
 The directory `analysis1/tstools/` contains 3 python modules that contain (incomplete) functions performing
-the same operations on data described in the original scripts `analysis.py` and `show_extremes.py`
+the same operations on data described in the original scripts `analysis.py` and `show_extremes.py`:
 
 ```text
 python-packaging-workshop/

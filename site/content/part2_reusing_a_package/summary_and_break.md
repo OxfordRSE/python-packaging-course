@@ -13,14 +13,14 @@ weight = 2005
     we make a change to it (to fix a bug for instance). Instead, the package can be installed
     in "editable" mode using the `pip install -e` command. This just redirects the python
     interpreter to your project directory.
--   The main value of packaging software is to faciliate its reuse across different projects.
-    One you have extracted the right operations into a package that is independant of your
-    analysis, you can easily "share" it between projects. In this way you avoid innefficient
+-   The main value of packaging software is to facilitate its reuse across different projects.
+    One you have extracted the right operations into a package that is independent of your
+    analysis, you can easily "share" it between projects. In this way you avoid inefficient
     and dangerous duplication of code.
 
 Beyond greatly facilitating code reuse, writing a python package (as opposed to a loosely
 organised collection of modules) enables a clear organisation of your software into modules
-and possibly subpackages. It makes it much easier for others, as well as yourself, to
+and possibly sub-packages. It makes it much easier for others, as well as yourself, to
 understand the structure of your software, _i.e_ what-does-what.
 
 Moreover, organising your python software into a package gives you access to a myriad
@@ -30,4 +30,4 @@ of project-level tasks.
 
 Next, we'll talk about python virtual environments. But before, fancy a little break?
 
-{{< figure src="/kisspng-cafe-coffee-cup-tea-cafe-graphic-5ac8dcf5aa0815.5906502615231132056965.png" >}}
+{{< figure src="/python-packaging-course/kisspng-cafe-coffee-cup-tea-cafe-graphic-5ac8dcf5aa0815.5906502615231132056965.png" >}}

@@ -127,7 +127,7 @@ This makes the installation of wheels both safer and faster.
 > See [Wheel vs Egg](https://packaging.python.org/discussions/wheel-vs-egg/) on the Python Packaging User Guide.
 
 
-### Activity 6 - Building a Python wheel {#activity-6-building-a-python-wheel}
+### Activity 5 - Building a Python wheel {#activity-5-building-a-python-wheel}
 
 1.  Create a new virtual environment for this activity
 
@@ -142,5 +142,6 @@ This makes the installation of wheels both safer and faster.
     python setup.py bdist_wheel
     ```
 3.  Install the wheel using `pip`.
-    Hint: wheels are written in the `dist/` directory, next to the `setup.pt` file, just
+    Hint: wheels are written in the `dist/` directory, next to the `setup.py` file, just
     like source distributions.
+4.  `.whl` files are basically zip files. Unzip the wheel and explore its contents.

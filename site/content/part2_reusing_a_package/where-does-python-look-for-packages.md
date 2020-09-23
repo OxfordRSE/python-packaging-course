@@ -14,6 +14,7 @@ Let's find out about what directories constitute the python path:
 $ python
 >>> import sys
 >>> sys.path
+['', '/usr/lib/python38.zip', '/usr/lib/python3.8', '/usr/lib/python3.8/lin-dynload', '/home/thibault/python-workshop-venv/lib/python3.8/site-packages/']
 ```
 
 The order of this list matters: it is the order in which python looks into the directories
@@ -28,7 +29,11 @@ If the package/module isn't found there, the python intepreter looks in the foll
 
 The above contain the modules and packages in the _standard library_, _i.e_ the packages and modules that
 come "pre-installed" with Python.
-Finally, the python interpreter looks inside the directory `python-workshop/lib/python3.8/site-packages/`.
+Finally, the python interpreter looks inside the directory `/home/thibault/python-workshop-venv/lib/python3.8/site-packages/`.
+
+> The output of `sys.path` is probaby different on your machine. It depends on many factors,
+> like your operating system, your version of Python, the location of your current active Python
+> environment.
 
 For Python to find out package `tstools` it must be located in one of the directories listed in
 the `sys.path` list. If it is the case, the package is said to be _installed_.

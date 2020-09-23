@@ -41,7 +41,7 @@
    :END:
    You now have a python package that you can use independently in your analyses.
    This package lives somehwere in your system (the ~tstools/~) directory and your can install
-   it in a project's virtualenv using setuptools (~python setup.py install~).
+   it in a project's virtualenv using setuptools (~pip install~).
 
    We now look at ways your can /share/ your package with people interested in using your pkg.
    This includes yourself.
@@ -308,22 +308,27 @@ We now have a ~tstools~ directory with 3 modules:
 
 In a way, the directory ~tstools~ is already a package, in the sense that it is possible to import functions from the modules:
 #+begin_src python :exports code
-import tstools.moments
-from tstools.vis import plot_histogram
+  import numpy as np
 
-timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
+  import tstools.moments
+  from tstools.vis import plot_histogram
 
-mean = tstools.moments.get_mean(timeseries)
-fig, ax = tstools.moments.plot_histogram(timeseries)
+  timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
+
+  mean, var = tstools.moments.get_mean_and_var(timeseries)
+  fig, ax = tstools.vis.plot_histogram(timeseries)
 #+end_src
 
 Let's try to import the package as a whole:
 #+begin_src python :dir ".infrastructure/tstools-no-init" :results output :exports code
   # compute-mean.py
   import numpy as np
+
   import tstools
+
   timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
-  mean = tstools.moments.get_mean(timeseries)
+
+  mean = tstools.moments.get_mean_and_var(timeseries)
 #+end_src
 
 #+begin_example
@@ -404,11 +409,11 @@ Our package is now ready to be used in our analysis, and an analysis scripts cou
   import matplotlib.pyplot as plt
   import tstools
 
-  timeseries = np.genfromtxt("./data/my_timeseries.csv", delimiter=",")
+  timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
 
   mean, var = tstools.get_mean_and_var(timeseries)
 
-  fig, ax = tstools.get_pdf(timeseries)
+  fig, ax = tstools.plot_histogram(timeseries, nbins=100)
 
   threshold = 3*np.sqrt(var)
   fig, ax = tstools.show_extremes(timeseries, threshold)
@@ -452,10 +457,11 @@ created in the previous section.
 #+begin_src python :dir "analysis2" :exports code
   # analysis2/analysis2.py
   import numpy as np
+
   import tstools
 
-  timeseries = np.genfromtxt("./data/data_analysis2.csv")
-  fig, ax = tstools.plot_trajectory_subset(timeseries, 0, 50, dt=0.1)
+  timeseries = np.genfromtxt("./data/data_analysis2.csv", delimiter=",")
+  fig, ax = tstools.plot_trajectory_subset(timeseries, 0, 50)
 #+end_src
 
 #+begin_example
@@ -633,7 +639,7 @@ To reflect this, let's move the ~tstools~ package into a new directory ~tstools-
 #+end_example
 
 The directory ~tstools-dist~ is a /distribution package/, containing the ~setup.py~ file and the package itself - the ~tstools~ directory.
-These are the two minimal ingredients required to /distribute/ a package, see section [[** Building python distributions]].
+These are the two minimal ingredients required to /distribute/ a package, see section [[* Building python distributions]].
 
 *** Activity 3 -  Installing ~tsools~ with pip
 1. Write a new ~setup.py~ file in directory ~tstools-dist~ including the following metadata:
@@ -686,6 +692,7 @@ your package project directory.
 
 To install your package in editable mode, use the ~-e~ option for the ~install~ command:
 #+begin_src shell
+# In directory tstools-dist/
 pip install -e .
 #+end_src
 
@@ -779,7 +786,7 @@ Whenever a python virtual environment ~my_env~ is /activated/, the ~python~ comm
 python executable that is unique to this environment (~my-env/lib/pythonX.Y/bin/python~), with a unique package installation location
 specific to this environment (~my_env/lib/pythonX.Y/site-packages~).
 
-*** Activity 5 - Virtual environments
+*** Activity 4 - Virtual environments
 
 1. Move to the ~analysis1/~ directory and create a virtual environment there:
   #+begin_src shell :exports code
@@ -792,7 +799,8 @@ specific to this environment (~my_env/lib/pythonX.Y/site-packages~).
 2. Activate the virtual envoronment for analysis1
   #+begin_src shell :exports code
     source venv-analysis1/bin/activate # GNU/Linux and MacOS
-    venv-analysis1\Scripts\activate.bat # Windows
+    venv-analysis1\Scripts\activate.bat # Windows command prompt
+    venv-analysis1\Scripts\Activate.ps1 # Windows PowerShell
   #+end_src
 
 3. What is the location of the current python executable?
@@ -802,13 +810,18 @@ specific to this environment (~my_env/lib/pythonX.Y/site-packages~).
    Note that your package and its dependencies have disappeared, and only
    the core python packages are installed. We effectively have a "fresh" python environment.
 
-5. Move to the the ~tstools-dist~ distribution package directory and install it into the
+5. Update ~pip~ and install utility packages
+   #+begin_src shell
+     pip install --upgrade pip setuptools wheel
+   #+end_src
+
+6. Move to the the ~tstools-dist~ distribution package directory and install it into the
    current environment:
   #+begin_src shell :exports code
     pip install .
   #+end_src
 
-6. Where was the package installed?
+7. Where was the package installed?
    Hint: When importing package ~package~ in python, use ~package.__file__~
    to check the location of the corresponding ~__init__.py~ file.
 
@@ -1022,7 +1035,7 @@ created in response to the shortcomings of Python eggs and this format is now ob
 See [[https://packaging.python.org/discussions/wheel-vs-egg/][Wheel vs Egg]] on the Python Packaging User Guide.
 #+end_quote
 
-**** Activity 6 - Building a Python wheel
+**** Activity 5 - Building a Python wheel
      1. Create a new virtual environment for this activity
 	#+begin_src shell
 	  python -m venv test-wheel
@@ -1034,8 +1047,9 @@ See [[https://packaging.python.org/discussions/wheel-vs-egg/][Wheel vs Egg]] on 
 	  python setup.py bdist_wheel
 	#+end_src
      3. Install the wheel using ~pip~.
-	Hint: wheels are written in the ~dist/~ directory, next to the ~setup.pt~ file, just 
+	Hint: wheels are written in the ~dist/~ directory, next to the ~setup.py~ file, just 
         like source distributions.
+     4. ~.whl~ files are basically zip files. Unzip the wheel and explore its contents.
     
 ** Uploading distributions to PyPI
    :PROPERTIES:
@@ -1090,7 +1104,7 @@ If you find yourself uploading packages often, or if you are concerned about sec
 a token that's specific for your account, or a particular project. This token is usually configured in a =~/.pypirc= file, and allows you to authenticate
 without entering your username and password every time. Note that you might want to encrypt =~/.pypirc= if concerned about security.
 
-**** Activity 7 - Publishing distributions to TestPyPI
+**** Activity 6 - Publishing distributions to TestPyPI
 
      1. On PyPI (or TestPyPI), there cannot be two package with the same name. Therefore, before you upload your ~tstools~ package, 
 	you must give the project a unique name. To do so, open the ~tstools-dist/setup.py~ file and change the ~name~ entry

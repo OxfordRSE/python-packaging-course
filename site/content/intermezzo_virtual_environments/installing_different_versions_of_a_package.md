@@ -7,7 +7,7 @@ weight = 2001
 
 In the previous section you learned how to share a package across several projects, or analyses.
 However, as your package and analyses evolve asynchronously, it is likely that you will reach a point when
-you'd like differnet analyses to use different versions of your package, or different versions of  third-party
+you'd like different analyses to use different versions of your package, or different versions of third-party
 packages that your analysis rely on.
 
 The question is then: _how to install two different versions of a same package?_

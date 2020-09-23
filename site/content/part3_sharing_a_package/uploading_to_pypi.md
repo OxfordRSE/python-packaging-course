@@ -58,7 +58,7 @@ a token that's specific for your account, or a particular project. This token is
 without entering your username and password every time. Note that you might want to encrypt `~/.pypirc` if concerned about security.
 
 
-### Activity 7 - Publishing distributions to TestPyPI {#activity-7-publishing-distributions-to-testpypi}
+### Activity 6 - Publishing distributions to TestPyPI {#activity-6-publishing-distributions-to-testpypi}
 
 1.  On PyPI (or TestPyPI), there cannot be two package with the same name. Therefore, before you upload your `tstools` package,
     you must give the project a unique name. To do so, open the `tstools-dist/setup.py` file and change the `name` entry

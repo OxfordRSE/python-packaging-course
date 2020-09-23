@@ -17,16 +17,18 @@ analysis1/
       data/
 ```
 
-In way, the directory `tstools` is already a pacakge, in the sens that it is possible to import each functions from the modules:
+In a way, the directory `tstools` is already a package, in the sense that it is possible to import functions from the modules:
 
 ```python
+import numpy as np
+
 import tstools.moments
 from tstools.vis import plot_histogram
 
 timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
 
-mean = tstools.moments.get_mean(timeseries)
-fig, ax = tstools.moments.plot_histogram(timeseries)
+mean, var = tstools.moments.get_mean_and_var(timeseries)
+fig, ax = tstools.vis.plot_histogram(timeseries)
 ```
 
 Let's try to import the package as a whole:
@@ -34,9 +36,12 @@ Let's try to import the package as a whole:
 ```python
 # compute-mean.py
 import numpy as np
+
 import tstools
+
 timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
-mean = tstools.moments.get_mean(timeseries)
+
+mean = tstools.moments.get_mean_and_var(timeseries)
 ```
 
 ```text
@@ -51,4 +56,4 @@ looks for a file named `__init__.py` inside this directory and imports this pyth
 If this python file is empty, or simply doesnt exists... nothing is imported.
 
 In the following section we add some `import` statements into the `__init__.py` so that
-all our functions (in the three modules) ar avaialbe under the single namespae `tstools`.
+all our functions (in the three modules) ar available under the single namespae `tstools`.

@@ -58,11 +58,13 @@ setup(name='tstools',
       url='myfancywebsite.com',
       author='Spam Eggs',
       package=['tstools'],
+      install_requires = ["numpy, matplotlib"],
       license='GPLv3')
 ```
 
 The above gives `pip` some metadata about our package: its version, a short description,
-its authors, ad its license.
+its authors, ad its license. It also provides information regarding the dependencies of
+our package, _i.e_ `numpy` and `matplotlib`.
 In addition, it gives `setup` the location of the package to be installed, in this case
 the directory `tstools`.
 
@@ -99,7 +101,7 @@ python-workshop/
 ```
 
 The directory `tstools-dist` is a _distribution package_, containing the `setup.py` file and the package itself - the `tstools` directory.
-These are the two minimal ingredients required to _distribute_ a package, see section ??.
+These are the two minimal ingredients required to _distribute_ a package, see section [Building python distributions]({{< relref "building_distributions" >}}).
 
 
 ## Activity 3 -  Installing `tsools` with pip {#activity-3-installing-tsools-with-pip}
@@ -114,7 +116,7 @@ These are the two minimal ingredients required to _distribute_ a package, see se
     -   The GPLv3 license
 
     Hint: A list of optional keywords for `setuptools.setup` can be found [here](https://setuptools.readthedocs.io/en/latest/setuptools.html#new-and-changed-setup-keywords).
-2.  Uninstall numpy and matplotlib
+2.  \*Un\*install numpy and matplotlib
 
     ```shell
     pip uninstall numpy matplotlib

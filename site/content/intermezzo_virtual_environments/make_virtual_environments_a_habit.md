@@ -11,8 +11,8 @@ of very frustrating problems, distracting you from your research.
 Moreover, using one python environment for all your projects means that this environment will change as you work on different projects,
 making it very hard to resolve dependency problems when they (and they will) occur.
 
-Most of the time, a better approach is to have one (or more if needed) virtual envirornments per analyses and projects.
-Coming back to our earlier example with the `tstools` package used in analysis analysis1 and analysis2, a recommnded setup
+Most of the time, a better approach is to have one (or more if needed) virtual environments per analyses and projects.
+Coming back to our earlier example with the `tstools` package used in analysis analysis1 and analysis2, a recommended setup
 would be
 
 ```text

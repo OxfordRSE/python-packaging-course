@@ -1,5 +1,5 @@
 +++
-title = "Maintaining your package indepently from the anaylises that use it"
+title = "Maintaining your package"
 author = ["Thibault Lestang"]
 draft = false
 weight = 2004
@@ -27,6 +27,7 @@ your package project directory.
 To install your package in editable mode, use the `-e` option for the `install` command:
 
 ```shell
+# In directory tstools-dist/
 pip install -e .
 ```
 
