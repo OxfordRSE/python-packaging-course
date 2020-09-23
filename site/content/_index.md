@@ -2,4 +2,4 @@
 
 ![python packaging course](/python-packaging-course/python_packaging_course_1080.jpg "python packaging course")
 
-{{% button icon="far fa-play-circle" %}}Get started{{% /button %}}
+{{% button href="https://oxfordrse.github.io/python-packaging-course/introduction/" icon="far fa-play-circle" %}}Get started{{% /button %}}

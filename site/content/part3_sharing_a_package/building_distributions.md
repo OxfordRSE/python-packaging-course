@@ -127,7 +127,7 @@ This makes the installation of wheels both safer and faster.
 > See [Wheel vs Egg](https://packaging.python.org/discussions/wheel-vs-egg/) on the Python Packaging User Guide.
 
 
-### Activity 5 - Building a Python wheel {#activity-5-building-a-python-wheel}
+### Activity 6 - Building a Python wheel {#activity-5-building-a-python-wheel}
 
 1.  Create a new virtual environment for this activity
 

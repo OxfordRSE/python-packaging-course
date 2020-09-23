@@ -16,7 +16,7 @@ python executable that is unique to this environment (`my-env/lib/pythonX.Y/bin/
 specific to this environment (`my_env/lib/pythonX.Y/site-packages`).
 
 
-## Activity 4 - Virtual environments {#activity-4-virtual-environments}
+## Activity 5 - Virtual environments {#activity-4-virtual-environments}
 
 1.  Move to the `analysis1/` directory and create a virtual environment there:
 
