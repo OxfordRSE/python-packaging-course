@@ -158,13 +158,13 @@ On Windows
 python-packaging-venv\Scripts\activate.bat
 #+end_src
 
-**** 5. Update ~pip~ and install some utilities
+**** 5. Update ~pip~
 #+begin_src shell
-python -m pip install --upgrade pip setuptools wheel
+python -m pip install --upgrade pip
 #+end_src
-**** 6. Install numpy and matplotlib
+**** 6. Install packages
 #+begin_src shell
-python -m pip install numpy matplotlib
+python -m pip install -r requirements.txt
 #+end_src
 **** 7. Deactivate your environment
 #+begin_src shell
