@@ -1,4 +1,5 @@
+matplotlib
+numpy
 setuptools
 wheel
-numpy
-matplotlib
+scipy
