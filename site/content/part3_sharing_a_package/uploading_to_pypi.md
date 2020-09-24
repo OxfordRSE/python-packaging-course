@@ -82,7 +82,7 @@ without entering your username and password every time. Note that you might want
     ```shell
     python setup.py sdist bdist_wheel
     ```
-5.  If you don't have one, create an account on the Test PyPI index by visiting <https://pypi.org/account/register/>.
+5.  If you don't have one, create an account on the Test PyPI index by visiting <https://test.pypi.org/account/register/>.
 6.  Lastly, publish your distributions to the test PyPI index:
 
     ```shell
