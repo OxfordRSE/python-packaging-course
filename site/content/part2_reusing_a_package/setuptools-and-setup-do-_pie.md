@@ -57,8 +57,8 @@ setup(name='tstools',
       description='A package to analyse timeseries',
       url='myfancywebsite.com',
       author='Spam Eggs',
-      package=['tstools'],
-      install_requires = ["numpy, matplotlib"],
+      packages=['tstools'],
+      install_requires = ["numpy", "matplotlib", "scipy"],
       license='GPLv3')
 ```
 
