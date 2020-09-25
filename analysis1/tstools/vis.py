@@ -50,7 +50,7 @@ def plot_histogram(timeseries, nbins=10, mean=None, std=None):
         The empirical standard deviation computed over the timeseries
     """
 
-    def get_gaussian_histogram(fluct_min, fluct_max, std, mean, nbins=100):
+    def get_theoritical_histogram(fluct_min, fluct_max, std, mean, nbins=100):
         bin_edges = np.linspace(fluct_min, fluct_max, nbins + 1)
         nb_samples = len(timeseries[:, 1])
         rescaled_bin_edges = (bin_edges - mean) / (std * np.sqrt(2))
