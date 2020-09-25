@@ -80,7 +80,9 @@ tstools-0.1/tstools.egg-info/requires.txt
 tstools-0.1/tstools.egg-info/top_level.txt
 ```
 
-> Take a moment to explore the content of the archive.
+{{% notice tip %}}
+Take a moment to explore the content of the archive.
+{{% /notice %}}
 
 As the name suggest a source distribution is nothing more than the source code of your package,
 along with the `setup.py` necessary to install it.
@@ -118,30 +120,47 @@ the `setup.py`** file, instead the content of wheels is directly unpacked in the
 location - most likely your current environment's `site-packages/` directory.
 This makes the installation of wheels both safer and faster.
 
-> Another very important feature of python wheels is that they can embed compiled code,
-> effectively alleviating the need for the recipient to compile (_build_) anything.
-> As a result, the wheel is platform-dependant, but makes the installation considerably easier
-> and faster. For this reason, wheels are part of the family of _built distrubtions_.
-> Another type of built distribution is the python _egg_. However, the wheel format was
-> created in response to the shortcomings of Python eggs and this format is now obsolete.
-> See [Wheel vs Egg](https://packaging.python.org/discussions/wheel-vs-egg/) on the Python Packaging User Guide.
+Another very important feature of python wheels is that they can embed compiled code,
+effectively alleviating the need for the recipient to compile (_build_) anything.
+As a result, the wheel is platform-dependant, but makes the installation considerably easier
+and faster. For this reason, wheels are part of the family of _built distrubtions_.
+Another type of built distribution is the python _egg_. However, the wheel format was
+created in response to the shortcomings of Python eggs and this format is now obsolete.
+See [Wheel vs Egg](https://packaging.python.org/discussions/wheel-vs-egg/) on the Python Packaging User Guide.
 
 
-### Activity 6 - Building a Python wheel {#activity-5-building-a-python-wheel}
+### Activity 5 - Building a Python wheel {#activity-5-building-a-python-wheel}
 
-1.  Create a new virtual environment for this activity
+1.  If you don't have one, create a new developement virtual environment in the
+    `tstools-dist` directory:
 
     ```shell
-    python -m venv test-wheel
-    source test-wheel/bin/activate # (GNU/Linux and MacOS)
-    test-wheel\Scripts\activate.bat # (Windows)
+    python -m venv tstools-venv
+    source tstools-venv/bin/activate # (GNU/Linux and MacOS)
+    tstools-venv\Scripts\activate.bat # (Windows command prompt)
+    tstools-venv\Scripts\Activate.ps1 # (Windows PowerShell)
     ```
-2.  Build a wheel
+2.  Update `pip`
+
+    ```shell
+    pip install --upgrade pip
+    ```
+3.  Install `setuptools` and the `wheel` extension:
+
+    ```shell
+    pip install setuptools wheel
+    ```
+4.  Build a wheel
 
     ```shell
     python setup.py bdist_wheel
     ```
-3.  Install the wheel using `pip`.
+5.  Install the wheel using `pip`.
     Hint: wheels are written in the `dist/` directory, next to the `setup.py` file, just
     like source distributions.
-4.  `.whl` files are basically zip files. Unzip the wheel and explore its contents.
+6.  `.whl` files are basically zip files. Unzip the wheel and explore its contents.
+
+{{% notice note %}}
+The `bdist_wheel` command is only available after the package [wheel](https://pypi.org/project/wheel/) is installed in your current environment.
+It is an extension to the `setuptools` package.
+{{% /notice %}}

@@ -1036,21 +1036,35 @@ See [[https://packaging.python.org/discussions/wheel-vs-egg/][Wheel vs Egg]] on 
 #+end_quote
 
 **** Activity 5 - Building a Python wheel
-     1. Create a new virtual environment for this activity
+     1. If you don't have one, create a new developement virtual environment in the 
+	~tstools-dist~ directory:
 	#+begin_src shell
-	  python -m venv test-wheel
-	  source test-wheel/bin/activate # (GNU/Linux and MacOS)
-	  test-wheel\Scripts\activate.bat # (Windows)
+	  python -m venv tstools-venv
+	  source tstools-venv/bin/activate # (GNU/Linux and MacOS)
+	  tstools-venv\Scripts\activate.bat # (Windows command prompt)
+	  tstools-venv\Scripts\Activate.ps1 # (Windows PowerShell)
 	#+end_src
-     2. Build a wheel
+     2. Update ~pip~
+	#+begin_src shell
+	  pip install --upgrade pip
+	#+end_src
+     3. Install ~setuptools~ and the ~wheel~ extension:
+	#+begin_src shell
+	  pip install setuptools wheel
+	#+end_src
+     4. Build a wheel
 	#+begin_src shell
 	  python setup.py bdist_wheel
 	#+end_src
-     3. Install the wheel using ~pip~.
+     5. Install the wheel using ~pip~.
 	Hint: wheels are written in the ~dist/~ directory, next to the ~setup.py~ file, just 
         like source distributions.
-     4. ~.whl~ files are basically zip files. Unzip the wheel and explore its contents.
+     6. ~.whl~ files are basically zip files. Unzip the wheel and explore its contents.
     
+#+begin_quote
+The ~bdist_wheel~ command is only available after the package [[https://pypi.org/project/wheel/][wheel]] is installed in your current environment.
+It is an extension to the ~setuptools~ package.
+#+end_quote
 ** Uploading distributions to PyPI
    :PROPERTIES:
    :EXPORT_HUGO_WEIGHT: auto
