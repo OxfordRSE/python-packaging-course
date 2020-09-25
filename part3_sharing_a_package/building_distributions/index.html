@@ -12,21 +12,21 @@
     <title>Building python distributions :: OxRSE Python Packaging Workshop</title>
 
     
-    <link href="/python-packaging-course/css/nucleus.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/hybrid.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/featherlight.min.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/auto-complete.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/theme.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/hugo-theme.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/nucleus.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/fontawesome-all.min.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/hybrid.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/featherlight.min.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/auto-complete.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/hugo-theme.css?1601048453" rel="stylesheet">
     
-    <link href="/python-packaging-course/css/theme-oxrse.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme-oxrse.css?1601048453" rel="stylesheet">
     
     
 
-    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1601048453"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -55,14 +55,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600862808"></script>
-<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600862808"></script>
+<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1601048453"></script>
+<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1601048453"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/oxfordrse.github.io\/python-packaging-course\/";
     
 </script>
-<script type="text/javascript" src="/python-packaging-course/js/search.js?1600862808"></script>
+<script type="text/javascript" src="/python-packaging-course/js/search.js?1601048453"></script>
 
     
   </div>
@@ -592,7 +592,7 @@
     <li><a href="#source-distributions">Source distributions</a></li>
     <li><a href="#wheel-distributions">Wheel distributions</a>
       <ul>
-        <li><a href="#activity-5-building-a-python-wheel">Activity 6 - Building a Python wheel</a></li>
+        <li><a href="#activity-5-building-a-python-wheel">Activity 5 - Building a Python wheel</a></li>
       </ul>
     </li>
   </ul>
@@ -676,9 +676,10 @@ tstools-0.1/tstools.egg-info/SOURCES.txt
 tstools-0.1/tstools.egg-info/dependency_links.txt
 tstools-0.1/tstools.egg-info/requires.txt
 tstools-0.1/tstools.egg-info/top_level.txt
-</code></pre></div><blockquote>
-<p>Take a moment to explore the content of the archive.</p>
-</blockquote>
+</code></pre></div>
+<div class="notices tip" ><p>Take a moment to explore the content of the archive.</p>
+</div>
+
 <p>As the name suggest a source distribution is nothing more than the source code of your package,
 along with the <code>setup.py</code> necessary to install it.
 Anyone with the source distribution therefore has everything they need to install your package.
@@ -707,7 +708,6 @@ The main difference with sdists is that <strong>wheels doesn&rsquo;t require pip
 the <code>setup.py</code></strong> file, instead the content of wheels is directly unpacked in the correct
 location - most likely your current environment&rsquo;s <code>site-packages/</code> directory.
 This makes the installation of wheels both safer and faster.</p>
-<blockquote>
 <p>Another very important feature of python wheels is that they can embed compiled code,
 effectively alleviating the need for the recipient to compile (<em>build</em>) anything.
 As a result, the wheel is platform-dependant, but makes the installation considerably easier
@@ -715,14 +715,23 @@ and faster. For this reason, wheels are part of the family of <em>built distrubt
 Another type of built distribution is the python <em>egg</em>. However, the wheel format was
 created in response to the shortcomings of Python eggs and this format is now obsolete.
 See <a href="https://packaging.python.org/discussions/wheel-vs-egg/">Wheel vs Egg</a> on the Python Packaging User Guide.</p>
-</blockquote>
-<h3 id="activity-5-building-a-python-wheel">Activity 6 - Building a Python wheel</h3>
+<h3 id="activity-5-building-a-python-wheel">Activity 5 - Building a Python wheel</h3>
 <ol>
 <li>
-<p>Create a new virtual environment for this activity</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">python -m venv test-wheel
-source test-wheel/bin/activate <span style="color:#75715e"># (GNU/Linux and MacOS)</span>
-test-wheel<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\a</span>ctivate.bat <span style="color:#75715e"># (Windows)</span>
+<p>If you don&rsquo;t have one, create a new developement virtual environment in the
+<code>tstools-dist</code> directory:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">python -m venv tstools-venv
+source tstools-venv/bin/activate <span style="color:#75715e"># (GNU/Linux and MacOS)</span>
+tstools-venv<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\a</span>ctivate.bat <span style="color:#75715e"># (Windows command prompt)</span>
+tstools-venv<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\A</span>ctivate.ps1 <span style="color:#75715e"># (Windows PowerShell)</span>
+</code></pre></div></li>
+<li>
+<p>Update <code>pip</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install --upgrade pip
+</code></pre></div></li>
+<li>
+<p>Install <code>setuptools</code> and the <code>wheel</code> extension:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install setuptools wheel
 </code></pre></div></li>
 <li>
 <p>Build a wheel</p>
@@ -737,6 +746,11 @@ like source distributions.</p>
 <p><code>.whl</code> files are basically zip files. Unzip the wheel and explore its contents.</p>
 </li>
 </ol>
+
+<div class="notices note" ><p>The <code>bdist_wheel</code> command is only available after the package <a href="https://pypi.org/project/wheel/">wheel</a> is installed in your current environment.
+It is an extension to the <code>setuptools</code> package.</p>
+</div>
+
 
 
 <footer class="footline">
@@ -1103,19 +1117,19 @@ like source distributions.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/python-packaging-course/js/clipboard.min.js?1600862808"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600862808"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600862808"></script>
-    <script src="/python-packaging-course/js/jquery.sticky.js?1600862808"></script>
-    <script src="/python-packaging-course/js/featherlight.min.js?1600862808"></script>
-    <script src="/python-packaging-course/js/highlight.pack.js?1600862808"></script>
+    <script src="/python-packaging-course/js/clipboard.min.js?1601048453"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1601048453"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1601048453"></script>
+    <script src="/python-packaging-course/js/jquery.sticky.js?1601048453"></script>
+    <script src="/python-packaging-course/js/featherlight.min.js?1601048453"></script>
+    <script src="/python-packaging-course/js/highlight.pack.js?1601048453"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600862808"></script>
-    <script src="/python-packaging-course/js/learn.js?1600862808"></script>
-    <script src="/python-packaging-course/js/hugo-learn.js?1600862808"></script>
+    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1601048453"></script>
+    <script src="/python-packaging-course/js/learn.js?1601048453"></script>
+    <script src="/python-packaging-course/js/hugo-learn.js?1601048453"></script>
     
         
-            <script src="/python-packaging-course/mermaid/mermaid.js?1600862808"></script>
+            <script src="/python-packaging-course/mermaid/mermaid.js?1601048453"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

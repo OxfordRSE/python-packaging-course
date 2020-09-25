@@ -12,21 +12,21 @@
     <title>setuptools, setup dot pie and pip :: OxRSE Python Packaging Workshop</title>
 
     
-    <link href="/python-packaging-course/css/nucleus.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/fontawesome-all.min.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/hybrid.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/featherlight.min.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/auto-complete.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/theme.css?1600862808" rel="stylesheet">
-    <link href="/python-packaging-course/css/hugo-theme.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/nucleus.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/fontawesome-all.min.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/hybrid.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/featherlight.min.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/perfect-scrollbar.min.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/auto-complete.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/atom-one-dark-reasonable.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme.css?1601048453" rel="stylesheet">
+    <link href="/python-packaging-course/css/hugo-theme.css?1601048453" rel="stylesheet">
     
-    <link href="/python-packaging-course/css/theme-oxrse.css?1600862808" rel="stylesheet">
+    <link href="/python-packaging-course/css/theme-oxrse.css?1601048453" rel="stylesheet">
     
     
 
-    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1600862808"></script>
+    <script src="/python-packaging-course/js/jquery-3.3.1.min.js?1601048453"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -55,14 +55,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1600862808"></script>
-<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1600862808"></script>
+<script type="text/javascript" src="/python-packaging-course/js/lunr.min.js?1601048453"></script>
+<script type="text/javascript" src="/python-packaging-course/js/auto-complete.js?1601048453"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/oxfordrse.github.io\/python-packaging-course\/";
     
 </script>
-<script type="text/javascript" src="/python-packaging-course/js/search.js?1600862808"></script>
+<script type="text/javascript" src="/python-packaging-course/js/search.js?1601048453"></script>
 
     
   </div>
@@ -647,8 +647,8 @@ setup(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;t
       description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;A package to analyse timeseries&#39;</span>,
       url<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;myfancywebsite.com&#39;</span>,
       author<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Spam Eggs&#39;</span>,
-      package<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;tstools&#39;</span>],
-      install_requires <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;numpy, matplotlib&#34;</span>],
+      packages<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;tstools&#39;</span>],
+      install_requires <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;numpy&#34;</span>, <span style="color:#e6db74">&#34;matplotlib&#34;</span>, <span style="color:#e6db74">&#34;scipy&#34;</span>],
       license<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;GPLv3&#39;</span>)
 </code></pre></div><p>The above gives <code>pip</code> some metadata about our package: its version, a short description,
 its authors, ad its license. It also provides information regarding the dependencies of
@@ -701,21 +701,21 @@ These are the two minimal ingredients required to <em>distribute</em> a package,
 <p>*Un*install numpy and matplotlib</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip uninstall numpy matplotlib
 </code></pre></div></li>
-<li>
-<p>Install the <code>tstools</code> package with <code>pip</code>.
+</ol>
+
+<div class="notices warning" ><p>Make sure <code>pip</code> points to your current virtual environment (you can check this by typing <code>pip --version</code>. Particularly, if admin rights are necessary to uninstall and install packages, you&rsquo;re probably using <code>pip</code> in your global Python environment. To make sure that you run the correct <code>pip</code> for your correct Python environment, run <code>python -m pip &lt;pip command&gt;</code> instead of <code>pip &lt;pip command&gt;</code>.)</p>
+</div>
+
+<ol start="3">
+<li>Install the <code>tstools</code> package with <code>pip</code>.
 Remember: <code>pip install &lt;location of setup file&gt;</code>
 Notice how <code>numpy</code> and <code>matplotlib</code> are automatically downloaded (can you find from where?)
-and installed.</p>
-</li>
-<li>
-<p>Move to the directory <code>analysis2/</code> and check that you can import your package from there.
+and installed.</li>
+<li>Move to the directory <code>analysis2/</code> and check that you can import your package from there.
 Where is this package located?
-Hint: You can check the location a package using the <code>__file__</code> attribute.</p>
-</li>
-<li>
-<p>The directory <code>analysis2</code> contains a timeseries under <code>data/</code>. What is the average value
-of the timeseries?</p>
-</li>
+Hint: You can check the location a package using the <code>__file__</code> attribute.</li>
+<li>The directory <code>analysis2</code> contains a timeseries under <code>data/</code>. What is the average value
+of the timeseries?</li>
 </ol>
 <p>Congratulations! Your <code>tstools</code> package is now installed can be reused across your analyses&hellip;
 no more dangerous copying and pasting!</p>
@@ -1088,19 +1088,19 @@ no more dangerous copying and pasting!</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/python-packaging-course/js/clipboard.min.js?1600862808"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1600862808"></script>
-    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1600862808"></script>
-    <script src="/python-packaging-course/js/jquery.sticky.js?1600862808"></script>
-    <script src="/python-packaging-course/js/featherlight.min.js?1600862808"></script>
-    <script src="/python-packaging-course/js/highlight.pack.js?1600862808"></script>
+    <script src="/python-packaging-course/js/clipboard.min.js?1601048453"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.min.js?1601048453"></script>
+    <script src="/python-packaging-course/js/perfect-scrollbar.jquery.min.js?1601048453"></script>
+    <script src="/python-packaging-course/js/jquery.sticky.js?1601048453"></script>
+    <script src="/python-packaging-course/js/featherlight.min.js?1601048453"></script>
+    <script src="/python-packaging-course/js/highlight.pack.js?1601048453"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1600862808"></script>
-    <script src="/python-packaging-course/js/learn.js?1600862808"></script>
-    <script src="/python-packaging-course/js/hugo-learn.js?1600862808"></script>
+    <script src="/python-packaging-course/js/modernizr.custom-3.6.0.js?1601048453"></script>
+    <script src="/python-packaging-course/js/learn.js?1601048453"></script>
+    <script src="/python-packaging-course/js/hugo-learn.js?1601048453"></script>
     
         
-            <script src="/python-packaging-course/mermaid/mermaid.js?1600862808"></script>
+            <script src="/python-packaging-course/mermaid/mermaid.js?1601048453"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
