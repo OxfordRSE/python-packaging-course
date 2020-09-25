@@ -543,7 +543,7 @@ However, unless you have a good reason to use one of them, they are not recommen
 reasons above. In the next section, we look at the recommended way to install a package, using
 ~setuptools~ and ~pip~.
 
-** setuptools, setup dot pie and pip
+** pip and setuptools
    :PROPERTIES:
    :EXPORT_HUGO_WEIGHT: auto
    :EXPORT_HUGO_SECTION: part2_reusing_a_package
@@ -654,6 +654,7 @@ These are the two minimal ingredients required to /distribute/ a package, see se
    #+begin_src shell
      pip uninstall numpy matplotlib
    #+end_src
+   Make sure ~pip~ points to your current virtual environment (you can check this by typing ~pip --version~. Particularly, if admin rights are necessary to uninstall and install packages, you're probably using ~pip~ in your global Python environment. To make sure that you run the correct ~pip~ for your correct Python environment, run ~python -m pip <pip command>~ instead of ~pip <pip command>~
 3. Install the ~tstools~ package with ~pip~.
    Remember: ~pip install <location of setup file>~
    Notice how ~numpy~ and ~matplotlib~ are automatically downloaded (can you find from where?)

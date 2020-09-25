@@ -123,6 +123,10 @@ These are the two minimal ingredients required to _distribute_ a package, see se
     ```shell
     pip uninstall numpy matplotlib
     ```
+{{% notice warning %}}
+Make sure `pip` points to your current virtual environment (you can check this by typing `pip --version`. Particularly, if admin rights are necessary to uninstall and install packages, you're probably using `pip` in your global Python environment. To make sure that you run the correct `pip` for your correct Python environment, run `python -m pip <pip command>` instead of `pip <pip command>`.)
+{{% /notice %}}
+
 3.  Install the `tstools` package with `pip`.
     Remember: `pip install <location of setup file>`
     Notice how `numpy` and `matplotlib` are automatically downloaded (can you find from where?)
