@@ -16,65 +16,52 @@ install" your package, automatically installing the required dependencies.
 - *V* Overview of advanced topics
 
 ** Course requirements
-- A basic familiarity with Python 3 syntax
-- Python 3, pip and Git
+- A basic familiarity with Python 3
+- Python 3, pip and Git installed.
 
 
 ** Getting ready for the course
 The course assumes that he following software is installed on your system:
 - Python 3 (3.3 or above)
-- The ~pip~ package manager
-- The ~venv~ Python module.
+- The ~pip~ package manager to upload and download Python packages.
+- The ~venv~ Python module to create Python virtual environments.
 
-Not sure? Just [[** Checking your installation][check your Python installation.]]
-
-*Note to Anaconda or Miniconda users*: This course assumes that you are using a regular 
-Python 3 installation, and not the Anaconda or Miniconda distribution.
-If you're using Anaconda/Miniconda - don't remove it - just install Python 3 alongside it 
-following the instructions below.
+Not sure? Just [[* Check your installation][check your Python installation]].
 
 If you already have the above requirements satisfied, jump to [[https://github.com/OxfordRSE/python-packaging-course#setup-the-python-environment-for-the-course][Setup the python environment for the course]].
-otherwise, read on.
+Otherwise, read on.
 
-*** Installing Python 3
-    If you encounter issues following these instructions, or if your operatiinf system
-    isn't listed, feel free to [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][open an issue]] describing your problem.
-**** GNU/Linux
-   On most GNU/Linux distributions, the command ~python~ points to 
-   the system's Python 2 interpreter.
-   Instead, Python 3 is often available as the ~python3~ package (and the
-   ~python3~ command).
+*** How to install Python 3
+    
+    There are may ways of installing Python 3, depending on your
+    operating system, but also what you want to use Python for.
+    Perhaps the most straightforward way to install a "ready to go"
+    Python is to install [[https://www.anaconda.com/][Anaconda]]. You can view Anaconda as a bundle
+    including Python itself + useful utilities (such as the ~pip~
+    package manager) + several gigabytes worth of Python packages.  An
+    alternative to Anaconda is [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]], which is essentially a
+    stripped version of Anaconda.  It provides a lighter Python
+    distribution consisting of just Python + a handful of core
+    utility packages.
+    
+    For the purpose of this course, it really doesn't matter if you
+    install Miniconda or Anaconda. If you'd rather save some disk
+    space and go for a shorter download, we recommend you go for
+    Miniconda.
 
-   On *Ubuntu*/*Debian* (and probably *Linux Mint*), you can install Python 3, the ~pip~ package manager
-   and the ~venv~ module using the ~apt~ package manager:
-   #+begin_src shell
-   sudo apt install python3 python3-pip python3-venv
-   #+end_src
+    - Click [[https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html#regular-installation][here]] for instructions on how to install Miniconda/Anaconda.
 
-   On *Fedora*, Python 3 should already be there. In case it's not, you can install it
-   with
-   #+begin_src shell
-   sudo dnf python3
-   #+end_src
-   This should include ~pip~ and the ~venv~ module.
+    If you'd rather install Python outside of Anaconda or Miniconda,
+    check out [[https://oxfordrse.github.io/python-packaging-course/appendix_installing_python/#install-python-3-outside-of-anacondaminiconda][our instructions]] on how to install Python 3 outside of
+    Anaconda/Miniconda.
 
-**** MacOS
-   1. Install homebrew (see the [[https://brew.sh/][installation instructions]]).
-   2. Install Python 3
-   #+begin_src shell
-   brew install python3
-   #+end_src
+    If you encounter issues whilst installing any of the above, feel
+    free to get in touch by [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][opening an issue]] on this repository.
 
-   That should be it.
+*** Check your installation
 
-**** Windows
-   1. Download the installer for the latest stable version of python [[https://www.python.org/downloads/windows/][here]].
-      (Most likely the /Windows x86-64 executable installer/).
-   2. Execute the Python installer - be sure to tick /Add Python 3.8 to PATH/.
-   3. Move on to [[https://github.com/OxfordRSE/python-packaging-course#checking-your-installation][Checking your installation]].
-
-*** Checking your installation
-Let's check that Python 3, pip and the venv modules are correctly installed.
+*Note*: If you installed Python withing Anaconda or Miniconda, and the
+~(base)~ environment is activated, replace ~python3~ by ~python~ in the following.
 
 #+begin_src shell :results output
 python3 --version
@@ -108,82 +95,91 @@ If any of the three commands above results in an error, please refer to
 the [[https://github.com/OxfordRSE/python-packaging-course#installing-python-3][installation instructions]]. If you get stuck, just [[https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue][open an issue]] 
 this repository and we'll help you.
 
-If not, congratulations! You have Python 3 installed and ready to go.
-One last step, let's [[* Setup the python environment for the course]].
+If not, congratulations! Python 3 is now installed and ready to go.
+One last step, let's [[* Setup the python environment for the course][setup the python environment for the course]].
 
 *** Setup the python environment for the course
+In a terminal, or the Anaconda prompt if you're using Windows, enter the following commands.
+
+*Note*: If you installed Python withing Anaconda or Miniconda, and the
+~(base)~ environment is activated, replace ~python3~ by ~python~ in the following.
+
 **** 0. Make sure you have Git installed.
-#+begin_src shell
-git --version
-#+end_src
+#+begin_example
+$ git --version
+#+end_example
 
 If not, please install Git. On GNU/Linux Git is available /via/ your package manager, for instance
 on Ubuntu:
-#+begin_src shell
-sudo apt install git
-#+end_src
+#+begin_example
+$ sudo apt install git
+#+end_example
 
 On MacOS, you can use [[https://brew.sh/][Homebrew]] once again:
-#+begin_src shell
-brew install git
-#+end_src
+#+begin_example
+$ brew install git
+#+end_example
 
 On Windows, we recommend that you use [[https://git-scm.com/download/win][Git for Windows]].
 
 **** 1. Clone the course GitHub repository
 Open a terminal (or git-bash on Windows) and run the following command:
-#+begin_src shell
-git clone https://github.com/OxfordRSE/python-packaging-course.git
-#+end_src
+#+begin_example
+$ git clone https://github.com/OxfordRSE/python-packaging-course.git
+#+end_example
 
 **** 2. Move to the course directory
-#+begin_src shell
-mv python-packaging-course/
-#+end_src
+Next, let's move into the course directory and create a virtual
+environment.  Once this virtual environment activated, you'll work in
+isolation from other Python versions installed on your machine, and
+you can install any packages you want without fear or breaking any
+dependency for your other work.
 
-**** 3. Create a virtual environment
-#+begin_src shell
-# In directory python-packaging-course/
-python3 -m venv python-packaging-venv
-#+end_src
+Open a terminal (or the Anaconda prompt/command prompt if you're using Windows) and enter the following commands:
+#+begin_example
+$ cd python-packaging-course/
+$ python3 -m venv python-course-venvv # just "python" for Anaconda/Miniconda
+# The following is GNU/Linux and MacOS only
+$ source python-course-venv/bin/activate # This activates the virtual environment
+#+end_example
 
-**** 4. Activate the virtual environment
-On GNU/Linux and MacOS:
-#+begin_src shell
-source python-packaging-venv/bin/activate
-#+end_src
-
-On Windows
-#+begin_src shell
+On windows use the following instead to activate the virtual environment.
+#+begin_example
 python-packaging-venv\Scripts\activate.bat
-#+end_src
+#+end_example
 
-**** 5. Update ~pip~
-#+begin_src shell
-python -m pip install --upgrade pip
-#+end_src
-**** 6. Install packages
-#+begin_src shell
-python -m pip install -r requirements.txt
-#+end_src
-**** 7. Deactivate your environment
-#+begin_src shell
-deactivate
-#+end_src
+**** 3. Install some packages
+Now that your Python 3 virtual environment is activated, typing
+~python~ at the command line will automatically call the Python 3
+versions which was used to create the virtual environment (give
+~python --version~ a try).
 
-You're done! See you at the workshop.
+Let's get the latest version of the Python package manager and install
+the packages required to run the examples in the course.
+#+begin_example 
+$ python -m pip install --upgrade pip
+$ python -m pip install -r requirements.txt
+#+end_example
+
+**** 4. Deactivate your environment
+You're done. You can deactivate your environment with the following command:
+#+begin_example
+$ deactivate
+#+end_example
+
+See you at the workshop!
 ** Building the course site
 1. Install [[https://gohugo.io/][Hugo]]
 2. Clone this repository
-   #+begin_src shell
-   git clone https://github.com/OxfordRSE/python-packaging-course.git
-   #+end_src
+   #+begin_example
+   $ git clone https://github.com/OxfordRSE/python-packaging-course.git
+   #+end_example
 3. Install the [[https://learn.netlify.app/en/][Hugo Learn theme]]
-   #+begin_src shell
-   cd python-packaging-course/site/
-   git clone git@github.com:matcornic/hugo-theme-learn.git themes/hugo-theme-learn
-   #+end_src
+   #+begin_example
+   $ cd python-packaging-course/site/
+   $ git clone git@github.com:matcornic/hugo-theme-learn.git themes/hugo-theme-learn
+   #+end_example
 4. Build the site
-   #+begin_src shell
-   hugo server
-   #+end_src
+   #+begin_example
+   $ hugo server
+   #+end_example
