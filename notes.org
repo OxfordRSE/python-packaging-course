@@ -1,0 +1,353 @@
+* Step 0: Directory structure and scripts walkthrough
+* Step 1: Calculator example
+  - Organisation of Python programs: simple calculator example.
+  - Russian Dolls analogy. At the core are literals, variables, functions.
+  - Organized into modules that can be reused.
+  - Modules can be grouped into packages
+    #+begin_src python
+      # calculator_example/use_calculator.py
+      import calculator.binary_operations as op
+      from calculator.representations import bin2int
+
+      a = bin2int((0, 1, 1))
+      b = bin2int((1, 0, 0, 0, 1, 1))
+
+      print(f"{a} + {b} = {op.add{a, b}}")
+    #+end_src
+
+* Activity 1: Turning a scripts into a reusable module (10min)
+  - Objective: get familiar with the different files.
+  - Preferred way of editing files, running Python doesn't matter.
+  - Nothing difficult, just replace the hashtags in ~analysis1/tstools/vis.py~.
+  - Can test that everything works by running ~analysis1/tests.py~.
+
+* Step 2: Making a package
+  - Using modules from ~tstools/~ directory in parent directory ~analysis1~.
+    #+begin_src python
+      import numpy as np
+      import tstools.moments
+      import tstools.vis import
+
+      timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
+
+      mean, var = tstools.moments.get_mean_and_var(timeseries)
+      fig, ax = tstools.vis.plot_histogram(timeseries)
+    #+end_src
+
+  - /Could also import the functions in the top level namespace with/
+    #+begin_src python
+      from tstools.vis import plot_histogram
+    #+end_src
+
+  - Having to to type the full path to the module is cumbersome.
+    Imagine a complex case with more layers:
+    #+begin_src python
+      import pkg.subpkg1.subpkg2.subpkg3.module
+    #+end_src
+   *The user doesn't have to know about the internal structure of the package*.
+
+  - In our case we want:
+    #+begin_src python
+      import tstools
+      # ... 
+      mean, ax = tstools.get_mean_and_var(timeseries)
+    #+end_src
+    /Everying under the ~tstools~ namespace/
+
+** Traps
+   - Cannot ~import tstools.vis.get_mean_and_var~
+     #+begin_example
+     ModuleNotFoundError: No module named 'tstools.vis.get_mean_and_var'; 'tstools.vis' is not a package
+     #+end_example
+     Dot notation assumes package structure.
+   - Killing the Python process in Emacs isn't enough for a new process to be started
+     in a new dir. For this a new ~*Python*~ buffer must be created.
+   
+* Step 3: 
+  - ~import tstools~ doesn't import anything.
+  - Importing a package is equivalent to importing the ~__init__.py~ inside
+    its directory.
+    #+begin_src python
+      # tstools/__init__.py
+      print("Hello from the init file!")
+    #+end_src
+    
+    #+begin_example
+      >>> import tstools
+      'Hello from the init file!'
+    #+end_example
+
+* Activity 2: Make functions in ~moments~, ~vis~, and ~show_extremes~ available under the ~tstools~ namespace
+  - Write import statements in ~tstools/init.py~.
+  - Statements in ~__init__.py~ are executed as if coming from the
+    parent scripts, and modules imported in ~__init__.py~ are made a
+    available under the ~tstools~ namespace.
+  - Because of the above that modules must be imported from the package itself
+    and not from the current working directory: ~from .moments import *~.
+    #+begin_src python
+      from .moments import *
+      from .vis import *
+      from .extremes import *
+    #+end_src
+
+* Step 4: Another analysis
+  - Another analysis directory with another data file.
+  - Say that some of the analysis for this new dataset is similar to the analysis
+    performed on the first dataset: *we want to reuse our package*.
+  - Cannot import tstools from ~analysis2~ because the package cannot
+    be found in the current directory.
+  - python looks in a list of directories, starting from the current directory
+    #+begin_src python :results output
+      import sys
+      print(sys.path)
+    #+end_src
+
+    #+RESULTS:
+    : ['', '/home/thibault/.pyenv/versions/3.8.5/lib/python38.zip', '/home/thibault/.pyenv/versions/3.8.5/lib/python3.8', '/home/thibault/.pyenv/versions/3.8.5/lib/python3.8/lib-dynload', '/home/thibault/repos/python-packaging-course/python-course-venv/lib/python3.8/site-packages']
+  - Installing a package means putting its source directory into a directory where
+    it can be found. Usually ~site-packages~.
+  - /Remark: could copy to package directory in ~analysis2~ or add
+    ~analysis1~ to ~sys.path~/. None is recommended.
+
+* Step 5: Installing a package with pip and setuptools
+  - Could manually copy package directory to ~site-packages~ directory.
+    + Have to know where it is
+    + Depends on platform
+    + Difficult to track changes to packages (i.e. version)
+    + Cumbersome and error prone for real world cases (compiled source)
+  - pip and setuptools can *automate* the installation
+    + setuptools is a Python package that provides ways to describes a package.
+    + pip is the actuall package manager - more about that in the next section.
+  - Start with a ~setup.py~ in ~analysis1~.
+    #+begin_src python
+      from setuptools import setup
+
+      setup(
+	  name="tstools",
+	  version="0.1",
+	  description="A package to analyse timeseries",
+	  url="",
+	  author="Spam Eggs",
+	  author_email="spameggs@example.com",
+	  packages=["tstools"],
+	  install_requires=["numpy", "matplotlib", "scipy"],
+	  license="GPLv3",
+      )
+    #+end_src
+  - Install package with ~pip~
+    #+begin_src shell
+    pip install . # pip install <directory containing setup.py>
+    #+end_src
+  - Stress that ~setup.py~ isn't located next to ~__init__.py~.
+  - Move ~setup.py~ and ~tstools~ directory out of ~analysis1~ and put
+    it in ~tstools-dist~. *Distribution package*. Could add a README.
+
+* Activity 3: Create distribution package and pip install package
+
+* Step 6: Editable install
+  - Painful to have to reinstall your package each time you make a
+    modification to it.
+  - ~pip install -e <dir>~ doesn't copy your package's source to the
+    ~site-package~ directory, but instead writes a link redirecting to
+    your package's source directory:
+
+    #+begin_src shell
+    pip uninstall tstools
+    pip install -e tstools
+    #+end_src
+
+    #+begin_src python
+      import tstools
+      print(tstools.__file__)
+    #+end_src
+    - Editable install are super useful when working on the package itself.
+
+    - Typical workflow when package is realtively stable:
+      #+begin_example
+	analysis1/
+		venv1/ (normal install)
+	analysis2/
+		venv2/ (normal install)
+	tstools-dist
+		venv-tstools/ (editable install)
+      #+end_example
+
+* BREAK
+  - Summary:
+    + Must install package to reuse it.
+    + Editable installs are supper useful
+    + Packaging is making reusing easy
+    + Packaging makes codebase organised and standard.
+    + Standards are useful both for developpers and tools.
+
+* Step 7: Virtual environments
+  - Can only have one version of a package at a time.
+   #+begin_src shell :results output
+     ls python-course-venv/lib/python3.8/site-packages | grep numpy
+   #+end_src
+
+   #+RESULTS:
+   : numpy
+   : numpy-1.19.4.dist-info
+   : numpy.libs
+
+  - This can cause conflicts when two packages depend on a different
+    versions of a same package.
+
+  - Virtual environments help *isolate* your project from other projects
+    with different requirements.
+
+  - Virtual environments can be created in several ways.f
+    Built-in module ~venv~:
+    #+begin_src shell
+      python -m venv myvenv
+      source myvenv/bin/activate
+    #+end_src
+
+    #+begin_src shell
+      pip install --upgrade pip setuptools wheel
+    #+end_src
+
+    #+begin_src python :results output
+      import sys
+      print(sys.executable)
+    #+end_src
+
+    #+RESULTS:
+    : /home/thibault/repos/python-packaging-course/python-course-venv//bin/python
+
+  - Virtual environment use the same python interpreter as the one that was used 
+    to create it. Therefore same version.
+
+  - Virtual environments can sound like a useless overhead, but dependency problems
+    arise quicker than you think. Hard to solve. Waste of time.
+
+  - Unless you have a good reason to, never install a package into your global
+    python environment. Some software depend on the Python packages installed in
+    this environment and breaking it means breaking part of your system.
+
+  - Typical workflow when package is relatively stable:
+      #+begin_example
+	analysis1/
+		venv1/ (normal install)
+	analysis2/
+		venv2/ (normal install)
+	tstools-dist
+		venv-tstools/ (editable install)
+      #+end_example
+
+* Step 8: Python distributions
+
+  - think about what you would do if you were to share the ~tstools~ with a friend.
+    Email an archive containing the distribution package.
+  - This archive is commonly called a Python distribution.
+  - ~setuptools~ can automate the creation of distribution. Automatically includes
+    metadata.
+    #+begin_src shell
+      # In tstools-dist
+      python setup.py sdist
+    #+end_src
+    This mainly does three things:
+    + It gathers the python source files that consitute the package (incuding the ~setup.py~).
+    + It writes some metadata about the package in a directory ~tstools.egg-info~.
+    + It bundles everyting into a tar archive.
+
+    #+begin_src shell
+    tar --list -f dist/tstools-0.1.tar.gz
+    #+end_src
+  - Python distributions can be processed by pip
+    #+begin_src shell
+    pip install dist/tstools-0.1.tar.gz
+    #+end_src
+
+* Step 9: Wheel distributions
+  - Their are two main types of distributions: source distributions
+    and wheel distributions
+  - Installing from a source distribution implies running the ~setup.py~ script.
+    + Security risk - cannot run arbitraty Python code somebody you don't know.
+    + Can be slow. Additonnal overhead of unpacking the archive.
+    + C or Fortran code have to be compiled. Slow, difficult, user must have
+      tools and compile time dependencies.
+  - Wheel distributions can be viewed as archives containign the
+    /result/ of installation. Installing a wheel does not required to
+    run the ~setup.py~ file.
+  - Wheel can contain compiled code. No need to compile anything.
+  - Safer, faster.
+  - Wheels are built in a way similar to source distributions:
+    #+begin_src shell
+      python setup.py bdist_wheel
+    #+end_src
+  - For pure Python code, Python wheels are very similar to source distribution.
+
+* Activity 4: Building Python wheels
+
+* Step 10: How software is shared
+  - Sending distributions by email doest not scale well.
+  - Managing versions is hard.
+  - Package repositories are index of packages hosted on distant servers.
+    Repositories can be be access via a package manager.
+    APT is a package manager.
+  - Package managers are useful to download, install, remove, upgrade,
+    configure and manage packages.
+  - ~pip~ is the main package manager for Python.
+  - ~pip~ speaks to PyPI. ~pip install~ makes a request to PyPI if
+    distribution package not found locally.
+  - ~pip~ can install specific versions.
+  
+* Step 11:
+  - If you want anyone to be able to ~pip install~ your package, you must
+    upload the corresponding distributions to PyPI.
+  - There is a small utility to automatically upload Python distributions to
+    PyPI.
+    #+begin_src shell
+      pip install twine
+    #+end_src
+    
+    #+begin_src shell
+      twine upload dist/tstools-0.1-py3-none-any.whl
+    #+end_src
+  - You need an account in order to upload your distributions.
+  - Uploaded distributions *cannot be removed*.
+  - testpypi.org is available to test things out before actually making a release
+    to PyPI.
+
+* Activity 5: Publishing your tstools package to PyPI
+  - You'll need a separate account for PyPI and TestPyPI
+  - Package names are unique. A package's name is the string given for the 
+    ~name~ field in the ~setup.py~.
+  - Be sure to give your package a unique name.
+  - Make sure ~setup.py~ and code doesn't contain any personal information
+    your doesn't want to share.
+  
+
+  + ~pip~ takes an option to specify the repository:
+    #+begin_src shell
+      twine upload --repository testpypi dist/*
+    #+end_src
+  + You could self-host your own PyPI
+  + Once your package is on TestPyPI, you can find it there
+  + You can install package from TestPyPI by providing ~pip~ extra options:
+    #+begin_src shell
+      pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple your-package
+    #+end_src
+  + *Caveat*: If you don't supply option ~extra-index-url~,
+    dependencies will be installed from TestPyPI as well.
+  + Note that /you cannot/ erase a published version of your package.
+  + You can do /post-release/, /i.e/ adding ~.postX~
+    add the end of the faulty version number.  For instance:
+    #+begin_src python
+   	 setup(name='tstools',
+   	 version='0.1.post1',
+   	 ...)
+    #+end_src
+    Post releases don not change the version number, the above is
+    still version ~0.1~, but ~pip install tstools==0.1~ will download
+    the ~0.1.post1~ version.  
+  + Possible to make several post releases, /i.e/ ~.post2~, ~.post3~...
+
+* Step 12: Advanced topics
+  - Include data in distribution
+  - Include tests in distribution
+  - tox
+  - Custom setuptools commands
+  - Packaging C/C++/Fortran extensions
