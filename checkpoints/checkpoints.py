@@ -1,3 +1,4 @@
+import argparse
 import os
 import shutil
 
@@ -9,7 +10,8 @@ def copy_files(files_list: list):
         file_to_replace = os.path.join("course", filename)
         try:
             shutil.copy2(cheat_file, file_to_replace)
-        except FileNotFoundError:
+        except FileNotFoundError as error:
+            print(error)
             msg = (
                 "could not setup course files."
                 " Are you in the course top-level directory?"
@@ -28,7 +30,7 @@ def checkpoint1():
 
 
 def checkpoint2():
-    files = ["analysis1/tstools/__init __.py"]
+    files = ["analysis1/tstools/__init__.py"]
     copy_files(files)
 
 
@@ -54,3 +56,30 @@ def checkpoint3():
         "tstools-dist/tstools/extremes.py",
     ]
     copy_files(files)
+
+
+def main(arguments=None):
+    description = (
+        "Setup the course directory to a clean "
+        "state prior to working on an activity."
+        )
+    parser = argparse.ArgumentParser(
+        description=description
+    )
+    parser.add_argument("checkpoint_number",
+                        type=int,
+                        help="the checkpoint number")
+    args = parser.parse_args(arguments)
+
+    map_number_to_function = {
+        1: checkpoint1,
+        2: checkpoint2,
+        3: checkpoint3,
+    }
+
+    map_number_to_function[args.checkpoint_number]()
+
+
+if __name__ == "__main__":
+    import sys
+    main(sys.argv[1:])

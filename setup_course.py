@@ -8,9 +8,7 @@ setup(
     packages=["checkpoints"],
     entry_points={
         "console_scripts": [
-            "checkpoint_1 = checkpoints:checkpoint1",
-            "checkpoint_2 = checkpoints:checkpoint2",
-            "checkpoint_3 = checkpoints:checkpoint3"
+            "checkpoint = checkpoints:main",
             ]
         },
     )
