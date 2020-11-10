@@ -1,9 +1,6 @@
 # analysis2/analysis2.py
-import sys
 import matplotlib.pyplot as plt
 import numpy as np
-
-sys.path.append("../analysis1/")
 
 import tstools
 
