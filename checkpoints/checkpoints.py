@@ -24,16 +24,16 @@ def copy_files(files_list: list, new_names=[]):
 
 def checkpoint1():
     files = [
-        "analysis1/tstools/vis.py",
-        "analysis1/tstools/moments.py",
-        "analysis1/tstools/extremes.py",
-        "analysis1/analysis1.py",
+        os.path.join("analysis1","tstools","vis.py"),
+        os.path.join("analysis1","tstools","moments.py"),
+        os.path.join("analysis1","tstools","extremes.py"),
+        os.path.join("analysis1","analysis1.py"),
     ]
     copy_files(files)
 
 
 def checkpoint2():
-    files = ["analysis1/tstools/__init__.py"]
+    files = [os.path.join("analysis1","tstools","__init__.py")]
     copy_files(files)
 
 
@@ -49,22 +49,22 @@ def checkpoint3():
     # Not using shutil.copytree because option dir_exists_ok only
     # available since python 3.8
     for directory in ["tstools-dist", os.path.join("tstools-dist", "tstools")]:
-        if not os.path.isdir(directory):
+        if not os.path.isdir(os.path.join("course", directory)):
             os.mkdir(directory)
 
     files = [
-        "tstools-dist/setup.py",
-        "tstools-dist/tstools/moments.py",
-        "tstools-dist/tstools/vis.py",
-        "tstools-dist/tstools/extremes.py",
+        os.path.join("tstools-dist","setup.py"),
+        os.path.join("tstools-dist","tstools","moments.py"),
+        os.path.join("tstools-dist","tstools","vis.py"),
+        os.path.join("tstools-dist","tstools","extremes.py"),
     ]
     copy_files(files)
 
 
 def checkpoint4():
     files = [
-        "analysis2/analysis2_centered.py",
-        "tstools-dist/tstools/centered/vis.py",
+        os.path.join("analysis2","analysis2_centered.py"),
+        os.path.join("tstools-dist","tstools","centered","vis.py"),
     ]
     new_files = [
         "analysis2/analysis2_centered.py",
