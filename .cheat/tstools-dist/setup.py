@@ -8,6 +8,12 @@ setup(
     author="Spam Eggs",
     author_email="spameggs@example.com",
     packages=["tstools"],
-    install_requires=["numpy", "matplotlib"],
+    install_requires=[
+        "matplotlib",
+        "numpy",
+        "setuptoools"
+        "wheel",
+        "scipy",
+        ],
     license="GPLv3",
 )

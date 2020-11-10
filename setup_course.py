@@ -6,6 +6,13 @@ setup(
     email="rse@cs.ox.ac.uk",
     url="https://github.com/OxfordRSE/python-packaging-course",
     packages=["checkpoints"],
+    install_requires=[
+        "matplotlib",
+        "numpy",
+        "setuptools",
+        "wheel",
+        "scipy",
+        ],
     entry_points={
         "console_scripts": [
             "checkpoint = checkpoints:main",
