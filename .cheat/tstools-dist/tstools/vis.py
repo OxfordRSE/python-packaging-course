@@ -31,7 +31,7 @@ def plot_trajectory_subset(timeseries, tmin, tmax):
     fig, ax = plt.subplots()
     ax.plot(t[indices_within_time_interval], values[indices_within_time_interval])
 
-    return fig, ax, np.amax(values[indices_within_time_interval])
+    return fig, ax
 
 
 def plot_histogram(timeseries, nbins=10, mean=None, std=None):
