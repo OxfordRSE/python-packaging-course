@@ -168,6 +168,7 @@ $ deactivate
 
 See you at the workshop!
 ** Building the course site
+   *This is not required to participate in the course.*
 1. Install [[https://gohugo.io/][Hugo]]
 2. Clone this repository
    #+begin_example
