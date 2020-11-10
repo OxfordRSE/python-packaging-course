@@ -50,7 +50,7 @@ def checkpoint3():
     # available since python 3.8
     for directory in ["tstools-dist", os.path.join("tstools-dist", "tstools")]:
         if not os.path.isdir(os.path.join("course", directory)):
-            os.mkdir(directory)
+            os.mkdir(os.path.join("course", directory))
 
     files = [
         os.path.join("tstools-dist","setup.py"),
