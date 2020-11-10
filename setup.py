@@ -10,7 +10,6 @@ setup(
         "matplotlib",
         "numpy",
         "setuptools",
-        "wheel",
         "scipy",
         ],
     entry_points={

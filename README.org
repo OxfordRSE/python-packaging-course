@@ -119,7 +119,7 @@ $ brew install git
 On Windows, we recommend that you use [[https://git-scm.com/download/win][Git for Windows]].
 
 **** 1. Clone the course GitHub repository
-Open a terminal (or git-bash on Windows) and run the following command:
+Open a terminal (on Windows you can use git-bash or the Anaconda prompt) and run the following command:
 #+begin_example
 $ git clone https://github.com/OxfordRSE/python-packaging-course.git
 #+end_example
@@ -144,7 +144,7 @@ $ source python-course-venv/bin/activate # This activates the virtual environmen
 
 On windows use the following instead to activate the virtual environment.
 #+begin_example
-python-packaging-venv\Scripts\activate.bat
+python-course-venv\Scripts\activate.bat
 #+end_example
 
 **** 3. Setup the course
@@ -156,8 +156,8 @@ versions which was used to create the virtual environment (give
 Let's get the latest version of the Python package manager and install
 the packages required to run the examples in the course.
 #+begin_example 
-$ python -m pip install --upgrade pip
-$ python setup_course.py install
+$ python -m pip install --upgrade pip wheel setuptools
+$ python -m pip install .
 #+end_example
 
 **** 4. Deactivate your environment
