@@ -1,3 +1,9 @@
 *~
 site/public/
 site/themes/
+__pycache__/
+build/
+dist/
+hotwire-data/raw_data/datajet.h5
+notes.*
+python-course-venv/
