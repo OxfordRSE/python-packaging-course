@@ -1,18 +1,18 @@
 
 # Table of Contents
 
-1.  [Contents](#orge4c6dba)
-2.  [Course requirements](#org8208b8f)
-3.  [Getting ready for the course](#orgb5fc913)
-    1.  [How to install Python 3](#orga8e1ad4)
-    2.  [Check your installation](#orga4007f5)
-    3.  [Setup the python environment for the course](#orge5996c8)
-        1.  [0. Make sure you have Git installed.](#org2fea19e)
-        2.  [1. Clone the course GitHub repository](#org7db5b96)
-        3.  [2. Create a Python virtual environment](#orgb023012)
-        4.  [3. Setup the course](#orge4f46ee)
-        5.  [4. Deactivate your environment](#org16bc150)
-4.  [Building the course site](#orgd83c7ff)
+1.  [Contents](#org007cf4e)
+2.  [Course requirements](#org6237f85)
+3.  [Getting ready for the course](#orge35d8eb)
+    1.  [How to install Python 3](#org2b537a1)
+    2.  [Check your installation](#org361c598)
+    3.  [Setup the python environment for the course](#org6fff038)
+        1.  [0. Make sure you have Git installed.](#org2908307)
+        2.  [1. Clone the course GitHub repository](#org9a8985b)
+        3.  [2. Create a Python virtual environment](#org28c088b)
+        4.  [3. Setup the course](#orgf94048a)
+        5.  [4. Deactivate your environment](#org8d6d672)
+4.  [Building the course site](#orge438342)
 
 In this workshop you will learn how to turn a couple of python scripts into
 a full blown Python package. You will see how you can develop and maintain
@@ -22,7 +22,7 @@ You will then learn the simple steps to make it possible for anyone to "pip
 install" your package, automatically installing the required dependencies.
 
 
-<a id="orge4c6dba"></a>
+<a id="org007cf4e"></a>
 
 # Contents
 
@@ -33,7 +33,7 @@ install" your package, automatically installing the required dependencies.
 -   **V** Overview of advanced topics
 
 
-<a id="org8208b8f"></a>
+<a id="org6237f85"></a>
 
 # Course requirements
 
@@ -41,7 +41,7 @@ install" your package, automatically installing the required dependencies.
 -   Python 3, pip and Git installed.
 
 
-<a id="orgb5fc913"></a>
+<a id="orge35d8eb"></a>
 
 # Getting ready for the course
 
@@ -51,13 +51,13 @@ The course assumes that he following software is installed on your system:
 -   The `pip` package manager to upload and download Python packages.
 -   The `venv` Python module to create Python virtual environments.
 
-Not sure? Just [check your Python installation](#orga4007f5).
+Not sure? Just [check your Python installation](#org361c598).
 
 If you already have the above requirements satisfied, jump to [Setup the python environment for the course](https://github.com/OxfordRSE/python-packaging-course#setup-the-python-environment-for-the-course).
 Otherwise, read on.
 
 
-<a id="orga8e1ad4"></a>
+<a id="org2b537a1"></a>
 
 ## How to install Python 3
 
@@ -87,7 +87,7 @@ If you encounter issues whilst installing any of the above, feel
 free to get in touch by [opening an issue](https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue) on this repository.
 
 
-<a id="orga4007f5"></a>
+<a id="org361c598"></a>
 
 ## Check your installation
 
@@ -105,15 +105,15 @@ the [installation instructions](https://github.com/OxfordRSE/python-packaging-co
 this repository and we'll help you.
 
 If not, congratulations! Python 3 is now installed and ready to go.
-One last step, let's [setup the python environment for the course](#orge5996c8).
+One last step, let's [setup the python environment for the course](#org6fff038).
 
 
-<a id="orge5996c8"></a>
+<a id="org6fff038"></a>
 
 ## Setup the python environment for the course
 
 
-<a id="org2fea19e"></a>
+<a id="org2908307"></a>
 
 ### 0. Make sure you have Git installed.
 
@@ -133,7 +133,7 @@ On MacOS, you can use [Homebrew](https://brew.sh/) once again:
 On Windows, we recommend that you use [Git for Windows](https://git-scm.com/download/win).
 
 
-<a id="org7db5b96"></a>
+<a id="org9a8985b"></a>
 
 ### 1. Clone the course GitHub repository
 
@@ -142,7 +142,7 @@ Open a terminal (on Windows you can use git-bash or the Anaconda prompt) and run
     $ git clone https://github.com/OxfordRSE/python-packaging-course.git
 
 
-<a id="orgb023012"></a>
+<a id="org28c088b"></a>
 
 ### 2. Create a Python virtual environment
 
@@ -167,7 +167,7 @@ On windows use the following instead to activate the virtual environment.
     python-course-venv\Scripts\activate.bat
 
 
-<a id="orge4f46ee"></a>
+<a id="orgf94048a"></a>
 
 ### 3. Setup the course
 
@@ -180,10 +180,10 @@ Let's get the latest version of the Python package manager and install
 the packages required to run the examples in the course.
 
     $ python -m pip install --upgrade pip wheel setuptools
-    $ python -m pip install course_setup
+    $ python -m pip install course_setup/
 
 
-<a id="org16bc150"></a>
+<a id="org8d6d672"></a>
 
 ### 4. Deactivate your environment
 
@@ -194,7 +194,7 @@ You're done. You can deactivate your environment with the following command:
 See you at the workshop!
 
 
-<a id="orgd83c7ff"></a>
+<a id="orge438342"></a>
 
 # Building the course site
 

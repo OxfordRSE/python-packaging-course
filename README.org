@@ -157,7 +157,7 @@ Let's get the latest version of the Python package manager and install
 the packages required to run the examples in the course.
 #+begin_example 
 $ python -m pip install --upgrade pip wheel setuptools
-$ python -m pip install course_setup
+$ python -m pip install course_setup/
 #+end_example
 
 **** 4. Deactivate your environment
