@@ -24,16 +24,16 @@ def copy_files(files_list: list, new_names=[]):
 
 def checkpoint1():
     files = [
-        os.path.join("analysis1","tstools","vis.py"),
-        os.path.join("analysis1","tstools","moments.py"),
-        os.path.join("analysis1","tstools","extremes.py"),
-        os.path.join("analysis1","analysis1.py"),
+        os.path.join("analysis1", "tstools", "vis.py"),
+        os.path.join("analysis1", "tstools", "moments.py"),
+        os.path.join("analysis1", "tstools", "extremes.py"),
+        os.path.join("analysis1", "analysis1.py"),
     ]
     copy_files(files)
 
 
 def checkpoint2():
-    files = [os.path.join("analysis1","tstools","__init__.py")]
+    files = [os.path.join("analysis1", "tstools", "__init__.py")]
     copy_files(files)
 
 
@@ -53,18 +53,18 @@ def checkpoint3():
             os.mkdir(os.path.join("course", directory))
 
     files = [
-        os.path.join("tstools-dist","setup.py"),
-        os.path.join("tstools-dist","tstools","moments.py"),
-        os.path.join("tstools-dist","tstools","vis.py"),
-        os.path.join("tstools-dist","tstools","extremes.py"),
+        os.path.join("tstools-dist", "setup.py"),
+        os.path.join("tstools-dist", "tstools", "moments.py"),
+        os.path.join("tstools-dist", "tstools", "vis.py"),
+        os.path.join("tstools-dist", "tstools", "extremes.py"),
     ]
     copy_files(files)
 
 
 def checkpoint4():
     files = [
-        os.path.join("analysis2","analysis2_centered.py"),
-        os.path.join("tstools-dist","tstools","centered","vis.py"),
+        os.path.join("analysis2", "analysis2_centered.py"),
+        os.path.join("tstools-dist", "tstools", "centered", "vis.py"),
     ]
     new_files = [
         "analysis2/analysis2_centered.py",
@@ -77,13 +77,9 @@ def main(arguments=None):
     description = (
         "Setup the course directory to a clean "
         "state prior to working on an activity."
-        )
-    parser = argparse.ArgumentParser(
-        description=description
     )
-    parser.add_argument("checkpoint_number",
-                        type=int,
-                        help="the checkpoint number")
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument("checkpoint_number", type=int, help="the checkpoint number")
     args = parser.parse_args(arguments)
 
     map_number_to_function = {
@@ -98,4 +94,5 @@ def main(arguments=None):
 
 if __name__ == "__main__":
     import sys
+
     main(sys.argv[1:])
