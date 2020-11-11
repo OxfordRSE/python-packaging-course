@@ -36,10 +36,12 @@ def checkpoint2():
     files = [
         os.path.join("analysis1", "tstools", "__init__.py"),
         os.path.join("analysis1", "analysis1_w_init.py"),
+        os.path.join("analysis1", "setup.py"),
     ]
     new_files = [
         os.path.join("analysis1", "tstools", "__init__.py"),
         os.path.join("analysis1", "analysis1.py"),
+        os.path.join("analysis1", "setup.py"),
     ]
     copy_files(files, new_files)
 
