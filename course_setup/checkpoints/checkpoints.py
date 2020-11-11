@@ -64,6 +64,7 @@ def checkpoint3():
         os.path.join("tstools-dist", "tstools", "moments.py"),
         os.path.join("tstools-dist", "tstools", "vis.py"),
         os.path.join("tstools-dist", "tstools", "extremes.py"),
+        os.path.join("tstools-dist", "tstools", "__init__.py"),
     ]
     copy_files(files)
 
