@@ -5,7 +5,11 @@
     <link>https://oxfordrse.github.io/python-packaging-course/</link>
     <description>Recent content on OxRSE Python Packaging Workshop</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://oxfordrse.github.io/python-packaging-course/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="https://oxfordrse.github.io/python-packaging-course/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Another analysis</title>
       <link>https://oxfordrse.github.io/python-packaging-course/part2_reusing_a_package/another-analysis/</link>

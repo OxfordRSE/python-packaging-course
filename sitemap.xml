@@ -79,6 +79,10 @@
   </url>
   
   <url>
+    <loc>https://oxfordrse.github.io/python-packaging-course/appendix_installing_python/</loc>
+  </url>
+  
+  <url>
     <loc>https://oxfordrse.github.io/python-packaging-course/</loc>
     <priority>0</priority>
   </url>

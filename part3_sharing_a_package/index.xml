@@ -5,7 +5,11 @@
     <link>https://oxfordrse.github.io/python-packaging-course/part3_sharing_a_package/</link>
     <description>Recent content in Sharing a package on OxRSE Python Packaging Workshop</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://oxfordrse.github.io/python-packaging-course/part3_sharing_a_package/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="https://oxfordrse.github.io/python-packaging-course/part3_sharing_a_package/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Building python distributions</title>
       <link>https://oxfordrse.github.io/python-packaging-course/part3_sharing_a_package/building_distributions/</link>

@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/python-packaging-course/images/favicon.png" type="image/png">
 
-    <title>From scripts to modules :: OxRSE Python Packaging Workshop</title>
+    <title>Appendix - how to install Python 3 :: OxRSE Python Packaging Workshop</title>
 
     
     <link href="/python-packaging-course/css/nucleus.css?1605104899" rel="stylesheet">
@@ -36,7 +36,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/">
+  <body class="" data-url="/python-packaging-course/appendix_installing_python/">
     <nav id="sidebar" class="">
 
 
@@ -114,7 +114,7 @@
   
     
     <li data-nav-id="/python-packaging-course/part1_making_a_package/" title="Making a package" class="dd-item
-        parent
+        
         
         
         ">
@@ -140,7 +140,7 @@
  
   
     
-      <li data-nav-id="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/" title="From scripts to modules" class="dd-item active">
+      <li data-nav-id="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/" title="From scripts to modules" class="dd-item ">
         <a href="/python-packaging-course/part1_making_a_package/from_scripts_to_modules/">
         From scripts to modules
         
@@ -544,8 +544,8 @@
   
     
     <li data-nav-id="/python-packaging-course/appendix_installing_python/" title="Appendix - how to install Python 3" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/python-packaging-course/appendix_installing_python/">
@@ -603,13 +603,7 @@
             
           
           
-            
-            
-          
-          
-            <a href='/python-packaging-course/'></a> > <a href='/python-packaging-course/part1_making_a_package/'>Making a package</a> > From scripts to modules
-          
-        
+            <a href='/python-packaging-course/'></a> > Appendix - how to install Python 3
           
         
           
@@ -622,8 +616,14 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#functions-modules-packages">Functions, modules, packages</a></li>
-    <li><a href="#activity-1-turning-scripts-into-a-collection-of-functions">Activity 1 - Turning scripts into a collection of functions</a></li>
+    <li><a href="#install-python-3-through-anacondaminiconda">Install Python 3 through Anaconda/Miniconda</a></li>
+    <li><a href="#install-python-3-outside-of-anacondaminiconda">Install Python 3 (outside of Anaconda/Miniconda)</a>
+      <ul>
+        <li><a href="#gnulinux">GNU/Linux</a></li>
+        <li><a href="#macos">MacOS</a></li>
+        <li><a href="#windows">Windows</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -641,74 +641,83 @@
           
             <h1>
               
-              From scripts to modules
+              Appendix - how to install Python 3
             </h1>
           
 
         
 
 
-<h2 id="functions-modules-packages">Functions, modules, packages</h2>
+
+	<h2 id="install-python-3-through-anacondaminiconda">Install Python 3 through Anaconda/Miniconda</h2>
+<p>There are may ways of installing Python 3, depending on your operating
+system, but also what you want to use Python for.  Perhaps the most
+straightforward way to install a &ldquo;ready to go&rdquo; Python is to install
+<a href="https://www.anaconda.com/">Anaconda</a>. You can view Anaconda as a
+bundle including Python itself + useful utilities (such as the <code>pip</code>
+package manager) + several gigabytes worth of Python packages.  An
+alternative to Anaconda is
+<a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>, which is
+essentially a stripped version of Anaconda.  It provides a lighter
+Python distribution consisting of just Python + a handful of core
+utility packages.</p>
+<p>For the purpose of this course, it really doesn&rsquo;t matter if you
+install Miniconda or Anaconda. it you&rsquo;d rather save some disk
+space and go for a shorter download, we recommend you go for
+Miniconda.</p>
 <ul>
-<li>functions, classes</li>
+<li>Click
+<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html##regular-installation">here</a>
+for instructions on how to install Miniconda/Anaconda.</li>
 </ul>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># operations.py</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a,b):
-    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">+</span>b
-</code></pre></div><ul>
-<li>modules
-Collection of python objects (classes, functions, variables)</li>
-</ul>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> operations <span style="color:#f92672">import</span> add
-<span style="color:#75715e"># &#34;From file (or module) operations.py import object add&#34;</span>
-
-result <span style="color:#f92672">=</span> add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
-</code></pre></div><ul>
-<li>packages
-Collection of modules (<code>.py</code> files)</li>
-</ul>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> calculator.operations <span style="color:#f92672">import</span> add
-<span style="color:#f92672">from</span> calculator.representations <span style="color:#f92672">import</span> hexa
-
-a <span style="color:#f92672">=</span> hexa(<span style="color:#ae81ff">1</span>)
-b <span style="color:#f92672">=</span> hexa(<span style="color:#ae81ff">2</span>)
-
-result <span style="color:#f92672">=</span> add(a,b)
-</code></pre></div><h2 id="activity-1-turning-scripts-into-a-collection-of-functions">Activity 1 - Turning scripts into a collection of functions</h2>
-<p>Let&rsquo;s rewrite both scripts <code>scripts/analysis.py</code> and <code>scripts/show_extremes.py</code>
-as a collection of functions that can be reused in separate scripts.</p>
-<p>The directory <code>analysis1/tstools/</code> contains 3 python modules that contain (incomplete) functions performing
-the same operations on data described in the original scripts <code>analysis.py</code> and <code>show_extremes.py</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">python-packaging-workshop/
-      scripts/
-      analysis1/
-  	      tstools/
-  		      __init__.py
-  		      moments.py
-  		      vis.py
-  		      extremes.py
-</code></pre></div><ol>
-<li>Open <code>moments.py</code> and complete function <code>get_mean_and_var</code> (replace the
-string <code>&quot;######&quot;</code>).</li>
-<li>Open file <code>vis.py</code> and complete functions <code>plot_trajectory_subset</code> and
-<code>plot_histogram</code> (replace the strings <code>&quot;######&quot;</code>).</li>
+<p>If you&rsquo;d rather install Python outside of Anaconda or Miniconda,
+check out our instructions on how to install Python.</p>
+<p>If you encounter issues whilst installing any of the above, feel free
+to get in touch by <a href="https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue">opening an
+issue</a>
+on <a href="https://github.com/OxfordRSE/python-packaging-course">the course repository</a>.</p>
+<h2 id="install-python-3-outside-of-anacondaminiconda">Install Python 3 (outside of Anaconda/Miniconda)</h2>
+<h3 id="gnulinux">GNU/Linux</h3>
+<p>On most GNU/Linux distributions, the command <code>python</code> points to
+the system&rsquo;s Python 2 interpreter.
+Instead, Python 3 is often available as the <code>python3</code> package (and the
+<code>python3</code> command).</p>
+<p>On Ubuntu/Debian (and probably Linux Mint), you can install Python 3, the <code>pip</code> package manager
+and the <code>venv</code> module using the <code>apt</code> package manager:</p>
+<pre><code>sudo apt install python3 python3-pip python3-venv
+</code></pre>
+<p>On Fedora, Python 3 should already be there. In case it&rsquo;s not, you can install it
+with</p>
+<pre><code>sudo dnf python3
+</code></pre>
+<p>This should include <code>pip</code> and the <code>venv</code> module.</p>
+<p>Be sure to check your installation by opening a terminal and running ~python &ndash;version~.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="macos">MacOS</h3>
+<ol>
+<li>
+<p>Install homebrew (see the <a href="https://brew.sh/">installation instructions</a>).</p>
+</li>
+<li>
+<p>Install Python 3</p>
+<p>brew install python3</p>
+</li>
 </ol>
+<p>That&rsquo;s it. Be sure to check your installation by opening a terminal and running ~python &ndash;version~.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="windows">Windows</h3>
+<ol>
+<li>Download the installer for the latest stable version of python <a href="https://www.python.org/downloads/windows/">here</a>.
+(Most likely the <em>Windows x86-64 executable installer</em>).</li>
+<li>Execute the Python installer - <strong>be sure to tick</strong> <em>Add Python 3.8 to PATH</em>.</li>
+</ol>
+<p>Be sure to check your installation by opening a command prompt and typing ~python &ndash;version~.</p>
 
-<div class="notices tip" ><p>Use <code>scripts/analysis.py</code> as a reference.</p>
-</div>
 
 
-<div class="notices tip" ><p>You can run the test script <code>tests.py</code> in <code>analysis1/</code> to test that everything is working fine.</p>
-</div>
-
-<p>The file <code>tstools/extremes.py</code> implements a function <code>show_extremes</code> corresponding to script <code>show_extremes.py</code>.
-It is already complete.</p>
 
 
-<footer class="footline">
+<footer class=" footline" >
 	
 </footer>
 
@@ -762,7 +771,6 @@ It is already complete.</p>
             
                 
                     
-                    
                 
                 
 
@@ -775,7 +783,6 @@ It is already complete.</p>
             
             
                 
-                    
                     
                 
                 
@@ -792,9 +799,6 @@ It is already complete.</p>
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1054,6 +1058,7 @@ It is already complete.</p>
             
             
                 
+                    
                     
                 
                 
@@ -1075,10 +1080,10 @@ It is already complete.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="/python-packaging-course/part1_making_a_package/" title="Making a package"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/python-packaging-course/part3_sharing_a_package/uploading_to_pypi/" title="Uploading distributions to PyPI"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/python-packaging-course/part1_making_a_package/the_tstools_package/" title="The tstools package" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/python-packaging-course/introduction/" title="Introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1110,4 +1115,3 @@ It is already complete.</p>
 
   </body>
 </html>
-
