@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import erf
 
-timeseries = np.genfromtxt("../analysis1/data/brownian.csv", delimiter=",")
+timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
 
 # Compute and print mean and standard deviation
 mean = np.mean(timeseries[:, 1])
