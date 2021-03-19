@@ -51,7 +51,7 @@ The course assumes that he following software is installed on your system:
 -   The `pip` package manager to upload and download Python packages.
 -   The `venv` Python module to create Python virtual environments.
 
-Not sure? Just [check your Python installation](#org361c598).
+Not sure? Plese [check your Python installation](#org361c598).
 
 If you already have the above requirements satisfied, jump to [Setup the python environment for the course](https://github.com/OxfordRSE/python-packaging-course#setup-the-python-environment-for-the-course).
 Otherwise, read on.
@@ -61,15 +61,14 @@ Otherwise, read on.
 
 ## How to install Python 3
 
-There are may ways of installing Python 3, depending on your
-operating system, but also what you want to use Python for.
-Perhaps the most straightforward way to install a "ready to go"
-Python is to install [Anaconda](https://www.anaconda.com/). You can view Anaconda as a bundle
-including Python itself + useful utilities (such as the `pip`
+We recommend install Python via
+[Anaconda](https://www.anaconda.com/). You can see Anaconda as a
+bundle including Python itself + useful utilities (such as the `pip`
 package manager) + several gigabytes worth of Python packages.  An
-alternative to Anaconda is [Miniconda](https://docs.conda.io/en/latest/miniconda.html), which is essentially a
-stripped version of Anaconda.  It provides a lighter Python
-distribution consisting of just Python + a handful of core
+alternative to Anaconda is
+[Miniconda](https://docs.conda.io/en/latest/miniconda.html), which is
+essentially a stripped version of Anaconda.  It provides a lighter
+Python distribution consisting of just Python + a handful of core
 utility packages.
 
 For the purpose of this course, it really doesn't matter if you
@@ -80,8 +79,7 @@ Miniconda.
 -   Click [here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html#regular-installation) for instructions on how to install Miniconda/Anaconda.
 
 If you'd rather install Python outside of Anaconda or Miniconda,
-check out [our instructions](https://oxfordrse.github.io/python-packaging-course/appendix_installing_python/#install-python-3-outside-of-anacondaminiconda) on how to install Python 3 outside of
-Anaconda/Miniconda.
+check out [our instructions](https://oxfordrse.github.io/python-packaging-course/appendix_installing_python/#install-python-3-outside-of-anacondaminiconda) on how to install Python 3 outside of Anaconda/Miniconda.
 
 If you encounter issues whilst installing any of the above, feel
 free to get in touch by [opening an issue](https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue) on this repository.
@@ -91,17 +89,23 @@ free to get in touch by [opening an issue](https://docs.github.com/en/enterprise
 
 ## Check your installation
 
-**Note**: If you installed Python withing Anaconda or Miniconda, and the
-`(base)` environment is activated, replace `python3` by `python` in the following.
+First, check that you have Python 3 available with
 
-    python3 --version
+    python --version
 
-    python3 -m pip --version
 
-    python3 -m venv --help
+If you find that `python` refers to Python 2, try with `python3` instead.
+
+Next, check that both `pip` and `venv` are available. They typically come along with
+Python itself.
+
+    python -m pip --version
+
+    python -m venv --help
+	
 
 If any of the three commands above results in an error, please refer to 
-the [installation instructions](https://github.com/OxfordRSE/python-packaging-course#installing-python-3). If you get stuck, just [open an issue](https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue) 
+the [installation instructions](https://github.com/OxfordRSE/python-packaging-course#installing-python-3). If you get stuck, please [open an issue](https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue) 
 this repository and we'll help you.
 
 If not, congratulations! Python 3 is now installed and ready to go.
@@ -117,7 +121,7 @@ One last step, let's [setup the python environment for the course](#org6fff038).
 
 ### 0. Make sure you have Git installed.
 
-The following commands are meant to be entered in a terminal (GNU/Linux or MacOS).
+The commands in this section are meant to be entered in a terminal (GNU/Linux or MacOS) or a command prompt (Windows).
 
     $ git --version
 
@@ -152,19 +156,18 @@ isolation from other Python versions installed on your machine, and
 you can install any packages you want without fear or breaking any
 dependencies for your other work.
 
-**Note**: If you installed Python withing Anaconda or Miniconda, and the
-`(base)` environment is activated, replace `python3` by `python` in the following.
-
 Open a terminal (or the Anaconda prompt/command prompt if you're using Windows) and enter the following commands:
 
     $ cd python-packaging-course/
-    $ python3 -m venv python-course-venv # just "python" for Anaconda/Miniconda
+    $ python -m venv python-course-venv # just "python" for Anaconda/Miniconda
     # The following is GNU/Linux and MacOS only
     $ source python-course-venv/bin/activate # This activates the virtual environment
 
 On windows use the following instead to activate the virtual environment.
 
     python-course-venv\Scripts\activate.bat
+	
+Again, you might need to type `python3` instead of `python` in order to use Python 3.
 
 
 <a id="orgf94048a"></a>
@@ -187,7 +190,7 @@ the packages required to run the examples in the course.
 
 ### 4. Deactivate your environment
 
-You're done. You can deactivate your environment with the following command:
+That's all! You can deactivate your environment with the following command:
 
     $ deactivate
 
