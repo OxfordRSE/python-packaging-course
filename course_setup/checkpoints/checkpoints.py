@@ -89,7 +89,7 @@ def main(arguments=None):
         "state prior to working on an activity."
     )
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument("checkpoint_number", type=int, help="the checkpoint number")
+    parser.add_argument("checkpoint_number", type=int, choices=range(1,5), help="the checkpoint number")
     args = parser.parse_args(arguments)
 
     map_number_to_function = {
