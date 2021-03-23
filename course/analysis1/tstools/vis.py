@@ -34,7 +34,7 @@ def plot_trajectory_subset(timeseries, tmin, tmax):
     return fig, ax
 
 
-def plot_histogram(timeseries, nbins=10, mean=None, std=None):
+def plot_histogram(timeseries, nbins=10):
     """
     Plot the histogram for the timeseries TIMESERIES.
 

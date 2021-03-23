@@ -29,7 +29,7 @@ class Testtstools(unittest.TestCase):
 
     def test_plot_histogram(self):
         fix, ax = plot_histogram(
-            self.test_timeseries, nbins=100, mean=self.mean, std=np.sqrt(self.var)
+            self.test_timeseries, nbins=100
         )
         values, hist = ax.lines[0].get_xydata().T
 

@@ -34,7 +34,7 @@ def plot_trajectory_subset(timeseries, tmin, tmax):
     return fig, ax
 
 
-def plot_histogram(timeseries, nbins=10, mean=None, std=None):
+def plot_histogram(timeseries, nbins=10):
     """
     Plot the histogram for the timeseries TIMESERIES.
 
@@ -50,29 +50,10 @@ def plot_histogram(timeseries, nbins=10, mean=None, std=None):
         The empirical standard deviation computed over the timeseries
     """
 
-    def get_theoritical_histogram(fluct_min, fluct_max, std, mean, nbins=100):
-        bin_edges = np.linspace(fluct_min, fluct_max, nbins + 1)
-        nb_samples = len(timeseries[:, 1])
-        rescaled_bin_edges = (bin_edges - mean) / (std * np.sqrt(2))
-        hist = (
-            0.5
-            * nb_samples
-            * (erf(rescaled_bin_edges[1:]) - erf(rescaled_bin_edges[:-1]))
-        )
-        return hist, bin_edges
-
     hist, bin_edges = np.histogram(timeseries[:, 1], bins=100)
     bin_centers = 0.5 * (bin_edges[1:] + bin_edges[0:-1])
 
     fig, ax = plt.subplots()
     ax.plot(bin_centers, hist, "*")
-
-    if (not std) or (not mean):
-        mean, var = get_mean_and_var(timeseries)
-        std = np.sqrt(var)
-    hist, bin_edges = get_theoritical_histogram(
-        np.amin(bin_edges), np.amax(bin_edges), std, mean
-    )
-    ax.plot(bin_centers, hist)
 
     return fig, ax
