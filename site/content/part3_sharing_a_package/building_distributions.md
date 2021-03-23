@@ -70,8 +70,8 @@ tstools-0.1/setup.cfg
 tstools-0.1/setup.py
 tstools-0.1/tstools/
 tstools-0.1/tstools/__init__.py
-tstools-0.1/tstools/show_extremes.py
-tstools-0.1/tstools/tstools.py
+tstools-0.1/tstools/vis.py
+tstools-0.1/tstools/moments.py
 tstools-0.1/tstools.egg-info/
 tstools-0.1/tstools.egg-info/PKG-INFO
 tstools-0.1/tstools.egg-info/SOURCES.txt

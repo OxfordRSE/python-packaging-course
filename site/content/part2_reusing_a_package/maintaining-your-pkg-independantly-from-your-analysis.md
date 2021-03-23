@@ -5,15 +5,19 @@ draft = false
 weight = 2004
 +++
 
-In the previous section you made your package "pip installable" by creating a `setup.py` file.
-You then installed the package, effectively making accessible between different analysis directories.
+In the previous section you made your package "pip installable" by
+creating a `setup.py` file.  You then installed the package,
+effectively making accessible between different analysis directories.
 
-However, a package is never set in stone: as you work on your analyses, you will almost certainly likely make changes to it,
-for instance to add functionalities or to fix bugs.
+However, a package is never set in stone: as you work on your
+analyses, you will almost certainly likely make changes to it, for
+instance to add functionalities or to fix bugs.
 
-You could just reinstall the package each time you make a modification to it, but this
-obviously becomes tedious if you are constantly making changes (maybe to hunt down a bug) and/or testing your package.
-In addition, you may simply forget to reinstall your package, leading to potentially very frustrating and time-consuming errors.
+You could just reinstall the package each time you make a modification
+to it, but this obviously becomes tedious if you are constantly making
+changes (maybe to hunt down a bug) and/or testing your package.  In
+addition, you may simply forget to reinstall your package, leading to
+potentially very frustrating and time-consuming errors.
 
 
 ## Editable installs {#editable-installs}
@@ -39,13 +43,15 @@ pip install -e .
     Hint: Use `pip --help` to get alist of available `pip` commands.
 3.  re-install `tstools` in editable mode.
 4.  Modify the `tstools.vis.plot_trajectory_subset` so that it returns the maximum value
-    over the trajectory subset, in addition to the `figure` and `axis`.
+    over the trajectory subset, in addition to `figure` and `axis`.
     Hint: You can use the numpy function `amax` to find the maximum of an array.
-5.  What is the maximum value of the timeseries in `analysis1/data/timeseries1.csv` between
-    t=0 and t = 4 ?
+5.  Edit and run the script `analysis2/analysis2.py` to print the
+    maximum value of the timeseries `analysis2/data/hotwire.csv` between t=0
+    and t = 0.25. 
 
-In editable mode, `pip install` just write a file `<package-name>.egg-link` at the package
-installation location in place of the actual package. This file contains the location of the
+In editable mode, `pip install` just write a file
+`<package-name>.egg-link` at the package installation location in
+place of the actual package. This file contains the location of the
 package in your package project directory:
 
 ```shell

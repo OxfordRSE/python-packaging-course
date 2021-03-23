@@ -10,14 +10,13 @@ but similar dataset to `analysis1/data/brownian.csv`.
 Now that we've structured our software into a python package, we would like
 to reuse that package for our second analysis.
 
-In the directory `analysis2/`, let's simply write a script `analysis2.py`, that imports the `tstools` package
-created in the previous section.
+In the directory `analysis2/`, let's write a script `analysis2.py`, that imports the `tstools` package created in the previous section.
 
 ```text
 analysis2/
       analysis2.py
       data/
-  	      data_analysis2.csv
+  	      hotwire.csv
 ```
 
 ```python
@@ -26,7 +25,7 @@ import numpy as np
 
 import tstools
 
-timeseries = np.genfromtxt("./data/data_analysis2.csv", delimiter=",")
+timeseries = np.genfromtxt("./data/hotwire.csv", delimiter=",")
 fig, ax = tstools.plot_trajectory_subset(timeseries, 0, 50)
 ```
 

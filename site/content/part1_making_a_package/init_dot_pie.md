@@ -31,23 +31,22 @@ Hello from __init__.py
 __init__.py
 ```
 
-The lesson here is that any object (variable, function, class) defined in the `__init__.py` file is available
-under the package's namespace.
+The lesson here is that any object (variable, function, class) defined in the `__init__.py` file is available under the package's namespace.
 
 
 ## Activity 2 - Bringing all functions under a single namespace {#activity-2-bringing-all-functions-under-a-single-namespace}
 
-Our package isn't very big, and the internal strucure with 3 different modules isn't
+Our package isn't very big, and the internal strucure with 2 different modules isn't
 very relevant for a user.
 
 1.  Write the `__init__.py` so that all functions defined in
-    modules `tstools.py` and `show_extremes.py` are accessible directly
-    at the top-lvel (under the `tstools` namespace), _i.e_
+    modules `vis.py` and `moments.py` are accessible directly
+    under the `tstools` namespace, that is
 
     ```python
     import tstools
     mean, var = tstools.get_mean_and_var(timeseries) # instead of mean, var = tstools.moments.get_mean_and_var(...)
-    fig, ax = tstools.show_extremes(timeseries, 4*np.sqrt(var)) # instead of fig, ax = tstools.vis.show_extremes(...)
+    fig, ax = tstools.plot_histogram(timeseries, 4*np.sqrt(var)) # instead of fig, ax = tstools.vis.show_extremes(...)
     ```
 	
 {{% notice tip %}}
@@ -78,11 +77,8 @@ timeseries = np.genfromtxt("./data/brownian.csv", delimiter=",")
 mean, var = tstools.get_mean_and_var(timeseries)
 
 fig, ax = tstools.plot_histogram(timeseries, nbins=100)
-
-threshold = 3*np.sqrt(var)
-fig, ax = tstools.show_extremes(timeseries, threshold)
 ```
 
-Note that the above does the job for both scripts `scripts/analysis.py` and `scripts/show_extremes.py`! Much better don't you think?
+Note that the above does a the exact same amount of work job as `initial_scripts/analysis.py`... but is much shorter and easier to read!
 
 [^fn:1]: Since Python 3.3, this isn't technically true. Directories without a `__init__.py` file are called namespace packages, see [Packaging namespace packages](https://packaging.python.org/guides/packaging-namespace-packages/) on the Python Packaging User Guide). However, their discussion is beyond the scope of this course.

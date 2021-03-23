@@ -5,18 +5,18 @@ draft = false
 weight = 2003
 +++
 
-The recommended way to install a package is to use the `setuptools` library in conjunction with
-`pip`, the official python _package manager_.
-Effectively, this approach is roughly equivalent to copying the package to the `site-packages` directory,
-expect that the process in **automated**.
+The recommended way to install a package is to use the `setuptools` library in conjunction with `pip`, the official python _package manager_.
+Effectively, this approach is roughly equivalent to copying the package to the `site-packages` directory, but the process is **automated**.
 
 
 ## pip {#pip}
 
-Pip is the de facto package manager for Python packages.
-It's main job is to install, remove, upgrade, configure and manage Python packages, both available
-locally on your machine but also hosted on on the [Python Package Index (PyPI)](https://pypi.org/).
-Pip is maintained by the [Python Packaging Authority](https://www.pypa.io/en/latest/).
+Pip is the de facto package manager for Python packages.  It's main
+job is to install, remove, upgrade, configure and manage Python
+packages, both available locally on your machine but also hosted on on
+the [Python Package Index (PyPI)](https://pypi.org/).  Pip is
+maintained by the [Python Packaging
+Authority](https://www.pypa.io/en/latest/).
 
 Installing a package with `pip` looks like this
 
@@ -36,10 +36,11 @@ ERROR: Directory './tstools' is not installable. Neither 'setup.py' nor 'pyproje
 ```
 
 The above doesn't really look like our package got installed properly.
-For `pip` to be able to install our package, we must first give it some information about it.
-In fact, `pip` expects to find a python file named `setup.py` in the directory that it is
-given as an argument. This file will contain some metadata about the package and tell `pip`
-the location of the actual source of the package.
+For `pip` to be able to install our package, we must first give it
+some information about it. In fact, `pip` expects to find a python
+file named `setup.py` in the directory that it is given as an
+argument. This file will contain some metadata about the package and
+tell `pip` the location of the actual source of the package.
 
 
 ## `setup.py` (setup dot pie) and distribution packages {#setup-dot-py--setup-dot-pie--and-distribution-packages}
@@ -62,11 +63,11 @@ setup(name='tstools',
       license='GPLv3')
 ```
 
-The above gives `pip` some metadata about our package: its version, a short description,
-its authors, ad its license. It also provides information regarding the dependencies of
-our package, _i.e_ `numpy` and `matplotlib`.
-In addition, it gives `setup` the location of the package to be installed, in this case
-the directory `tstools`.
+The above gives `pip` some metadata about our package: its version, a
+short description, its authors, ad its license. It also provides
+information regarding the dependencies of our package, _i.e_ `numpy`
+and `matplotlib`.  In addition, it gives `setup` the location of the
+package to be installed, in this case the directory `tstools`.
 
 {{% notice warning %}}
 The above `setup.py` states `(...,package=["tstools"],...)`.
@@ -83,11 +84,14 @@ python-workshop/
   	      tstools/
 ```
 
-Actually, there are no reasons for our `tstools` package to be located in the `analysis1/` directory.
-Indeed, the package is independant from this specific analysis, and we want to share it among multiple analyses.
+Actually, there are no reasons for our `tstools` package to be located
+in the `analysis1/` directory.  Indeed, the package is independant
+from this specific analysis, and we want to share it among multiple
+analyses.
 
-To reflect this, let's move the `tstools` package into a new directory `tstools-dist` located next to the `anaylis1` and
-`analysis2` directories:
+To reflect this, let's move the `tstools` package into a new directory
+`tstools-dist` located next to the `anaylis1` and `analysis2`
+directories:
 
 ```text
 python-workshop/
@@ -129,13 +133,13 @@ Make sure `pip` points to your current virtual environment (you can check this b
 
 3.  Install the `tstools` package with `pip`.
     Remember: `pip install <location of setup file>`
-    Notice how `numpy` and `matplotlib` are automatically downloaded (can you find from where?)
-    and installed.
-4.  Move to the directory `analysis2/` and check that you can import your package from there.
-    Where is this package located?
-    Hint: You can check the location a package using the `__file__` attribute.
-5.  The directory `analysis2` contains a timeseries under `data/`. What is the average value
-    of the timeseries?
+    Notice how `numpy` and `matplotlib` are automatically downloaded (can you find from where?) even though your just uninstalled them.
+4.  Move to the directory `analysis2/` and check that you can import
+    your package from there.  Where is this package located?  Hint:
+    You can check the location a package using the `__file__`
+    attribute.
+5.  The directory `analysis2` contains a timeseries under
+    `data/`. What is the average value of the timeseries?
 
-Congratulations! Your `tstools` package is now installed can be reused across your analyses...
-no more dangerous copying and pasting!
+Congratulations! Your `tstools` package is now installed can be reused
+across your analyses...  no more dangerous copying and pasting!
