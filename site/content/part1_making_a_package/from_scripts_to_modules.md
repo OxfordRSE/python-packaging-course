@@ -47,21 +47,19 @@ result = add(a,b)
 
 ## Activity 1 - Turning scripts into a collection of functions {#activity-1-turning-scripts-into-a-collection-of-functions}
 
-Let's rewrite both scripts `scripts/analysis.py` and `scripts/show_extremes.py`
-as a collection of functions that can be reused in separate scripts.
+Let's turn the script `initial_scripts/analysis.py` into a collection
+of functions that can be reused in separate scripts.
 
-The directory `analysis1/tstools/` contains 3 python modules that contain (incomplete) functions performing
-the same operations on data described in the original scripts `analysis.py` and `show_extremes.py`:
+The directory `analysis1/tstools/` contains 3 python modules that contain functions performing the same operations on data described in the original scripts `analysis.py`.
 
 ```text
 python-packaging-workshop/
-      scripts/
+      initial_scripts/
       analysis1/
   	      tstools/
   		      __init__.py
   		      moments.py
   		      vis.py
-  		      extremes.py
 ```
 
 1.  Open `moments.py` and complete function `get_mean_and_var` (replace the
@@ -70,12 +68,10 @@ python-packaging-workshop/
     `plot_histogram` (replace the strings `"######"`).
 
 {{% notice tip %}}
-Use `scripts/analysis.py` as a reference.
+Use `initial_scripts/analysis.py` as a reference.
 {{% /notice %}}
 
 {{% notice tip %}}
 You can run the test script `tests.py` in `analysis1/` to test that everything is working fine.
 {{% /notice %}}
 
-The file `tstools/extremes.py` implements a function `show_extremes` corresponding to script `show_extremes.py`.
-It is already complete.
