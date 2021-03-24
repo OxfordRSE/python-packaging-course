@@ -14,8 +14,8 @@ class Testtstools(unittest.TestCase):
 
     def test_get_mean_and_var(self):
         mean, var = get_mean_and_var(self.test_timeseries)
-        np.testing.assert_almost_equal(mean, self.mean, decimal=5)
-        np.testing.assert_almost_equal(var, self.var, decimal=4)
+        np.testing.assert_almost_equal(mean, self.mean, decimal=3)
+        np.testing.assert_almost_equal(var, self.var, decimal=3)
 
     def test_plot_trajectory_subset(self):
         expected_pos = self.test_timeseries[:, 1][0:11]
@@ -38,6 +38,9 @@ class Testtstools(unittest.TestCase):
         fig, expected_ax = plt.subplots()
         expected_ax.plot(bin_centers, hist, "*")
         expected_values, expected_hist = expected_ax.lines[0].get_xydata().T
+
+        np.testing.assert_equal(values, expected_values)
+        np.testing.assert_equal(hist, expected_hist)
 
 
 if __name__ == "__main__":
