@@ -26,7 +26,6 @@ def checkpoint1():
     files = [
         os.path.join("analysis1", "tstools", "vis.py"),
         os.path.join("analysis1", "tstools", "moments.py"),
-        os.path.join("analysis1", "tstools", "extremes.py"),
         os.path.join("analysis1", "analysis1.py"),
     ]
     copy_files(files)
