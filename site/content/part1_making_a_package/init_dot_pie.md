@@ -45,8 +45,12 @@ very relevant for a user.
 
     ```python
     import tstools
-    mean, var = tstools.get_mean_and_var(timeseries) # instead of mean, var = tstools.moments.get_mean_and_var(...)
-    fig, ax = tstools.plot_histogram(timeseries, 4*np.sqrt(var)) # instead of fig, ax = tstools.vis.show_extremes(...)
+
+    # instead of mean, var = tstools.moments.get_mean_and_var(...)
+    mean, var = tstools.get_mean_and_var(timeseries) 
+
+    # instead of fig, ax = tstools.vis.plot_histogram(...)
+    fig, ax = tstools.plot_histogram(timeseries, 4*np.sqrt(var)) 
     ```
 	
 {{% notice tip %}}
@@ -79,6 +83,7 @@ mean, var = tstools.get_mean_and_var(timeseries)
 fig, ax = tstools.plot_histogram(timeseries, nbins=100)
 ```
 
-Note that the above does a the exact same amount of work job as `initial_scripts/analysis.py`... but is much shorter and easier to read!
+Note that the above does the exact same amount of work job as 
+`initial_scripts/analysis.py`... but is much shorter and easier to read!
 
 [^fn:1]: Since Python 3.3, this isn't technically true. Directories without a `__init__.py` file are called namespace packages, see [Packaging namespace packages](https://packaging.python.org/guides/packaging-namespace-packages/) on the Python Packaging User Guide). However, their discussion is beyond the scope of this course.
